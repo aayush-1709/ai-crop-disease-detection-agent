@@ -1,0 +1,167 @@
+/* Global CSS for all pages */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Custom loader spinner */
+.loader {
+    border-top-color: #3498db; /* Blue color for the top border */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Markdown styling for the report content on Home page */
+/* These are now standard CSS rules, no @apply */
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: #1f2937; /* gray-900 */
+    font-weight: 700; /* font-bold */
+    margin-top: 1.5rem; /* mt-6 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+.prose h1 { font-size: 2.25rem; /* text-3xl */ }
+.prose h2 { font-size: 1.875rem; /* text-2xl */ }
+.prose h3 { font-size: 1.25rem; /* text-xl */ }
+.prose p {
+    color: #374151; /* gray-700 */
+    margin-bottom: 1rem; /* mb-4 */
+    line-height: 1.625; /* leading-relaxed */
+}
+.prose ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-bottom: 1rem; /* mb-4 */
+}
+.prose ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+    margin-bottom: 1rem; /* mb-4 */
+}
+.prose li {
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+.prose strong {
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* gray-800 */
+}
+.prose a {
+    color: #2563eb; /* blue-600 */
+    text-decoration: underline;
+}
+.prose pre {
+    background-color: #f9fafb; /* gray-100 */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+    overflow-x: auto;
+    font-size: 0.875rem; /* text-sm */
+}
+.prose code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* font-mono */
+    color: #db2777; /* pink-600 */
+}
+.prose blockquote {
+    border-left: 4px solid #d1d5db; /* border-gray-300 */
+    padding-left: 1rem; /* pl-4 */
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem; /* py-1 */
+    font-style: italic;
+    color: #4b5563; /* gray-600 */
+}
+
+/* Ensure images within prose are responsive */
+.prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+}
+
+/* Navigation Bar Styling */
+nav {
+    z-index: 10; /*Ensure navbar is on top */
+}
+
+/* User Guide Specific Styles */
+/* These classes are now directly in HTML, removed @apply */
+/* .card-header { ... } */
+/* .guide-navigation-tabs { ... } */
+/* .guide-navigation-tabs li { ... } */
+/* .guide-navigation .btn { ... } */
+/* .guide-navigation .btn.active { ... } */
+/* .guide-card { ... } */
+/* .step-visual { ... } */
+/* .upload-demo { ... } */
+/* .confidence-example span { ... } */
+/* .confidence-guide .confidence-item { ... } */
+/* .confidence-guide .confidence-bar { ... } */
+/* .disease-categories .category-item { ... } */
+/* .prevention-grid .prevention-item { ... } */
+/* .troubleshoot-item .solution { ... } */
+/* .faq-item { ... } */
+
+
+/* History Page Card Styling */
+.history-card {
+    background-color: #ffffff; /* bg-white */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.history-card img {
+    width: 100%;
+    height: 10rem; /* h-40 */
+    object-fit: cover;
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-bottom: 0.75rem; /* mb-3 */
+    border: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+.history-card .confidence-badge {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600; /* font-semibold */
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem; /* px-3 */
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem; /* py-1 */
+    border-radius: 9999px; /* rounded-full */
+    margin-top: 0.5rem; /* mt-2 */
+}
+
+/* Tools Page Card Styling */
+.tool-card {
+    background-color: #ffffff; /* bg-white */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    transition-property: box-shadow;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* transition-shadow duration-200 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tool-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-lg */
+}
+
+.tool-card div:first-child { /* Icon container */
+    background-color: #e5e7eb; /* bg-gray-200 */
+    border-radius: 9999px; /* rounded-full */
+    padding: 0.75rem; /* p-3 */
+    margin-bottom: 1rem; /* mb-4 */
+}

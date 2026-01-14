@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Doctor - History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
+    <!-- Navigation Bar -->
+    <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- 🌿 Logo & Brand -->
+            <a href="/" class="text-white text-2xl font-bold flex items-center space-x-3">
+                <img
+                    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+                    alt="AI Crop Doctor Logo"
+                    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
+                />
+                <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
+            </a>
+
+            <!-- 📂 Navigation Links -->
+            <div class="space-x-4 hidden md:flex">
+                <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
+                <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
+                <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
+                <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
+                <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
+                    <i class="fas fa-phone-alt mr-1"></i> Emergency
+                </a>
+            </div>
+            
+            <!-- 📱 Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menuToggle" class="text-white text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 📱 Mobile Dropdown -->
+        <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
+            <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
+            <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
+            <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
+            <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
+            <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
+                <i class="fas fa-phone-alt mr-1"></i> Emergency
+            </a>
+        </div>
+    </nav>
+
+    <!-- JS: Toggle mobile menu -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Main Wrapper with Background Image -->
+    <div class="relative min-h-screen bg-[url('https://i.etsystatic.com/19272169/r/il/6e34c8/3628502168/il_1080xN.3628502168_mm4w.jpg')] bg-cover bg-center bg-fixed">
+        <!-- Overlay for faded effect -->
+        <div class="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+
+        <!-- Main Content -->
+        <main class="relative z-10 flex-grow flex items-center justify-center p-4">
+            <div class="bg-white/70 p-8 rounded-2xl shadow-2xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-6 backdrop-blur-md">
+                <div class="relative inline-block bg-green-100 text-green-800 px-6 py-3 rounded-r-xl shadow-md border-l-4 border-green-500">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent border-r-green-300"></div>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">
+                        Prediction History
+                    </h1>
+                </div>
+
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    Review your past plant disease predictions and their details.
+                </p>
+
+                <!-- History Cards Section -->
+                <div id="history-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                    <!-- Add more prediction cards here dynamically via JS -->
+                    <p id="loading-history" class="text-gray-500 col-span-full">Loading history...</p>
+                    <p id="no-history" class="hidden text-gray-500 col-span-full">No prediction history found.</p>
+                    <p id="history-error" class="hidden text-red-500 col-span-full">Error loading history. Please try again later.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const historyContainer = document.getElementById('history-container');
+            const loadingHistory = document.getElementById('loading-history');
+            const noHistory = document.getElementById('no-history');
+            const historyError = document.getElementById('history-error');
+
+            try {
+                const response = await fetch('/history');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                loadingHistory.classList.add('hidden');
+
+                if (data.history && data.history.length > 0) {
+                    historyContainer.innerHTML = ''; // Clear loading message
+                    data.history.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'bg-gray-50 p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center';
+                        
+                        const timestamp = new Date(item.timestamp).toLocaleString();
+
+                        card.innerHTML = `
+                            <img src="data:image/jpeg;base64,${item.image_base64}" alt="Predicted Plant" class="w-48 h-48 object-cover rounded-lg mb-4 border border-gray-300">
+                            <h3 class="text-xl font-semibold text-green-700 mb-2">${item.predicted_class_name.replace(/_/g, ' ')}</h3>
+                            <p class="text-gray-600 text-sm mb-1">Confidence: ${item.confidence.toFixed(2)}%</p>
+                            <p class="text-gray-500 text-xs">Diagnosed On: ${timestamp}</p>
+                        `;
+                        historyContainer.appendChild(card);
+                    });
+                } else {
+                    noHistory.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Failed to fetch history:', error);
+                loadingHistory.classList.add('hidden');
+                historyError.classList.remove('hidden');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white text-sm py-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
+            <!-- Project Info -->
+            <!-- <div>
+                <span class="font-semibold">AI Crop Doctor</span> — Built by 
+                <span class="underline">Anshika Singh</span> & 
+                <span class="underline">Ayush Sinha</span>
+            </div> -->
+            <!-- Tagline -->
+            <div class="italic text-green-100">
+                Empowering farmers with AI 🌿
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+        <div class="text-center text-green-100 text-xs mt-2">
+            © 2026 AI Crop Doctor. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+</body>
+</html>
