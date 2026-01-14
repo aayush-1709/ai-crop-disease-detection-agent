@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,595 +13,874 @@
     <!-- Marked.js for Markdown rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 0px #4ade80; }
-      50% { box-shadow: 0 0 15px #4ade80; }
-      100% { box-shadow: 0 0 0px #4ade80; }
-    }
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0px #4ade80;
+            }
 
-    .glow-logo {
-      animation: pulse-glow 2s infinite;
-    }
+            50% {
+                box-shadow: 0 0 15px #4ade80;
+            }
 
-    .nav-link:hover {
-      transform: scale(1.1);
-      transition: all 0.3s ease-in-out;
-    }
-  </style>
-  <style>
-  @keyframes marquee-right {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
+            100% {
+                box-shadow: 0 0 0px #4ade80;
+            }
+        }
 
-  .animate-marquee-right {
-    animation: marquee-right 10s linear infinite;
-  }
-</style>
+        .glow-logo {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .nav-link:hover {
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+    <style>
+        @keyframes marquee-right {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .animate-marquee-right {
+            animation: marquee-right 10s linear infinite;
+        }
+    </style>
 
 </head>
+
 <body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
-<!-- Frame 1 -->
-<div id="frame1" class="fixed inset-0 flex flex-col items-center justify-center bg-green-200 text-center text-3xl font-bold z-50">
-  <h1>🌿 Welcome to Crop Cure!</h1>
-  <p class="text-xl mt-2 italic text-green-800">"A healthy crop is a healthy future."</p>
-</div>
-
-<!-- Frame 2 -->
-<div id="frame2" class="fixed inset-0 hidden flex flex-col items-center justify-center bg-green-100 text-center text-3xl font-bold z-40">
-  <h1>🌱 AI Crop Doctor</h1>
-  <p class="text-xl mt-2 italic text-green-700">"Detect early, protect fully."</p>
-</div>
-
-<!-- Main Content Wrapper -->
-<div id="mainContent" class="hidden">
-  <!-- 🟩 Everything else like navbar, hero section, footer goes inside here -->
-
-    
-    <!-- 🌱 Navigation Bar -->
-  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-    <div class="container mx-auto flex justify-between items-center">
-      
-      <!-- 🌿 Logo & Brand -->
-      <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-  <img
-    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-    alt="AI Crop Doctor Logo"
-    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
-  />
-  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-</a>
-
-
-      <!-- 📂 Navigation Links -->
-      <div class="space-x-4 hidden md:flex">
-        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
-        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
-        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
-        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-        <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
-          <i class="fas fa-phone-alt mr-1"></i> Emergency
-        </a>
-      </div>
-      
-      <!-- 📱 Mobile Menu Button -->
-      <div class="md:hidden">
-        <button id="menuToggle" class="text-white text-2xl focus:outline-none">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
+    <!-- Frame 1 -->
+    <div id="frame1"
+        class="fixed inset-0 flex flex-col items-center justify-center bg-green-200 text-center text-3xl font-bold z-50">
+        <h1>🌿 Welcome to Crop Cure!</h1>
+        <p class="text-xl mt-2 italic text-green-800">"A healthy crop is a healthy future."</p>
     </div>
 
-    <!-- 📱 Mobile Dropdown -->
-    <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
-      <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
-      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
-      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
-      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-      <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
-        <i class="fas fa-phone-alt mr-1"></i> Emergency
-      </a>
+    <!-- Frame 2 -->
+    <div id="frame2"
+        class="fixed inset-0 hidden flex flex-col items-center justify-center bg-green-100 text-center text-3xl font-bold z-40">
+        <h1>🌱 AI Crop Doctor</h1>
+        <p class="text-xl mt-2 italic text-green-700">"Detect early, protect fully."</p>
     </div>
-  </nav>
 
-  
-  
-
-  <!-- JS: Toggle mobile menu -->
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-
-<!-- frame chnages -->
- 
-
-<!-- hero section -->
-
-    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
-      style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
-  
-  <!-- Main content container -->
-  <div class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
-    
-    <!-- Left Section: Introduction & Sample Images -->
-    <div id="intro-sample-section" class="w-full text-left">
-        <!-- Image with smooth hover animation -->
-
-      <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
-
-  <div class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-  <div class="overflow-hidden whitespace-nowrap">
-  <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
-    Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
-  </h2>
-</div>
-
-</div>
+    <!-- Main Content Wrapper -->
+    <div id="mainContent" class="hidden">
+        <!-- 🟩 Everything else like navbar, hero section, footer goes inside here -->
 
 
-  <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-  <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
-    Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with smart <span class="font-semibold text-gray-900">AI</span> — just upload a photo and let technology assist your next step.
-  </p>
-</div>
+        <!-- 🌱 Navigation Bar -->
+        <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
+            <div class="container mx-auto flex justify-between items-center">
+
+                <!-- 🌿 Logo & Brand -->
+                <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
+                    <img src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+                        alt="AI Crop Doctor Logo"
+                        class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300" />
+                    <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
+                </a>
 
 
-  <p class="text-gray-900 text-base italic leading-relaxed">
-  Powered by <span class="font-bold text-gray-900">Machine learning</span> and 
-  <span class="font-bold text-gray-900">Generative AI</span>
-</p>
+                <!-- 📂 Navigation Links -->
+                <div class="space-x-4 hidden md:flex">
+                    <a href="/"
+                        class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
+                    <a href="/history_page" target="_blank"
+                        class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
+                    <a href="/user_guide" target="_blank"
+                        class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User
+                        Guide</a>
+                    <a href="/tools" target="_blank"
+                        class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
+                    <a href="#"
+                        class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
+                        <i class="fas fa-phone-alt mr-1"></i> Emergency
+                    </a>
+                </div>
 
-
-</div>
-            <div id="upload-section" class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-    Upload Plant Image
-  </h2>
-
-  <div id="drop-area" class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
-    <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-    </svg>
-    <p class="text-gray-600 text-center text-base">
-      Drag & Drop your image here, or 
-      <span class="text-green-600 font-semibold underline">click to browse</span>
-    </p>
-    <input type="file" id="image-input" accept="image/*" class="hidden">
-  </div>
-
-  <div id="image-preview-container-initial" class="hidden mb-4 text-center">
-    <img id="image-preview-initial" class="max-w-full h-36 object-contain mx-auto rounded-lg shadow-sm border border-gray-200" alt="Image Preview">
-    <p id="image-name-initial" class="text-gray-500 mt-2 text-sm italic"></p>
-  </div>
-
-  <div class="flex justify-center">
-    <button id="predict-button" class="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition duration-300 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
-      Analyze Image
-    </button>
-  </div>
-</div>
-
-                
-                
-                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
-                <!--  grid for rows with 5 images each -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_black-rot.JPG') }}" data-image-name="0001.JPG">
-                        <img src="{{ url_for('static', filename='images/apple_black-rot.JPG') }}" alt="Apple Black Rot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Apple Black Rot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}" data-image-name="0002.JPG">
-                        <img src="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}" alt="Apple Cedar Rust" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Apple Cedar Rust</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_healthy.JPG') }}" data-image-name="0003.JPG">
-                        <img src="{{ url_for('static', filename='images/apple_healthy.JPG') }}" alt="Apple Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Apple Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_scab.JPG') }}" data-image-name="0004.JPG">
-                        <img src="{{ url_for('static', filename='images/apple_scab.JPG') }}" alt="Apple Scab" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Apple Scab</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}" data-image-name="0005.JPG">
-                        <img src="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}" alt="Healthy Blueberry" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Healthy Blueberry</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}" data-image-name="0006.JPG">
-                        <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}" alt="Cherry Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Cherry Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}" data-image-name="0007.JPG">
-                        <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}" alt="Cherry Powdery Milkdew" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Cherry Powdery Milkdew</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}" data-image-name="0008.JPG">
-                        <img src="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}" alt="Corn Cercospora Leaf Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Corn Cercospora Leaf Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}" data-image-name="0009.JPG">
-                        <img src="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}" alt="Corn Common Rust" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Corn Common Rust</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}" data-image-name="0010.JPG">
-                        <img src="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}" alt="Corn Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Corn Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}" data-image-name="0011.JPG">
-                        <img src="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}" alt="Corn Northern leaf Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Corn Northern leaf Blight</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}" data-image-name="0012.JPG">
-                        <img src="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}" alt="Grape Black Rot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Grape Black Rot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}" data-image-name="0013.JPG">
-                        <img src="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}" alt="Grape Leaf Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Grape Leaf Blight</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/grape_esca.JPG') }}" data-image-name="0014.JPG">
-                        <img src="{{ url_for('static', filename='images/grape_esca.JPG') }}" alt="Grape Esca" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Grape Esca</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/grape_healthy.JPG') }}" data-image-name="0015.JPG">
-                        <img src="{{ url_for('static', filename='images/grape_healthy.JPG') }}" alt="Grape Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Grape Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}" data-image-name="0016.JPG">
-                        <img src="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}" alt="Orange Haunglongbing" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Orange Haunglongbing</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}" data-image-name="0017.JPG">
-                        <img src="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}" alt="Peach Bacterial Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Peach Bacterial Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Peach___healthy.JPG') }}" data-image-name="0018.JPG">
-                        <img src="{{ url_for('static', filename='images/Peach___healthy.JPG') }}" alt="Peach Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Peach Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/pepper_spot.JPG') }}" data-image-name="0019.JPG">
-                        <img src="{{ url_for('static', filename='images/pepper_spot.JPG') }}" alt="Pepper Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Pepper Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}" data-image-name="0020.JPG">
-                        <img src="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}" alt="Pepper Bell Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Pepper Bell Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Potato___healthy.JPG') }}" data-image-name="0021.JPG">
-                        <img src="{{ url_for('static', filename='images/Potato___healthy.JPG') }}" alt="Potato Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Potato Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/potato_early_blight.JPG') }}" data-image-name="0022.JPG">
-                        <img src="{{ url_for('static', filename='images/potato_early_blight.JPG') }}" alt="Potato Early Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Potato Early Blight</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/potato_late_blight.JPG') }}" data-image-name="0023.JPG">
-                        <img src="{{ url_for('static', filename='images/potato_late_blight.JPG') }}" alt="Potato Late Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Potato Late Blight</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}" data-image-name="0024.JPG">
-                        <img src="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}" alt="Raspberry Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Raspberry Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}" data-image-name="0025.JPG">
-                        <img src="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}" alt="Soyabean Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Soyabean Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}" data-image-name="0026.JPG">
-                        <img src="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}" alt="Squash Powdery Mildew" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Squash Powdery Mildew</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}" data-image-name="0027.JPG">
-                        <img src="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}" alt="Strawberry Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Strawberry Healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}" data-image-name="0028.JPG">
-                        <img src="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}" alt="Strawberry Leaf Scorch" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Strawberry Leaf Scorch</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}" data-image-name="0029.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}" alt="Tomato Bacterial Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Bacterial Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}" data-image-name="0030.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}" alt="Tomato Early Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Early Blight</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}" data-image-name="0031.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}" alt="Tomato healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato healthy</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}" data-image-name="0032.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}" alt="Tomato Leaf Mold" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Leaf Mold</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}" data-image-name="0033.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}" alt="Tomato Septoria leaf Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Septoria leaf Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}" data-image-name="0034.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}" alt="Tomato Spider Mites" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Spider Mites</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}" data-image-name="0035.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}" alt="Tomato Target Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Target Spot</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}" data-image-name="0036.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}" alt="Tomato Mosaic Virus" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Mosaic Virus</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}" data-image-name="0037.JPG">
-                        <img src="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}" alt="Tomato Yellow Leaf Curl Virus" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Yellow Leaf Curl Virus</p>
-                    </div>
-                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}" data-image-name="0038.JPG">
-                        <img src="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}" alt="Tomato Late Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
-                        <p class="text-xs font-medium text-gray-700">Tomato Late Blight</p>
-                    </div>
+                <!-- 📱 Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="menuToggle" class="text-white text-2xl focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Main Application Logic Section - now always full width -->
-            <div id="main-app-section" class="w-full">
-                <!-- Loading Indicator for initial prediction -->
-                <div id="loading-spinner-initial" class="hidden flex flex-col items-center justify-center mb-8">
-                    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
-                    <p class="text-gray-700 text-lg font-medium">Analyzing your image...</p>
-                </div>
+            <!-- 📱 Mobile Dropdown -->
+            <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
+                <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
+                <a href="/history_page" target="_blank"
+                    class="block text-white font-medium hover:text-green-200">History</a>
+                <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User
+                    Guide</a>
+                <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
+                <a href="#"
+                    class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
+                    <i class="fas fa-phone-alt mr-1"></i> Emergency
+                </a>
+            </div>
+        </nav>
 
-                <!-- Disease Detection Section -->
-                <div id="disease-detection-section" class="hidden mb-8 text-left">
-                    <div class="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
-                        <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection</h2>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
-                        <div class="flex items-center justify-between mb-2">
-                            <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
-                            <div class="flex items-center">
-                                <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
-                                <div class="w-32 bg-gray-200 rounded-full h-2.5">
-                                    <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%;"></div>
-                                </div>
-                                <span id="confidence-score-text" class="ml-2 text-gray-700 font-semibold text-sm"></span>
-                            </div>
-                        </div>
-                        <img id="image-preview-summary" class="max-w-full h-48 object-contain mx-auto rounded-lg shadow-md border border-gray-200 mt-4" alt="Uploaded Image">
-                        <p id="image-name-summary" class="text-gray-600 mt-2 text-sm text-center"></p>
-                    </div>
-                </div>
 
-                <!-- Additional Information Section -->
-                <div id="additional-info-section" class="hidden mb-8 text-left">
-                    <div class="bg-yellow-500 text-white p-3 rounded-t-lg flex items-center">
-                        <h3 class="text-xl font-semibold"><i class="fas fa-info-circle mr-2"></i>Additional Information</h3>
-                    </div>
-                    <div id="additional-info-content" class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
-                        <p class="text-gray-700 mb-4">Please answer these questions for a more accurate diagnosis:</p>
+        <!-- Hero Slider Section -->
+        <div id="hero-slider" class="relative w-full h-[85vh] overflow-hidden shadow-2xl">
+            <!-- Slide 1: 4K Agriculture Field -->
+            <div class="slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=3840&auto=format&fit=crop');">
+            </div>
 
-                        <!-- Plant Symptoms -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-green-300">
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-leaf text-green-600 mr-2"></i>Plant Symptoms</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="leaf-discoloration" class="block text-gray-700 text-sm font-medium mb-1">Leaf discoloration observed?</label>
-                                    <select id="leaf-discoloration" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="yellowing">Yellowing</option>
-                                        <option value="browning">Browning</option>
-                                        <option value="reddening">Reddening</option>
-                                        <option value="spots">Spots</option>
-                                        <option value="none">None</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="wilting-dropping" class="block text-gray-700 text-sm font-medium mb-1">Wilting or dropping?</label>
-                                    <select id="wilting-dropping" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="wilting">Wilting</option>
-                                        <option value="dropping">Dropping</option>
-                                        <option value="none">None</option>
-                                        <option value="slight">Slight</option>
-                                        <option value="severe">Severe</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Slide 3: 4K Crops -->
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=3840&auto=format&fit=crop');">
+            </div>
+            <!-- Slide 4: 4K Green Field -->
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=3840&auto=format&fit=crop');">
+            </div>
 
-                        <!-- Environmental Conditions -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-blue-300">
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-cloud-sun text-blue-600 mr-2"></i>Environmental Conditions</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="recent-weather" class="block text-gray-700 text-sm font-medium mb-1">Recent weather conditions?</label>
-                                    <select id="recent-weather" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="dry">Dry</option>
-                                        <option value="humid">Humid</option>
-                                        <option value="rainy">Rainy</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="extreme_heat">Extreme Heat</option>
-                                        <option value="extreme_cold">Extreme Cold</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="temperature-condition" class="block text-gray-700 text-sm font-medium mb-1">Temperature condition?</label>
-                                    <select id="temperature-condition" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="normal">Normal</option>
-                                        <option value="hot">Hot</option>
-                                        <option value="cold">Cold</option>
-                                        <option value="fluctuating">Fluctuating</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Hero Overlay Content -->
+            <div
+                class="hero-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center z-20">
 
-                        <!-- Treatment History -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-purple-300">
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-flask text-purple-600 mr-2"></i>Treatment History</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="recent-fertilizer" class="block text-gray-700 text-sm font-medium mb-1">Recent fertilizer application?</label>
-                                    <select id="recent-fertilizer" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="yes_npk">Yes (NPK)</option>
-                                        <option value="yes_organic">Yes (Organic)</option>
-                                        <option value="yes_other">Yes (Other)</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="previous-pesticide" class="block text-gray-700 text-sm font-medium mb-1">Previous pesticide use?</label>
-                                    <select id="previous-pesticide" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="yes_fungicide">Yes (Fungicide)</option>
-                                        <option value="yes_insecticide">Yes (Insecticide)</option>
-                                        <option value="yes_herbicide">Yes (Herbicide)</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Pest Observations -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-red-300">
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-bug text-red-600 mr-2"></i>Pest Observations</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="insects-observed" class="block text-gray-700 text-sm font-medium mb-1">Insects observed?</label>
-                                    <select id="insects-observed" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="aphids">Aphids</option>
-                                        <option value="whiteflies">Whiteflies</option>
-                                        <option value="spider_mites">Spider Mites</option>
-                                        <option value="caterpillars">Caterpillars</option>
-                                        <option value="none">None</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="evidence-of-damage" class="block text-gray-700 text-sm font-medium mb-1">Evidence of pest damage?</label>
-                                    <select id="evidence-of-damage" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="chewing">Chewing marks</option>
-                                        <option value="holes">Holes in leaves</option>
-                                        <option value="sticky_residue">Sticky residue</option>
-                                        <option value="none">None</option>
-                                        <option value="visible_pests">Visible pests</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Plant Management -->
-                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-orange-300">
-                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-hand-holding-water text-orange-600 mr-2"></i>Plant Management</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="watering-frequency" class="block text-gray-700 text-sm font-medium mb-1">Watering frequency?</label>
-                                    <select id="watering-frequency" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="daily">Daily</option>
-                                        <option value="every_few_days">Every few days</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="irregular">Irregular</option>
-                                        <option value="overwatering">Overwatering signs</option>
-                                        <option value="underwatering">Underwatering signs</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="plant-age-growth" class="block text-gray-700 text-sm font-medium mb-1">Plant age/growth stage?</label>
-                                    <select id="plant-age-growth" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                                        <option value="">Select...</option>
-                                        <option value="seedling">Seedling</option>
-                                        <option value="vegetative">Vegetative</option>
-                                        <option value="flowering">Flowering</option>
-                                        <option value="fruiting">Fruiting</option>
-                                        <option value="mature">Mature</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button id="get-report-button" class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg text-lg font-semibold w-full">
-                        <i class="fas fa-robot mr-2"></i> Get AI Diagnosis
-                    </button>
-                </div>
-
-                <!-- Loading Indicator for detailed report generation -->
-                <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
-                    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
-                    <p class="text-gray-700 text-lg font-medium text-center">
-                        <span id="loading-text-report">Generating your personalized report...</span>
-                        <br>
-                        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
-                    </p>
-                </div>
-
-                <!-- AI Agronomist Report Section - now separate and hidden by default -->
-                <div id="report-section-standalone" class="hidden text-left mb-8">
-                    <div class="bg-green-600 text-white p-3 rounded-t-lg flex items-center">
-                        <h2 class="text-xl font-semibold"><i class="fas fa-robot mr-2"></i>AI Agronomist Report</h2>
-                    </div>
-                    <div id="final-report-content" class="bg-gray-50 p-6 rounded-b-xl border border-gray-200 prose max-w-none">
-                        <!-- Report content will be injected here -->
-                    </div>
-                    <button id="start-over-button" class="bg-gray-400 text-white px-8 py-3 rounded-xl hover:bg-gray-500 transition-colors duration-300 shadow-lg text-lg font-semibold mt-6">
-                        Start Over
-                    </button>
-                </div>
-
-                <!-- Error Message -->
-                <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mt-4" role="alert">
-                    <strong class="font-bold">Error!</strong>
-                    <span class="block sm:inline" id="error-text">Something went wrong. Please try again.</span>
-                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 drop-shadow-lg tracking-tight">
+                    AI Crop Doctor
+                </h1>
+                <p class="text-xl md:text-2xl text-green-100 font-light italic mb-8 drop-shadow-md">
+                    "Detect early, protect fully."
+                </p>
+                <a href="#main-app-section"
+                    onclick="document.getElementById('main-app-section').scrollIntoView({behavior: 'smooth'})"
+                    class="bg-green-600/90 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-xl backdrop-blur-sm border border-green-400">
+                    Start Diagnosis <i class="fas fa-arrow-down ml-2"></i>
+                </a>
             </div>
         </div>
-    </main>
-    <footer class="bg-green-700 text-white text-sm py-4">
-  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-     <!-- Project Info -->
-    <!-- <div>
+
+        <!-- JS: Toggle mobile menu -->
+        <!-- JS: Toggle mobile menu -->
+        <script>
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        </script>
+
+        <!-- frame chnages -->
+
+
+        <!-- hero section -->
+
+        <main
+            class="flex-grow flex flex-col items-center justify-center p-4 min-h-screen bg-transparent -mt-32 relative z-30">
+
+            <!-- Main content container -->
+            <div
+                class="bg-white/95 backdrop-blur-xl p-8 rounded-3xl shadow-2xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+
+                <!-- Left Section: Introduction & Sample Images -->
+                <div id="intro-sample-section" class="w-full text-left">
+                    <!-- Image with smooth hover animation -->
+
+                    <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
+
+                        <div
+                            class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+                            <div class="overflow-hidden whitespace-nowrap">
+                                <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
+                                    Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
+                                </h2>
+                            </div>
+
+                        </div>
+
+
+                        <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
+                                Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with
+                                smart <span class="font-semibold text-gray-900">AI</span> — just upload a photo and let
+                                technology assist your next step.
+                            </p>
+                        </div>
+
+
+                        <p class="text-gray-900 text-base italic leading-relaxed">
+                            Powered by <span class="font-bold text-gray-900">Machine learning</span> and
+                            <span class="font-bold text-gray-900">Generative AI</span>
+                        </p>
+
+
+                    </div>
+                    <div id="upload-section"
+                        class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                            Upload Plant Image
+                        </h2>
+
+                        <div id="drop-area"
+                            class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
+                            <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                </path>
+                            </svg>
+                            <p class="text-gray-600 text-center text-base">
+                                Drag & Drop your image here, or
+                                <span class="text-green-600 font-semibold underline">click to browse</span>
+                            </p>
+                            <input type="file" id="image-input" accept="image/*" class="hidden">
+                        </div>
+
+                        <div id="image-preview-container-initial" class="hidden mb-4 text-center">
+                            <img id="image-preview-initial"
+                                class="max-w-full h-36 object-contain mx-auto rounded-lg shadow-sm border border-gray-200"
+                                alt="Image Preview">
+                            <p id="image-name-initial" class="text-gray-500 mt-2 text-sm italic"></p>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button id="predict-button"
+                                class="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition duration-300 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
+                                Analyze Image
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
+                    <!--  grid for rows with 5 images each -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/apple_black-rot.JPG') }}"
+                            data-image-name="0001.JPG">
+                            <img src="{{ url_for('static', filename='images/apple_black-rot.JPG') }}"
+                                alt="Apple Black Rot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Apple Black Rot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}"
+                            data-image-name="0002.JPG">
+                            <img src="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}"
+                                alt="Apple Cedar Rust"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Apple Cedar Rust</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/apple_healthy.JPG') }}"
+                            data-image-name="0003.JPG">
+                            <img src="{{ url_for('static', filename='images/apple_healthy.JPG') }}" alt="Apple Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Apple Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/apple_scab.JPG') }}"
+                            data-image-name="0004.JPG">
+                            <img src="{{ url_for('static', filename='images/apple_scab.JPG') }}" alt="Apple Scab"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Apple Scab</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}"
+                            data-image-name="0005.JPG">
+                            <img src="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}"
+                                alt="Healthy Blueberry"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Healthy Blueberry</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
+                            data-image-name="0006.JPG">
+                            <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
+                                alt="Cherry Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Cherry Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
+                            data-image-name="0007.JPG">
+                            <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
+                                alt="Cherry Powdery Milkdew"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Cherry Powdery Milkdew</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}"
+                            data-image-name="0008.JPG">
+                            <img src="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}"
+                                alt="Corn Cercospora Leaf Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Corn Cercospora Leaf Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
+                            data-image-name="0009.JPG">
+                            <img src="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
+                                alt="Corn Common Rust"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Corn Common Rust</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}"
+                            data-image-name="0010.JPG">
+                            <img src="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}"
+                                alt="Corn Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Corn Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
+                            data-image-name="0011.JPG">
+                            <img src="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
+                                alt="Corn Northern leaf Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Corn Northern leaf Blight</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}"
+                            data-image-name="0012.JPG">
+                            <img src="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}"
+                                alt="Grape Black Rot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Grape Black Rot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
+                            data-image-name="0013.JPG">
+                            <img src="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
+                                alt="Grape Leaf Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Grape Leaf Blight</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/grape_esca.JPG') }}"
+                            data-image-name="0014.JPG">
+                            <img src="{{ url_for('static', filename='images/grape_esca.JPG') }}" alt="Grape Esca"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Grape Esca</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/grape_healthy.JPG') }}"
+                            data-image-name="0015.JPG">
+                            <img src="{{ url_for('static', filename='images/grape_healthy.JPG') }}" alt="Grape Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Grape Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
+                            data-image-name="0016.JPG">
+                            <img src="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
+                                alt="Orange Haunglongbing"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Orange Haunglongbing</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
+                            data-image-name="0017.JPG">
+                            <img src="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
+                                alt="Peach Bacterial Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Peach Bacterial Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Peach___healthy.JPG') }}"
+                            data-image-name="0018.JPG">
+                            <img src="{{ url_for('static', filename='images/Peach___healthy.JPG') }}"
+                                alt="Peach Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Peach Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/pepper_spot.JPG') }}"
+                            data-image-name="0019.JPG">
+                            <img src="{{ url_for('static', filename='images/pepper_spot.JPG') }}" alt="Pepper Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Pepper Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}"
+                            data-image-name="0020.JPG">
+                            <img src="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}"
+                                alt="Pepper Bell Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Pepper Bell Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Potato___healthy.JPG') }}"
+                            data-image-name="0021.JPG">
+                            <img src="{{ url_for('static', filename='images/Potato___healthy.JPG') }}"
+                                alt="Potato Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Potato Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/potato_early_blight.JPG') }}"
+                            data-image-name="0022.JPG">
+                            <img src="{{ url_for('static', filename='images/potato_early_blight.JPG') }}"
+                                alt="Potato Early Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Potato Early Blight</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/potato_late_blight.JPG') }}"
+                            data-image-name="0023.JPG">
+                            <img src="{{ url_for('static', filename='images/potato_late_blight.JPG') }}"
+                                alt="Potato Late Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Potato Late Blight</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}"
+                            data-image-name="0024.JPG">
+                            <img src="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}"
+                                alt="Raspberry Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Raspberry Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}"
+                            data-image-name="0025.JPG">
+                            <img src="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}"
+                                alt="Soyabean Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Soyabean Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
+                            data-image-name="0026.JPG">
+                            <img src="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
+                                alt="Squash Powdery Mildew"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Squash Powdery Mildew</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}"
+                            data-image-name="0027.JPG">
+                            <img src="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}"
+                                alt="Strawberry Healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Strawberry Healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
+                            data-image-name="0028.JPG">
+                            <img src="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
+                                alt="Strawberry Leaf Scorch"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Strawberry Leaf Scorch</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
+                            data-image-name="0029.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
+                                alt="Tomato Bacterial Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Bacterial Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}"
+                            data-image-name="0030.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}"
+                                alt="Tomato Early Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Early Blight</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}"
+                            data-image-name="0031.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}"
+                                alt="Tomato healthy"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato healthy</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}"
+                            data-image-name="0032.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}"
+                                alt="Tomato Leaf Mold"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Leaf Mold</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
+                            data-image-name="0033.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
+                                alt="Tomato Septoria leaf Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Septoria leaf Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
+                            data-image-name="0034.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
+                                alt="Tomato Spider Mites"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Spider Mites</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}"
+                            data-image-name="0035.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}"
+                                alt="Tomato Target Spot"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Target Spot</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
+                            data-image-name="0036.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
+                                alt="Tomato Mosaic Virus"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Mosaic Virus</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
+                            data-image-name="0037.JPG">
+                            <img src="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
+                                alt="Tomato Yellow Leaf Curl Virus"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Yellow Leaf Curl Virus</p>
+                        </div>
+                        <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                            data-image-path="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}"
+                            data-image-name="0038.JPG">
+                            <img src="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}"
+                                alt="Tomato Late Blight"
+                                class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                            <p class="text-xs font-medium text-gray-700">Tomato Late Blight</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Application Logic Section - now always full width -->
+                <div id="main-app-section" class="w-full">
+                    <!-- Loading Indicator for initial prediction -->
+                    <div id="loading-spinner-initial" class="hidden flex flex-col items-center justify-center mb-8">
+                        <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4">
+                        </div>
+                        <p class="text-gray-700 text-lg font-medium">Analyzing your image...</p>
+                    </div>
+
+                    <!-- Disease Detection Section -->
+                    <div id="disease-detection-section" class="hidden mb-8 text-left">
+                        <div class="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                            <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection
+                            </h2>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
+                                <div class="flex items-center">
+                                    <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
+                                    <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                        <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full"
+                                            style="width: 0%;"></div>
+                                    </div>
+                                    <span id="confidence-score-text"
+                                        class="ml-2 text-gray-700 font-semibold text-sm"></span>
+                                </div>
+                            </div>
+                            <img id="image-preview-summary"
+                                class="max-w-full h-48 object-contain mx-auto rounded-lg shadow-md border border-gray-200 mt-4"
+                                alt="Uploaded Image">
+                            <p id="image-name-summary" class="text-gray-600 mt-2 text-sm text-center"></p>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information Section -->
+                    <div id="additional-info-section" class="hidden mb-8 text-left">
+                        <div class="bg-yellow-500 text-white p-3 rounded-t-lg flex items-center">
+                            <h3 class="text-xl font-semibold"><i class="fas fa-info-circle mr-2"></i>Additional
+                                Information</h3>
+                        </div>
+                        <div id="additional-info-content"
+                            class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
+                            <p class="text-gray-700 mb-4">Please answer these questions for a more accurate diagnosis:
+                            </p>
+
+                            <!-- Plant Symptoms -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-green-300">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i
+                                        class="fas fa-leaf text-green-600 mr-2"></i>Plant Symptoms</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="leaf-discoloration"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Leaf discoloration
+                                            observed?</label>
+                                        <select id="leaf-discoloration"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="yellowing">Yellowing</option>
+                                            <option value="browning">Browning</option>
+                                            <option value="reddening">Reddening</option>
+                                            <option value="spots">Spots</option>
+                                            <option value="none">None</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="wilting-dropping"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Wilting or
+                                            dropping?</label>
+                                        <select id="wilting-dropping"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="wilting">Wilting</option>
+                                            <option value="dropping">Dropping</option>
+                                            <option value="none">None</option>
+                                            <option value="slight">Slight</option>
+                                            <option value="severe">Severe</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Environmental Conditions -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-blue-300">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i
+                                        class="fas fa-cloud-sun text-blue-600 mr-2"></i>Environmental Conditions</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="recent-weather"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Recent weather
+                                            conditions?</label>
+                                        <select id="recent-weather"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="dry">Dry</option>
+                                            <option value="humid">Humid</option>
+                                            <option value="rainy">Rainy</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="extreme_heat">Extreme Heat</option>
+                                            <option value="extreme_cold">Extreme Cold</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="temperature-condition"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Temperature
+                                            condition?</label>
+                                        <select id="temperature-condition"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="hot">Hot</option>
+                                            <option value="cold">Cold</option>
+                                            <option value="fluctuating">Fluctuating</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Treatment History -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-purple-300">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i
+                                        class="fas fa-flask text-purple-600 mr-2"></i>Treatment History</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="recent-fertilizer"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Recent fertilizer
+                                            application?</label>
+                                        <select id="recent-fertilizer"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="yes_npk">Yes (NPK)</option>
+                                            <option value="yes_organic">Yes (Organic)</option>
+                                            <option value="yes_other">Yes (Other)</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="previous-pesticide"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Previous pesticide
+                                            use?</label>
+                                        <select id="previous-pesticide"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="yes_fungicide">Yes (Fungicide)</option>
+                                            <option value="yes_insecticide">Yes (Insecticide)</option>
+                                            <option value="yes_herbicide">Yes (Herbicide)</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pest Observations -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-red-300">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i
+                                        class="fas fa-bug text-red-600 mr-2"></i>Pest Observations</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="insects-observed"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Insects
+                                            observed?</label>
+                                        <select id="insects-observed"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="aphids">Aphids</option>
+                                            <option value="whiteflies">Whiteflies</option>
+                                            <option value="spider_mites">Spider Mites</option>
+                                            <option value="caterpillars">Caterpillars</option>
+                                            <option value="none">None</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="evidence-of-damage"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Evidence of pest
+                                            damage?</label>
+                                        <select id="evidence-of-damage"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="chewing">Chewing marks</option>
+                                            <option value="holes">Holes in leaves</option>
+                                            <option value="sticky_residue">Sticky residue</option>
+                                            <option value="none">None</option>
+                                            <option value="visible_pests">Visible pests</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Plant Management -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-orange-300">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i
+                                        class="fas fa-hand-holding-water text-orange-600 mr-2"></i>Plant Management</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="watering-frequency"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Watering
+                                            frequency?</label>
+                                        <select id="watering-frequency"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="daily">Daily</option>
+                                            <option value="every_few_days">Every few days</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="irregular">Irregular</option>
+                                            <option value="overwatering">Overwatering signs</option>
+                                            <option value="underwatering">Underwatering signs</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="plant-age-growth"
+                                            class="block text-gray-700 text-sm font-medium mb-1">Plant age/growth
+                                            stage?</label>
+                                        <select id="plant-age-growth"
+                                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                            <option value="">Select...</option>
+                                            <option value="seedling">Seedling</option>
+                                            <option value="vegetative">Vegetative</option>
+                                            <option value="flowering">Flowering</option>
+                                            <option value="fruiting">Fruiting</option>
+                                            <option value="mature">Mature</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="get-report-button"
+                            class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg text-lg font-semibold w-full">
+                            <i class="fas fa-robot mr-2"></i> Get AI Diagnosis
+                        </button>
+                    </div>
+
+                    <!-- Loading Indicator for detailed report generation -->
+                    <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
+                        <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4">
+                        </div>
+                        <p class="text-gray-700 text-lg font-medium text-center">
+                            <span id="loading-text-report">Generating your personalized report...</span>
+                            <br>
+                            <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles
+                                the best advice for you.</span>
+                        </p>
+                    </div>
+
+                    <!-- AI Agronomist Report Section - now separate and hidden by default -->
+                    <div id="report-section-standalone" class="hidden text-left mb-8">
+                        <div class="bg-green-600 text-white p-3 rounded-t-lg flex items-center">
+                            <h2 class="text-xl font-semibold"><i class="fas fa-robot mr-2"></i>AI Agronomist Report</h2>
+                        </div>
+                        <div id="final-report-content"
+                            class="bg-gray-50 p-6 rounded-b-xl border border-gray-200 prose max-w-none">
+                            <!-- Report content will be injected here -->
+                        </div>
+                        <button id="start-over-button"
+                            class="bg-gray-400 text-white px-8 py-3 rounded-xl hover:bg-gray-500 transition-colors duration-300 shadow-lg text-lg font-semibold mt-6">
+                            Start Over
+                        </button>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="error-message"
+                        class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mt-4"
+                        role="alert">
+                        <strong class="font-bold">Error!</strong>
+                        <span class="block sm:inline" id="error-text">Something went wrong. Please try again.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-green-700 text-white text-sm py-4">
+            <div
+                class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
+                <!-- Project Info -->
+                <!-- <div>
       <span class="font-semibold">AI Crop Doctor</span> — Built by 
       <span class="underline">Anshika Singh</span> & 
       <span class="underline">Ayush Sinha</span>
     </div> -->
- <!-- Tagline -->
-    <div class="italic text-green-100">
-      Empowering farmers with AI 🌿
-    </div>
-  </div>
-<!-- Footer Bottom -->
-  <div class="text-center text-green-100 text-xs mt-2">
-    © 2025 AI Crop Doctor. All rights reserved.
-  </div>
-</footer>
- <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script>
-  window.onload = function () {
-    // Show Frame 1 for 2s
-    setTimeout(() => {
-      document.getElementById("frame1").classList.add("hidden");
-      document.getElementById("frame2").classList.remove("hidden");
+                <!-- Tagline -->
+                <div class="italic text-green-100">
+                    Empowering farmers with AI 🌿
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="text-center text-green-100 text-xs mt-2">
+                © 2025 AI Crop Doctor. All rights reserved.
+            </div>
+        </footer>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script>
+            window.onload = function () {
+                // Show Frame 1 for 2s
+                setTimeout(() => {
+                    document.getElementById("frame1").classList.add("hidden");
+                    document.getElementById("frame2").classList.remove("hidden");
 
-      // Show Frame 2 for 2s, then Main
-      setTimeout(() => {
-        document.getElementById("frame2").classList.add("hidden");
-        document.getElementById("mainContent").classList.remove("hidden");
-      }, 2000); // Frame 2 duration
-    }, 2000); // Frame 1 duration
-  };
-</script>
+                    // Show Frame 2 for 2s, then Main
+                    setTimeout(() => {
+                        document.getElementById("frame2").classList.add("hidden");
+                        document.getElementById("mainContent").classList.remove("hidden");
+                    }, 2000); // Frame 2 duration
+                }, 2000); // Frame 1 duration
+
+                // Hero Slider Logic
+                const slides = document.querySelectorAll('.slide');
+                let currentSlide = 0;
+
+                function nextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+
+                if (slides.length > 0) {
+                    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+                }
+            };
+        </script>
 </body>
+
 </html>

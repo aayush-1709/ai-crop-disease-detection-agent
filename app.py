@@ -1,8 +1,13 @@
 import os
 import json
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.preprocessing import image
+try:
+    import tensorflow as tf
+    from tensorflow.keras.preprocessing import image
+    TF_AVAILABLE = True
+except ImportError:
+    print("TensorFlow not available. Running in Lite mode (Mocking AI features).")
+    TF_AVAILABLE = False
 import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
@@ -38,8 +43,8 @@ def initialize_firebase():
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
         if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
+            print("WARNING: FIREBASE_CONFIG_JSON environment variable not set. History features will be disabled.")
+            # print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
             return False
 
         cred = credentials.Certificate(json.loads(firebase_config_json))
@@ -52,13 +57,17 @@ def initialize_firebase():
         return True
     except Exception as e:
         print(f"Failed to initialize Firebase: {e}")
-        import traceback
-        traceback.print_exc()
+        # import traceback
+        # traceback.print_exc()
         return False
 
 # --- Load Model and Class Indices on startup ---
 def load_resources():
     global model, class_labels
+    if not TF_AVAILABLE:
+        print("TensorFlow is not available. Skipping model loading.")
+        return True # Return True to allow app to start
+
     print("Attempting to load model and class indices...")
     try:
         if not os.path.exists(MODEL_FILENAME):
@@ -147,31 +156,38 @@ def predict():
         return jsonify({"error": "No selected file"}), 400
 
     try:
-        img_bytes = file.read()
-        img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-        img_stream = io.BytesIO(img_bytes)
-        
-        img = image.load_img(img_stream, target_size=(IMG_HEIGHT, IMG_WIDTH))
-        img_array = image.img_to_array(img)
-        img_array = np.expand_dims(img_array, axis=0).astype(np.float32) / 255.0
+        if not TF_AVAILABLE:
+             # Mock prediction for Python 3.14 support
+            predicted_class_name = "Mock Disease (TF Missing)"
+            confidence = 99.9
+            img_base64 = "mock_base64" # Placeholder
+        else:
+            img_bytes = file.read()
+            img_base64 = base64.b64encode(img_bytes).decode('utf-8')
+            img_stream = io.BytesIO(img_bytes)
+            
+            img = image.load_img(img_stream, target_size=(IMG_HEIGHT, IMG_WIDTH))
+            img_array = image.img_to_array(img)
+            img_array = np.expand_dims(img_array, axis=0).astype(np.float32) / 255.0
 
-        # --- TFLite Inference ---
-        input_details = model.get_input_details()
-        output_details = model.get_output_details()
+            # --- TFLite Inference ---
+            input_details = model.get_input_details()
+            output_details = model.get_output_details()
 
-        # Set input tensor
-        model.set_tensor(input_details[0]['index'], img_array)
-        
-        # Run inference
-        model.invoke()
-        
-        # Get output tensor
-        prediction = model.get_tensor(output_details[0]['index'])
-        # --- End TFLite Inference ---
+            # Set input tensor
+            model.set_tensor(input_details[0]['index'], img_array)
+            
+            # Run inference
+            model.invoke()
+            
+            # Get output tensor
+            prediction = model.get_tensor(output_details[0]['index'])
+            # --- End TFLite Inference ---
 
-        predicted_class_index = np.argmax(prediction[0])
-        confidence = np.max(prediction[0]) * 100
-        predicted_class_name = class_labels[predicted_class_index]
+            predicted_class_index = np.argmax(prediction[0])
+            confidence = np.max(prediction[0]) * 100
+            predicted_class_name = class_labels[predicted_class_index]
+
 
         if db:
             history_ref = db.collection('predictions')
@@ -256,12 +272,14 @@ if __name__ == '__main__':
 
     # Initialize Firebase and load resources
     if not initialize_firebase():
-        print("CRITICAL ERROR: Firebase initialization failed during app startup.")
-        exit(1)
+        print("WARNING: Firebase init failed. Continuing without it...")
+        # print("CRITICAL ERROR: Firebase initialization failed during app startup.")
+        # exit(1)
 
     if not load_resources():
-        print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
-        exit(1)
+        print("WARNING: Model load failed. Continuing without it...")
+        # print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
+        # exit(1)
         
     app.run(debug=True, port=5000)
 
