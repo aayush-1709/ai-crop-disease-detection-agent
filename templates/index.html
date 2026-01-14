@@ -568,24 +568,67 @@
             </div>
         </div>
     </main>
-    <footer class="bg-green-700 text-white text-sm py-4">
-  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-     <!-- Project Info -->
-    <!-- <div>
-      <span class="font-semibold">AI Crop Doctor</span> — Built by 
-      <span class="underline">Anshika Singh</span> & 
-      <span class="underline">Ayush Sinha</span>
-    </div> -->
- <!-- Tagline -->
-    <div class="italic text-green-100">
-      Empowering farmers with AI 🌿
+    <!--Footer section-->
+   <footer class="bg-gradient-to-r from-green-800 via-green-700 to-green-900 text-white pt-10 pb-6">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+    <!-- Brand Info -->
+    <div>
+      <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+        🌱 AI Crop Doctor
+      </h3>
+      <p class="text-green-100 text-sm leading-relaxed">
+        Smart AI powered crop disease detection helping farmers take fast and accurate decisions.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Quick Links</h4>
+      <ul class="space-y-2 text-green-100 text-sm">
+        <li><a href="/" class="hover:text-white">Home</a></li>
+        <li><a href="/history_page" target="_blank" class="hover:text-white">History</a></li>
+        <li><a href="/user_guide" target="_blank" class="hover:text-white">User Guide</a></li>
+        <li><a href="/tools" target="_blank" class="hover:text-white">Tools</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Support</h4>
+      <ul class="space-y-2 text-green-100 text-sm">
+        <li><a href="#" class="hover:text-white">FAQs</a></li>
+        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-white">Terms & Conditions</a></li>
+        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Get in Touch</h4>
+      <p class="text-green-100 text-sm">📧 support@aicropdoctor.com</p>
+      <p class="text-green-100 text-sm">📞 +91 xxxx xxx xxx</p>
+
+      <!-- Social Icons -->
+      <div class="flex gap-4 mt-4 text-xl">
+        <a href="#" class="hover:text-green-300"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-green-300"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-green-300"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+      </div>
     </div>
   </div>
-<!-- Footer Bottom -->
-  <div class="text-center text-green-100 text-xs mt-2">
-    © 2025 AI Crop Doctor. All rights reserved.
+
+  <!-- Divider -->
+  <div class="border-t border-green-600 mt-8"></div>
+
+  <!-- Bottom Bar -->
+  <div class="text-center text-green-200 text-sm mt-4">
+    © 2025 AI Crop Doctor — Empowering Farmers with AI 🌿
   </div>
 </footer>
+
  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
   window.onload = function () {
