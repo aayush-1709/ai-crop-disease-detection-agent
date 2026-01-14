@@ -1,0 +1,6 @@
+venv/
+.env
+app_local.py
+serviceAccountKey.json
+crop_diagnosis_best_model.keras
+plant-disease-detection-467016-55dc39c76029.json

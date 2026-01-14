@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Doctor - User Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
+        <!-- Navigation Bar -->
+        <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      
+      <!-- 🌿 Logo & Brand -->
+      <a href="/" class="text-white text-2xl font-bold flex items-center space-x-3">
+  <img
+    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+    alt="AI Crop Doctor Logo"
+    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
+  />
+  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
+</a>
+
+<!-- 📂 Navigation Links -->
+      <div class="space-x-4 hidden md:flex">
+        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
+        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
+        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
+        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
+        <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
+          <i class="fas fa-phone-alt mr-1"></i> Emergency
+        </a>
+      </div>
+      
+      <!-- 📱 Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menuToggle" class="text-white text-2xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 📱 Mobile Dropdown -->
+    <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
+      <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
+      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
+      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
+      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
+      <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
+        <i class="fas fa-phone-alt mr-1"></i> Emergency
+      </a>
+    </div>
+  </nav>
+
+  <!-- JS: Toggle mobile menu -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+<!-- hero section -->
+
+    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center" style="background-image: url('https://img.freepik.com/premium-photo/field-green-wheat-with-sun-setting-background_662214-190979.jpg');">
+
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-4xl w-full border-t-4 border-green-500">
+            <div class="card shadow">
+                <div class="card-header bg-green-600 text-white p-4 rounded-t-xl">
+                    <h5 class="text-2xl font-bold mb-1"><i class="fas fa-book mr-2"></i>User Guide</h5>
+                    <small class="text-green-100">Complete guide to using AI Crop Doctor effectively</small>
+                </div>
+                <div class="card-body user-guide-content p-6">
+                    <nav class="guide-navigation mb-6">
+                        <ul class="guide-navigation-tabs flex flex-wrap justify-center gap-2" role="tablist">
+                            <li role="presentation">
+                                <button id="tab-getting-started" class="btn px-5 py-2 rounded-full border-2 border-green-500 text-green-700 font-semibold hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 active" role="tab" aria-selected="true" aria-controls="guide-getting-started" onclick="showGuideSection('getting-started')">Getting Started</button>
+                            </li>
+                            <li role="presentation">
+                                <button id="tab-how-to-use" class="btn px-5 py-2 rounded-full border-2 border-green-500 text-green-700 font-semibold hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75" role="tab" aria-selected="false" aria-controls="guide-how-to-use" onclick="showGuideSection('how-to-use')">How to Use</button>
+                            </li>
+                            <li role="presentation">
+                                <button id="tab-understanding-results" class="btn px-5 py-2 rounded-full border-2 border-green-500 text-green-700 font-semibold hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75" role="tab" aria-selected="false" aria-controls="guide-understanding-results" onclick="showGuideSection('understanding-results')">Understanding Results</button>
+                            </li>
+                            <li role="presentation">
+                                <button id="tab-tips" class="btn px-5 py-2 rounded-full border-2 border-green-500 text-green-700 font-semibold hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75" role="tab" aria-selected="false" aria-controls="guide-tips" onclick="showGuideSection('tips')">Tips & Best Practices</button>
+                            </li>
+                            <li role="presentation">
+                                <button id="tab-troubleshooting" class="btn px-5 py-2 rounded-full border-2 border-green-500 text-green-700 font-semibold hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75" role="tab" aria-selected="false" aria-controls="guide-troubleshooting" onclick="showGuideSection('troubleshooting')">Troubleshooting</button>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <div id="guide-getting-started" class="guide-section" role="tabpanel" aria-labelledby="tab-getting-started">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3"><i class="fas fa-rocket text-green-600 mr-2"></i>Getting Started</h4>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-info-circle text-blue-500 mr-2"></i>What is AI Crop Doctor?</h6>
+                            <p class="text-gray-700">AI Crop Doctor is an advanced machine learning application that helps farmers and agricultural professionals identify plant diseases from photographs. Our AI model can detect various crop diseases with high accuracy and provide treatment recommendations.</p>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-seedling text-green-600 mr-2"></i>Supported Crops & Diseases</h6>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <strong class="text-gray-800">Supported Crops:</strong>
+                                    <ul class="list-disc list-inside text-gray-700 mt-1">
+                                        <li>Tomato</li>
+                                        <li>Potato</li>
+                                        <li>Apple</li>
+                                        <li>Corn</li>
+                                        <li>Wheat</li>
+                                        <li>Pepper</li>
+                                        <li>Grape</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong class="text-gray-800">Common Diseases Detected:</strong>
+                                    <ul class="list-disc list-inside text-gray-700 mt-1">
+                                        <li>Early Blight</li>
+                                        <li>Late Blight</li>
+                                        <li>Bacterial Spot</li>
+                                        <li>Powdery Mildew</li>
+                                        <li>Rust</li>
+                                        <li>Scab</li>
+                                        <li>Leaf Curl</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i>System Requirements</h6>
+                            <ul class="list-disc list-inside text-gray-700">
+                                <li><strong>Internet Connection:</strong> Required for AI processing</li>
+                                <li><strong>Browser:</strong> Chrome, Firefox, Safari, Edge (latest versions)</li>
+                                <li><strong>Image Format:</strong> JPG, PNG, GIF supported</li>
+                                <li><strong>File Size:</strong> Maximum 16MB per image</li>
+                                <li><strong>Resolution:</strong> Minimum 300x300 pixels recommended</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="guide-how-to-use" class="guide-section hidden" role="tabpanel" aria-labelledby="tab-how-to-use">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3"><i class="fas fa-play-circle text-green-600 mr-2"></i>How to Use</h4>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-upload text-blue-500 mr-2"></i>Step 1: Upload Plant Image</h6>
+                            <div class="step-visual mb-3 flex justify-center items-center h-24 border-2 border-dashed border-gray-300 rounded-lg bg-white">
+                                <div class="upload-demo text-center">
+                                    <i class="fas fa-cloud-upload-alt fa-2x text-green-600"></i>
+                                    <p class="text-gray-600 text-sm mt-1">Drag & Drop or Click to Upload</p>
+                                </div>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-700">
+                                <li>Click the upload area in the left panel</li>
+                                <li>Select a clear photo of the affected plant</li>
+                                <li>Or drag and drop the image directly</li>
+                                <li>Alternatively, try sample images from the homepage</li>
+                            </ul>
+                            <div class="alert bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg mt-3">
+                                <strong class="font-bold">Photo Tips:</strong> Ensure good lighting, focus on affected leaves, avoid blurry images
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-search text-blue-500 mr-2"></i>Step 2: Initial Analysis</h6>
+                            <p class="text-gray-700">After uploading, our AI will:</p>
+                            <ol class="list-decimal list-inside text-gray-700">
+                                <li>Process your image (usually takes 5-10 seconds)</li>
+                                <li>Display the detected disease name</li>
+                                <li>Show confidence level (accuracy percentage)</li>
+                                <li>Present the analyzed image in the left panel</li>
+                            </ol>
+                            <div class="confidence-example mt-3">
+                                <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded-full mr-2">85% Confident</span>
+                                <span class="text-gray-600 text-sm">High accuracy detection</span>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-question-circle text-blue-500 mr-2"></i>Step 3: Detailed Diagnosis (Optional)</h6>
+                            <p class="text-gray-700">For more accurate treatment recommendations:</p>
+                            <ol class="list-decimal list-inside text-gray-700">
+                                <li>Click "Get Detailed Diagnosis" button</li>
+                                <li>Answer 5 categories of questions:
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li><strong>Plant Symptoms:</strong> Leaf discoloration, wilting</li>
+                                        <li><strong>Environmental:</strong> Weather, temperature</li>
+                                        <li><strong>Treatment History:</strong> Fertilizers, pesticides used</li>
+                                        <li><strong>Pest Observations:</strong> Insects, damage patterns</li>
+                                        <li><strong>Plant Management:</strong> Watering, growth stage</li>
+                                    </ul>
+                                </li>
+                                <li>Submit for AI-generated comprehensive report</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="guide-card bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-user-md text-blue-500 mr-2"></i>Step 4: Review Recommendations</h6>
+                            <p class="text-gray-700">The AI Agronomist Report includes:</p>
+                            <ul class="list-disc list-inside text-gray-700">
+                                <li><strong>Integrated Diagnosis:</strong> Combined AI + your observations</li>
+                                <li><strong>Organic Treatment:</strong> Natural remedies and practices</li>
+                                <li><strong>Chemical Treatment:</strong> Recommended products (India-specific)</li>
+                                <li><strong>Prevention Strategy:</strong> Long-term disease prevention</li>
+                                <li><strong>Monitoring Timeline:</strong> When to expect results</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="guide-understanding-results" class="guide-section hidden" role="tabpanel" aria-labelledby="tab-understanding-results">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3"><i class="fas fa-chart-bar text-green-600 mr-2"></i>Understanding Results</h4>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-percentage text-blue-500 mr-2"></i>Confidence Levels</h6>
+                            <div class="confidence-guide space-y-4">
+                                <div class="confidence-item flex items-start">
+                                    <div class="confidence-bar bg-green-500 w-4 h-4 rounded-full flex-shrink-0 mt-1 mr-3"></div>
+                                    <div class="confidence-info">
+                                        <strong class="text-gray-800">80-100%:</strong> High Confidence
+                                        <p class="text-gray-700 text-sm">Very reliable detection. Proceed with recommended treatment.</p>
+                                    </div>
+                                </div>
+                                <div class="confidence-item flex items-start">
+                                    <div class="confidence-bar bg-yellow-500 w-4 h-4 rounded-full flex-shrink-0 mt-1 mr-3"></div>
+                                    <div class="confidence-info">
+                                        <strong class="text-gray-800">60-79%:</strong> Moderate Confidence
+                                        <p class="text-gray-700 text-sm">Good detection. Consider expert consultation for confirmation.</p>
+                                    </div>
+                                </div>
+                                <div class="confidence-item flex items-start">
+                                    <div class="confidence-bar bg-red-500 w-4 h-4 rounded-full flex-shrink-0 mt-1 mr-3"></div>
+                                    <div class="confidence-info">
+                                        <strong class="text-gray-800">Below 60%:</strong> Low Confidence
+                                        <p class="text-gray-700 text-sm">Uncertain detection. Consult local agricultural expert.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-leaf text-blue-500 mr-2"></i>Disease Categories</h6>
+                            <div class="disease-categories space-y-4">
+                                <div class="category-item flex items-start">
+                                    <i class="fas fa-virus text-red-500 text-xl flex-shrink-0 mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="text-gray-800">Fungal Diseases:</strong>
+                                        <p class="text-gray-700 text-sm">Blight, rust, mildew, scab - often weather-related</p>
+                                    </div>
+                                </div>
+                                <div class="category-item flex items-start">
+                                    <i class="fas fa-bacteria text-yellow-500 text-xl flex-shrink-0 mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="text-gray-800">Bacterial Diseases:</strong>
+                                        <p class="text-gray-700 text-sm">Spots, wilts, cankers - spread through water/wounds</p>
+                                    </div>
+                                </div>
+                                <div class="category-item flex items-start">
+                                    <i class="fas fa-dna text-blue-500 text-xl flex-shrink-0 mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="text-gray-800">Viral Diseases:</strong>
+                                        <p class="text-gray-700 text-sm">Mosaic, curl, yellowing - vector-transmitted</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-clock text-blue-500 mr-2"></i>Treatment Timeline</h6>
+                            <ul class="list-disc list-inside text-gray-700">
+                                <li><strong>Immediate (0-3 days):</strong> Emergency treatments, isolation</li>
+                                <li><strong>Short-term (1-2 weeks):</strong> Active treatment application</li>
+                                <li><strong>Medium-term (2-4 weeks):</strong> Monitoring and follow-up</li>
+                                <li><strong>Long-term (1+ months):</strong> Prevention and maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="guide-tips" class="guide-section hidden" role="tabpanel" aria-labelledby="tab-tips">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3"><i class="fas fa-lightbulb text-green-600 mr-2"></i>Tips & Best Practices</h4>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-camera text-blue-500 mr-2"></i>Photography Tips</h6>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h7 class="text-green-600 font-semibold text-base block mb-2"><i class="fas fa-check-circle mr-1"></i> Good Photos:</h7>
+                                    <ul class="good-practices list-disc list-inside text-gray-700">
+                                        <li>Natural daylight (not direct sun)</li>
+                                        <li>Focus on affected leaves/areas</li>
+                                        <li>Multiple angles if possible</li>
+                                        <li>Clean, unobstructed view</li>
+                                        <li>Stable, non-blurry images</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h7 class="text-red-600 font-semibold text-base block mb-2"><i class="fas fa-times-circle mr-1"></i> Avoid:</h7>
+                                    <ul class="bad-practices list-disc list-inside text-gray-700">
+                                        <li>Very dark or bright lighting</li>
+                                        <li>Blurry or out-of-focus shots</li>
+                                        <li>Too much background clutter</li>
+                                        <li>Screenshots from other sources</li>
+                                        <li>Heavily filtered images</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-brain text-blue-500 mr-2"></i>Maximizing AI Accuracy</h6>
+                            <ol class="list-decimal list-inside text-gray-700">
+                                <li><strong>Multiple Samples:</strong> Upload 2-3 different affected leaves</li>
+                                <li><strong>Complete Questions:</strong> Answer all diagnostic questions thoroughly</li>
+                                <li><strong>Recent Photos:</strong> Use current images, not old ones</li>
+                                <li><strong>Context Information:</strong> Provide detailed environmental conditions</li>
+                                <li><strong>Cross-Reference:</strong> Compare with similar cases in history</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-shield-alt text-blue-500 mr-2"></i>Disease Prevention</h6>
+                            <div class="prevention-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="prevention-item text-center bg-white p-3 rounded-lg shadow-sm">
+                                    <i class="fas fa-tint text-blue-500 text-2xl mb-2"></i>
+                                    <strong class="block text-gray-800">Proper Watering</strong>
+                                    <p class="text-gray-700 text-sm">Avoid overhead watering, water at soil level</p>
+                                </div>
+                                <div class="prevention-item text-center bg-white p-3 rounded-lg shadow-sm">
+                                    <i class="fas fa-wind text-green-500 text-2xl mb-2"></i>
+                                    <strong class="block text-gray-800">Air Circulation</strong>
+                                    <p class="text-gray-700 text-sm">Ensure adequate spacing between plants</p>
+                                </div>
+                                <div class="prevention-item text-center bg-white p-3 rounded-lg shadow-sm">
+                                    <i class="fas fa-leaf text-yellow-500 text-2xl mb-2"></i>
+                                    <strong class="block text-gray-800">Crop Rotation</strong>
+                                    <p class="text-gray-700 text-sm">Rotate crops to break disease cycles</p>
+                                </div>
+                                <div class="prevention-item text-center bg-white p-3 rounded-lg shadow-sm">
+                                    <i class="fas fa-broom text-blue-500 text-2xl mb-2"></i>
+                                    <strong class="block text-gray-800">Garden Hygiene</strong>
+                                    <p class="text-gray-700 text-sm">Remove infected plant debris promptly</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-calendar-check text-blue-500 mr-2"></i>When to Consult Experts</h6>
+                            <ul class="list-disc list-inside text-gray-700">
+                                <li>Confidence level below 60%</li>
+                                <li>Disease spreading rapidly despite treatment</li>
+                                <li>Multiple diseases detected simultaneously</li>
+                                <li>Valuable/commercial crop at risk</li>
+                                <li>Unfamiliar or severe symptoms</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="guide-troubleshooting" class="guide-section hidden" role="tabpanel" aria-labelledby="tab-troubleshooting">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3"><i class="fas fa-wrench text-green-600 mr-2"></i>Troubleshooting</h4>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>Common Issues</h6>
+                            <div class="space-y-4">
+                                <div class="troubleshoot-item">
+                                    <strong class="block text-gray-800 mb-1">Problem:</strong> "File upload failed"
+                                    <div class="solution bg-white p-3 rounded-md border border-gray-200">
+                                        <strong class="block text-gray-700 mb-1">Solutions:</strong>
+                                        <ul class="list-disc list-inside text-gray-700 text-sm">
+                                            <li>Check file size (max 16MB)</li>
+                                            <li>Use supported formats (JPG, PNG, GIF)</li>
+                                            <li>Try a different image</li>
+                                            <li>Check internet connection</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="troubleshoot-item">
+                                    <strong class="block text-gray-800 mb-1">Problem:</strong> "Low confidence results"
+                                    <div class="solution bg-white p-3 rounded-md border border-gray-200">
+                                        <strong class="block text-gray-700 mb-1">Solutions:</strong>
+                                        <ul class="list-disc list-inside text-gray-700 text-sm">
+                                            <li>Upload clearer, better-lit photos</li>
+                                            <li>Focus on clearly affected areas</li>
+                                            <li>Try multiple angles</li>
+                                            <li>Ensure disease symptoms are visible</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="troubleshoot-item">
+                                    <strong class="block text-gray-800 mb-1">Problem:</strong> "Analysis takes too long"
+                                    <div class="solution bg-white p-3 rounded-md border border-gray-200">
+                                        <strong class="block text-gray-700 mb-1">Solutions:</strong>
+                                        <ul class="list-disc list-inside text-gray-700 text-sm">
+                                            <li>Check internet connection speed</li>
+                                            <li>Reduce image file size</li>
+                                            <li>Clear browser cache</li>
+                                            <li>Try during off-peak hours</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card mb-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-question-circle text-blue-500 mr-2"></i>FAQ</h6>
+                            <div class="space-y-3">
+                                <div class="faq-item">
+                                    <strong class="block text-gray-800">Q: Is my data secure?</strong>
+                                    <p class="text-gray-700 text-sm">A: Yes, images are processed securely and not stored permanently on our servers.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <strong class="block text-gray-800">Q: Can I use this offline?</strong>
+                                    <p class="text-gray-700 text-sm">A: No, internet connection is required for AI processing.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <strong class="block text-gray-800">Q: How accurate is the detection?</strong>
+                                    <p class="text-gray-700 text-sm">A: Our model achieves 95%+ accuracy on tested crops and diseases.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <strong class="block text-gray-800">Q: Can I save my results?</strong>
+                                    <p class="text-gray-700 text-sm">A: Yes, all analyses are automatically saved in your History section.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-card bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h6 class="text-lg font-medium text-gray-800 mb-2"><i class="fas fa-headset text-blue-500 mr-2"></i>Get Help</h6>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <strong class="block text-gray-800 mb-1">Emergency Support:</strong>
+                                    <p class="text-gray-700 text-sm">Click the red "Emergency" button in the navbar for immediate agricultural helplines.</p>
+                                </div>
+                                <div>
+                                    <strong class="block text-gray-800 mb-1">Technical Support:</strong>
+                                    <p class="text-gray-700 text-sm">For technical issues, contact your system administrator or IT support.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<script>
+  function showGuideSection(sectionId) {
+    const sections = document.querySelectorAll('.guide-section');
+    const tabs = document.querySelectorAll('.guide-navigation-tabs button');
+
+    sections.forEach(section => section.classList.add('hidden'));
+    tabs.forEach(tab => tab.classList.remove('active', 'bg-green-500', 'text-white'));
+    tabs.forEach(tab => tab.setAttribute('aria-selected', 'false'));
+
+    document.getElementById(`guide-${sectionId}`).classList.remove('hidden');
+    const activeTab = document.getElementById(`tab-${sectionId}`);
+    activeTab.classList.add('active', 'bg-green-500', 'text-white');
+    activeTab.setAttribute('aria-selected', 'true');
+  }
+</script>
+
+    <script src="{{ url_for('static', filename='js/user_guide.js') }}"></script>
+</body>
+</html>
