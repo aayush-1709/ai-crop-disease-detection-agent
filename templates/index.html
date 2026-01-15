@@ -62,48 +62,55 @@
 
     
     <!-- 🌱 Navigation Bar -->
-  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-    <div class="container mx-auto flex justify-between items-center">
-      
-      <!-- 🌿 Logo & Brand -->
-      <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-  <img
-    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-    alt="AI Crop Doctor Logo"
-    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
-  />
-  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-</a>
+  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 shadow-2xl z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        
+        <!-- 🌿 Logo & Brand -->
+        <a href="/" class="flex items-center space-x-3 group">
+          <img
+            src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+            alt="AI Crop Doctor Logo"
+            class="w-12 h-12 rounded-full shadow-lg border-2 border-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 ease-in-out"
+          />
+          <span class="text-white text-lg font-bold tracking-wide group-hover:text-green-100 transition-colors duration-300">AI Crop Doctor</span>
+        </a>
 
+        <!-- 📂 Navigation Links -->
+        <div class="hidden md:flex items-center space-x-2">
+          <a href="/" class="text-white px-4 py-2.5 rounded-full font-medium text-sm hover:bg-white hover:bg-opacity-20 transition-all duration-300 ease-in-out">Home</a>
+          <a href="/history_page" target="_blank" class="text-white px-4 py-2.5 rounded-full font-medium text-sm hover:bg-white hover:bg-opacity-20 transition-all duration-300 ease-in-out">History</a>
+          <a href="/user_guide" target="_blank" class="text-white px-4 py-2.5 rounded-full font-medium text-sm hover:bg-white hover:bg-opacity-20 transition-all duration-300 ease-in-out">User Guide</a>
+          <a href="/tools" target="_blank" class="text-white px-4 py-2.5 rounded-full font-medium text-sm hover:bg-white hover:bg-opacity-20 transition-all duration-300 ease-in-out">Tools</a>
+          <a href="#" class="ml-3 bg-red-500 text-white px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out flex items-center border-2 border-white">
+            <svg class="w-4 h-4 mr-2 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+            Emergency
+          </a>
+        </div>
+        
+        <!-- 📱 Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="menuToggle" class="text-white p-2.5 rounded-full hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
 
-      <!-- 📂 Navigation Links -->
-      <div class="space-x-4 hidden md:flex">
-        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
-        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
-        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
-        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-        <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
-          <i class="fas fa-phone-alt mr-1"></i> Emergency
+      <!-- 📱 Mobile Dropdown -->
+      <div id="mobileMenu" class="md:hidden hidden pb-4 space-y-2">
+        <a href="/" class="block text-white px-4 py-2.5 rounded-full hover:bg-white hover:bg-opacity-20 font-medium transition-all duration-300">Home</a>
+        <a href="/history_page" target="_blank" class="block text-white px-4 py-2.5 rounded-full hover:bg-white hover:bg-opacity-20 font-medium transition-all duration-300">History</a>
+        <a href="/user_guide" target="_blank" class="block text-white px-4 py-2.5 rounded-full hover:bg-white hover:bg-opacity-20 font-medium transition-all duration-300">User Guide</a>
+        <a href="/tools" target="_blank" class="block text-white px-4 py-2.5 rounded-full hover:bg-white hover:bg-opacity-20 font-medium transition-all duration-300">Tools</a>
+        <a href="#" class="block bg-red-500 text-white px-4 py-2.5 rounded-full hover:bg-red-600 font-semibold text-center shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white flex items-center justify-center mt-2">
+          <svg class="w-4 h-4 mr-2 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+          Emergency
         </a>
       </div>
-      
-      <!-- 📱 Mobile Menu Button -->
-      <div class="md:hidden">
-        <button id="menuToggle" class="text-white text-2xl focus:outline-none">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- 📱 Mobile Dropdown -->
-    <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
-      <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
-      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
-      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
-      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-      <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
-        <i class="fas fa-phone-alt mr-1"></i> Emergency
-      </a>
     </div>
   </nav>
 
@@ -568,24 +575,120 @@
             </div>
         </div>
     </main>
-    <footer class="bg-green-700 text-white text-sm py-4">
-  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-     <!-- Project Info -->
-    <!-- <div>
-      <span class="font-semibold">AI Crop Doctor</span> — Built by 
-      <span class="underline">Anshika Singh</span> & 
-      <span class="underline">Ayush Sinha</span>
-    </div> -->
- <!-- Tagline -->
-    <div class="italic text-green-100">
-      Empowering farmers with AI 🌿
-    </div>
-  </div>
-<!-- Footer Bottom -->
-  <div class="text-center text-green-100 text-xs mt-2">
-    © 2026 AI Crop Doctor. All rights reserved.
-  </div>
-</footer>
+    
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-green-800 via-green-700 to-green-900 text-white mt-auto">
+        <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12">
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-10">
+                
+                <!-- Brand Section -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-5">
+                        <img
+                            src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+                            alt="AI Crop Doctor"
+                            class="w-12 h-12 rounded-full border-2 border-white shadow-xl"
+                        />
+                        <div>
+                            <h3 class="text-2xl font-bold">AI Crop Doctor</h3>
+                            <p class="text-green-200 text-xs">Smart Agriculture Solutions</p>
+                        </div>
+                    </div>
+                    <p class="text-green-100 text-sm leading-relaxed max-w-md mb-5">
+                        Empowering farmers worldwide with cutting-edge AI technology for crop disease detection and precision agriculture management. Building a sustainable future, one crop at a time. 🌿
+                    </p>
+                    <p class="text-green-200 text-xs italic">
+                        "A healthy crop is a healthy future."
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-5 text-white">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/" class="text-green-100 hover:text-white transition-all duration-300 text-sm flex items-center group">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 group-hover:w-3 transition-all duration-300"></span>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/history_page" class="text-green-100 hover:text-white transition-all duration-300 text-sm flex items-center group">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 group-hover:w-3 transition-all duration-300"></span>
+                                History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user_guide" class="text-green-100 hover:text-white transition-all duration-300 text-sm flex items-center group">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 group-hover:w-3 transition-all duration-300"></span>
+                                User Guide
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools" class="text-green-100 hover:text-white transition-all duration-300 text-sm flex items-center group">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 group-hover:w-3 transition-all duration-300"></span>
+                                Tools
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div>
+                    <h4 class="text-lg font-bold mb-5 text-white">Support</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start group">
+                            <svg class="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <a href="mailto:support@aicropdoctor.com" class="text-green-100 hover:text-white transition-colors duration-300 break-all">
+                                support@aicropdoctor.com
+                            </a>
+                        </li>
+                        <li class="flex items-start group">
+                            <svg class="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span class="text-green-100">+1 (555) 123-4567</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Connect Section -->
+                <div>
+                    <h4 class="text-lg font-bold mb-5 text-white">Connect With Us</h4>
+                    <p class="text-green-100 text-sm mb-5">Follow us for updates and news</p>
+                    <div class="flex space-x-3">
+                        <a href="https://github.com/aayush-1709/ai-crop-disease-detection-agent" target="_blank" rel="noopener noreferrer" 
+                           class="group w-11 h-11 bg-white bg-opacity-10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-opacity-20 transition-all duration-300 hover:scale-110 hover:-translate-y-1 border border-white border-opacity-20">
+                            <i class="fab fa-github text-xl group-hover:text-green-200 transition-colors duration-300"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/aayush-sinha-481345230/" target="_blank" rel="noopener noreferrer" 
+                           class="group w-11 h-11 bg-white bg-opacity-10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-opacity-20 transition-all duration-300 hover:scale-110 hover:-translate-y-1 border border-white border-opacity-20">
+                            <i class="fab fa-linkedin text-xl group-hover:text-blue-300 transition-colors duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-green-600 border-opacity-40 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-green-200 text-sm">
+                        © 2026 <span class="font-semibold text-white">AI Crop Doctor</span>. All rights reserved.
+                    </p>
+                    <div class="flex items-center gap-2 text-green-200 text-sm">
+                        <span>Made with</span>
+                        <svg class="w-4 h-4 text-red-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>for farmers worldwide</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
   window.onload = function () {
