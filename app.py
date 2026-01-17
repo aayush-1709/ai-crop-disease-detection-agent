@@ -38,8 +38,14 @@ def initialize_firebase():
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
         if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
+            print("\n[Firebase Setup Warning]")
+            print("FIREBASE_CONFIG_JSON environment variable is not set.")
+            print("Firebase features (like prediction history) will be disabled.\n")
+            print("To fix this locally:")
+            print("1. Download your Firebase service account JSON")
+            print("2. Set it as an environment variable:")
+            print('   export FIREBASE_CONFIG_JSON=\'{...json here...}\'\n')
+            print("The app will continue to run without Firebase.\n")
             return False
 
         cred = credentials.Certificate(json.loads(firebase_config_json))
@@ -62,10 +68,16 @@ def load_resources():
     print("Attempting to load model and class indices...")
     try:
         if not os.path.exists(MODEL_FILENAME):
-            print(f"Error: Model file not found at {MODEL_FILENAME}. Please ensure it's committed to GitHub.")
+            print("\n[Model Load Error]")
+            print(f"Model file not found: {MODEL_FILENAME}")
+            print("Make sure the .tflite model file exists in the project root.")
+            print("If you just cloned the repo, check whether the model file is included.\n")
             return False
+
         if not os.path.exists(CLASS_INDICES_FILENAME):
-            print(f"Error: Class indices file not found at {CLASS_INDICES_FILENAME}. Please ensure it's in the project root.")
+            print("\n[Class Indices Error]")
+            print(f"class_indices.json not found at: {CLASS_INDICES_FILENAME}")
+            print("This file is required to map prediction outputs to class names.\n")
             return False
 
         # --- Load TFLite model using Interpreter ---
@@ -88,7 +100,14 @@ def load_resources():
 # --- Gemini Integration ---
 def get_gemini_diagnosis(disease_name, user_context):
     if not GEMINI_API_KEY:
-        return "Error: Gemini API key not configured on the backend. Please set the GEMINI_API_KEY environment variable."
+        return (
+            "Gemini API key is not configured.\n\n"
+            "To enable AI-based diagnosis:\n"
+            "1. Get an API key from https://ai.google.dev/\n"
+            "2. Set it in your environment:\n"
+            "   export GEMINI_API_KEY='your_api_key_here'\n\n"
+            "The app is still usable, but detailed AI recommendations are disabled."
+        )
 
     try:
         genai.configure(api_key=GEMINI_API_KEY)
