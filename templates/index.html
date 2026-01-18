@@ -242,6 +242,9 @@
 
 
 </div>
+            <!-- React Field Mode (Offline) -->
+            <div id="field-mode-root" class="max-w-xl mx-auto mb-10"></div>
+
             <div id="upload-section" class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
   <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
     Upload Plant Image
@@ -270,7 +273,7 @@
   </div>
 </div>
 
-                
+            <div id="intro-sample-section">
                 
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
                 <!--  grid for rows with 5 images each -->
@@ -428,6 +431,7 @@
                         <p class="text-xs font-medium text-gray-700">Tomato Late Blight</p>
                     </div>
                 </div>
+            </div>
             </div>
 
             <!-- Main Application Logic Section - now always full width -->
@@ -684,5 +688,6 @@
     }, 2000); // Frame 1 duration
   };
 </script>
+<script src="{{ url_for('static', filename='js/dist/field-mode.js') }}"></script>
 </body>
 </html>

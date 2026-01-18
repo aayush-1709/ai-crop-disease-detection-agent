@@ -1,0 +1,32 @@
+{
+  "name": "ai-crop-disease-detection-agent",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://readme-typing-svg.demolab.com?font=Inter&size=28&pause=1200&center=true&vCenter=true&width=600&lines=Detect+early%2C+protect+fully+%F0%9F%8C%B1;AI+powered+plant+disease+diagnosis;Your+digital+crop+health+assistant\" alt=\"Typing Animation\" />\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sh1vaas/ai-crop-disease-detection-agent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sh1vaas/ai-crop-disease-detection-agent/issues"
+  },
+  "homepage": "https://github.com/sh1vaas/ai-crop-disease-detection-agent#readme",
+  "dependencies": {
+    "@tensorflow-models/mobilenet": "^2.1.1",
+    "@tensorflow/tfjs": "^4.22.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.3.1"
+  }
+}
