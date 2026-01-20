@@ -1,19 +1,30 @@
-# 🔬 AI Crop Doctor - Model Documentation
+# 🔬 Model Documentation & Versioning
 
-## 🏗 Model Architecture
+This document provides technical details about the AI engine powering the Crop Doctor.
+
+## 🏗️ Architecture Overview
+The current model is a **lightweight CNN (Convolutional Neural Network)** optimized for mobile and web deployment.
+
 - **Base Model:** MobileNetV2 (Transfer Learning)
-- **Input Size:** 224x224x3 (RGB)
-- **Output:** Softmax Layer (38 Classes)
+- **Framework:** TensorFlow / Keras
+- **Export Format:** `.tflite` (TensorFlow Lite)
+- **Optimization:** Float16 Quantization for faster inference.
 
-## 📊 Dataset Metadata
-- **Source:** PlantVillage Dataset
-- **Images:** 54,303 healthy and diseased leaf images.
-- **Classes:** Includes Tomato, Potato, Apple, Corn, and Grape.
+## 📊 Technical Specifications
+| Parameter | Value |
+| :--- | :--- |
+| **Input Shape** | `(224, 224, 3)` |
+| **Color Space** | RGB |
+| **Normalization** | 1/255.0 scaling |
+| **Classes** | 38 (based on PlantVillage dataset) |
+| **Primary Dataset** | [PlantVillage](https://github.com/spMohanty/PlantVillage-Dataset) |
 
-## 🧠 Diagnostic Pipeline
-1. **Feature Extraction:** CNN identifies visual patterns (spots, wilting, color).
-2. **Confidence Threshold:** If the top prediction is below 0.8, the **Interactive Q&A** is triggered.
-3. **Contextual Adjustment:** Q&A answers (e.g., "Humidity level," "Soil type") act as weights to refine the final output.
+## 🛡️ Out of Distribution (OOD) Strategy
+To ensure the model doesn't give false diagnoses for non-leaf images:
+- **Entropy Thresholding:** If the prediction entropy is too high (indicating uncertainty across all classes), the image is flagged.
+- **Background Filter:** We check for specific green/brown pixel density to verify the presence of organic plant tissue before processing.
 
-## 🛡 Out of Distribution (OOD) Handling
-To prevent false positives, we implement an **Image Classifier Filter** that checks for the presence of a leaf. If the probability of "Plant" is below 0.7, the analysis is aborted to save compute resources.
+## 📈 Model Versioning
+- **v1.0.0:** Basic CNN, trained on Tomato classes only.
+- **v1.0.1:** Added MobileNetV2 base, expanded to 15 crops.
+- **v1.0.2 (Current):** Integrated TFLite support and optimized for Edge deployment.
