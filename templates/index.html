@@ -57,7 +57,7 @@
 </div>
 
 <!-- Main Content Wrapper -->
-<div id="mainContent" class="hidden">
+<div id="mainContent">
   <!-- 🟩 Everything else like navbar, hero section, footer goes inside here -->
 
     
@@ -201,77 +201,75 @@
     });
   </script>
 
-<!-- frame chnages -->
- 
-
-<!-- hero section -->
-
-    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
-      style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
-  
-  <!-- Main content container -->
-  <div class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
-    
-    <!-- Left Section: Introduction & Sample Images -->
-    <div id="intro-sample-section" class="w-full text-left">
-        <!-- Image with smooth hover animation -->
-
-      <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
-
-  <div class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-  <div class="overflow-hidden whitespace-nowrap">
-  <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
-    Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
-  </h2>
-</div>
-
-</div>
+                <!-- frame chnages -->
 
 
-  <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-  <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
-    Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with smart <span class="font-semibold text-gray-900">AI</span> — just upload a photo and let technology assist your next step.
-  </p>
-</div>
+                <!-- hero section -->
+
+                    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
+                      style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
+
+                  <!-- Main content container -->
+                  <div class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+
+                    <!-- Left Section: Introduction & Sample Images -->
+                    <div id="intro-sample-section" class="w-full text-left">
+                        <!-- Image with smooth hover animation -->
+                    
+                      <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
+                    
+                  <div class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+                  <div class="overflow-hidden whitespace-nowrap">
+                  <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
+                    Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
+                  </h2>
+                </div>
+
+                </div>
 
 
-  <p class="text-gray-900 text-base italic leading-relaxed">
-  Powered by <span class="font-bold text-gray-900">Machine learning</span> and 
-  <span class="font-bold text-gray-900">Generative AI</span>
-</p>
+                  <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                  <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
+                    Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with smart <span class="font-semibold text-gray-900">AI</span> — just upload a photo and let technology assist your next step.
+                  </p>
+                </div>
 
 
-</div>
-            <div id="upload-section" class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-    Upload Plant Image
-  </h2>
+                  <p class="text-gray-900 text-base italic leading-relaxed">
+                  Powered by <span class="font-bold text-gray-900">Machine learning</span> and 
+                  <span class="font-bold text-gray-900">Generative AI</span>
+                </p>
 
-  <div id="drop-area" class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
-    <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-    </svg>
-    <p class="text-gray-600 text-center text-base">
-      Drag & Drop your image here, or 
-      <span class="text-green-600 font-semibold underline">click to browse</span>
-    </p>
-    <input type="file" id="image-input" accept="image/*" class="hidden">
-  </div>
 
-  <div id="image-preview-container-initial" class="hidden mb-4 text-center">
-    <img id="image-preview-initial" class="max-w-full h-36 object-contain mx-auto rounded-lg shadow-sm border border-gray-200" alt="Image Preview">
-    <p id="image-name-initial" class="text-gray-500 mt-2 text-sm italic"></p>
-  </div>
+                </div>
+                <div id="upload-section" class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    Upload Plant Image
+                  </h2>
+              
+                  <div id="drop-area" class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
+                    <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="text-gray-600 text-center text-base">
+                      Drag & Drop your image here, or 
+                      <span class="text-green-600 font-semibold underline">click to browse</span>
+                    </p>
+                    <input type="file" id="image-input" accept="image/*" class="hidden">
+                  </div>
+              
+                  <div id="image-preview-container-initial" class="hidden mb-4 text-center">
+                    <img id="image-preview-initial" class="max-w-full h-36 object-contain mx-auto rounded-lg shadow-sm border border-gray-200" alt="Image Preview">
+                    <p id="image-name-initial" class="text-gray-500 mt-2 text-sm italic"></p>
+                  </div>
+              
+                  <div class="flex justify-center">
+                    <button id="predict-button" class="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition duration-300 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
+                      Analyze Image
+                    </button>
+                  </div>
+                </div>
 
-  <div class="flex justify-center">
-    <button id="predict-button" class="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition duration-300 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
-      Analyze Image
-    </button>
-  </div>
-</div>
-
-                
-                
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
                 <!--  grid for rows with 5 images each -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
@@ -621,17 +619,17 @@
 
                 <!-- Loading Indicator for detailed report generation -->
                 <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
-    <div class="relative w-24 h-24 mb-6">
-        <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
-        <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full"></div>
-    </div>
-
-    <p class="text-gray-700 text-lg font-medium text-center">
-        <span id="loading-text-report">Generating your personalized report...</span>
-        <br>
-        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
-    </p>
-</div>
+                    <div class="relative w-24 h-24 mb-6">
+                        <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
+                        <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full"></div>
+                    </div>
+                
+                    <p class="text-gray-700 text-lg font-medium text-center">
+                        <span id="loading-text-report">Generating your personalized report...</span>
+                        <br>
+                        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
+                    </p>
+                </div>
 
                 <!-- AI Agronomist Report Section - now separate and hidden by default -->
                 <div id="report-section-standalone" class="hidden text-left mb-8">
@@ -675,17 +673,16 @@
  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
   window.onload = function () {
-    // Show Frame 1 for 2s
     setTimeout(() => {
       document.getElementById("frame1").classList.add("hidden");
       document.getElementById("frame2").classList.remove("hidden");
 
-      // Show Frame 2 for 2s, then Main
       setTimeout(() => {
         document.getElementById("frame2").classList.add("hidden");
         document.getElementById("mainContent").classList.remove("hidden");
-      }, 2000); // Frame 2 duration
-    }, 2000); // Frame 1 duration
+
+      }, 2000);
+    }, 2000);
   };
 </script>
 </body>

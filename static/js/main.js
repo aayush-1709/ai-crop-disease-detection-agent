@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const leafDiscolorationSelect = document.getElementById('leaf-discoloration');
     const wiltingDroppingSelect = document.getElementById('wilting-dropping');
     const recentWeatherSelect = document.getElementById('recent-weather');
-    const temperatureConditionSelect = document = document.getElementById('temperature-condition');
+    const temperatureConditionSelect = document.getElementById('temperature-condition');
     const recentFertilizerSelect = document.getElementById('recent-fertilizer');
     const previousPesticideSelect = document.getElementById('previous-pesticide');
     const insectsObservedSelect = document.getElementById('insects-observed');
@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show initial upload section and hide others
         uploadSection.classList.remove('hidden');
         diseaseDetectionSection.classList.add('hidden'); // Hide disease detection
-        additionalInfoSection.classList.add('hidden'); // Hide additional info section (including header)
         reportSectionStandalone.classList.add('hidden'); // Hide standalone report
         loadingSpinnerInitial.classList.add('hidden');
         loadingSpinnerReport.classList.add('hidden');
@@ -114,8 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingSpinnerInitial.querySelector('p').textContent = "Analyzing your image...";
         loadingTextReport.textContent = "Generating your personalized report...";
 
-        // Reset layout: show intro/sample section. main-app-section is already w-full
+        // Reset layout
         introSampleSection.classList.remove('hidden');
+
+        // Always load prediction history on reset
+        setTimeout(() => {
+        }, 0);
+
     }
 
     // Function to handle file processing (for both input change and drag-drop)
@@ -257,6 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
             imagePreviewSummary.src = imagePreviewInitial.src;
             imageNameSummary.textContent = imageNameInitial.textContent;
 
+            // ================= Save Prediction History =================
+            savePredictionToHistory(
+                predictedDiseaseName.replace(/_/g, ' '),
+                currentConfidence.toFixed(2),
+                imagePreviewSummary.src
+            );
         } catch (error) {
             console.error('Error:', error);
             loadingSpinnerInitial.classList.add('hidden');
@@ -338,7 +348,30 @@ document.addEventListener('DOMContentLoaded', () => {
         getReportButton.click();
     });
 
+    /* ================= Prediction History Logic ================= */
 
-    // Initialize form state
-    resetForm();
+// Save prediction to localStorage
+function savePredictionToHistory(disease, confidence, imageSrc) {
+  const history = JSON.parse(localStorage.getItem("predictionHistory")) || [];
+
+  history.unshift({
+    disease,
+    confidence,
+    image: imageSrc,
+    time: new Date().toLocaleString()
+  });
+
+  // Keep only last 5 predictions
+  if (history.length > 5) history.pop();
+
+  localStorage.setItem("predictionHistory", JSON.stringify(history));
+}
+
+    // Initialize app
+resetForm();
+
+// Force-load history once page is fully painted
+window.requestAnimationFrame(() => {
+});
+
 });

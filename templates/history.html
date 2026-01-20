@@ -95,49 +95,6 @@
         </main>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const historyContainer = document.getElementById('history-container');
-            const loadingHistory = document.getElementById('loading-history');
-            const noHistory = document.getElementById('no-history');
-            const historyError = document.getElementById('history-error');
-
-            try {
-                const response = await fetch('/history');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-
-                loadingHistory.classList.add('hidden');
-
-                if (data.history && data.history.length > 0) {
-                    historyContainer.innerHTML = ''; // Clear loading message
-                    data.history.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'bg-gray-50 p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center';
-                        
-                        const timestamp = new Date(item.timestamp).toLocaleString();
-
-                        card.innerHTML = `
-                            <img src="data:image/jpeg;base64,${item.image_base64}" alt="Predicted Plant" class="w-48 h-48 object-cover rounded-lg mb-4 border border-gray-300">
-                            <h3 class="text-xl font-semibold text-green-700 mb-2">${item.predicted_class_name.replace(/_/g, ' ')}</h3>
-                            <p class="text-gray-600 text-sm mb-1">Confidence: ${item.confidence.toFixed(2)}%</p>
-                            <p class="text-gray-500 text-xs">Diagnosed On: ${timestamp}</p>
-                        `;
-                        historyContainer.appendChild(card);
-                    });
-                } else {
-                    noHistory.classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error('Failed to fetch history:', error);
-                loadingHistory.classList.add('hidden');
-                historyError.classList.remove('hidden');
-            }
-        });
-    </script>
-
     <!-- Footer -->
     <footer class="bg-green-700 text-white text-sm py-4">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">

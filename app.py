@@ -38,8 +38,7 @@ def initialize_firebase():
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
         if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
+            print("Firebase config not found. Running without Firebase (local mode).")
             return False
 
         cred = credentials.Certificate(json.loads(firebase_config_json))
@@ -208,30 +207,6 @@ def get_diagnosis():
     final_report = get_gemini_diagnosis(disease_name, user_context)
     return jsonify({"report": final_report})
 
-# --- History Endpoint ---
-@app.route('/history', methods=['GET'])
-def get_history():
-    if not db:
-        print("ERROR: Firestore 'db' object is None before history fetch.")
-        return jsonify({"error": "Firestore not initialized."}), 500
-
-    try:
-        predictions_ref = db.collection('predictions').order_by('timestamp', direction=firestore.Query.DESCENDING).limit(50)
-        docs = predictions_ref.stream()
-
-        history_data = []
-        for doc in docs:
-            data = doc.to_dict()
-            if 'timestamp' in data and data['timestamp']:
-                data['timestamp'] = data['timestamp'].isoformat()
-            history_data.append(data)
-
-        return jsonify({"history": history_data})
-    except Exception as e:
-        print(f"ERROR fetching history: {e}")
-        import traceback
-        traceback.print_exc()
-        return jsonify({"error": f"Error fetching history: {e}"}), 500
 
 # --- Frontend Routes ---
 @app.route('/')
@@ -255,9 +230,9 @@ if __name__ == '__main__':
     print("Starting Flask server for local development...")
 
     # Initialize Firebase and load resources
-    if not initialize_firebase():
-        print("CRITICAL ERROR: Firebase initialization failed during app startup.")
-        exit(1)
+    firebase_ok = initialize_firebase()
+    if not firebase_ok:
+        print("Continuing without Firebase for local development.")
 
     if not load_resources():
         print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
