@@ -103,6 +103,15 @@ user_guide.html
 
 ---
 
+## 🛠️ Technical Documentation
+
+To maintain scalability and allow open-source collaboration, we have formalized the project's internal logic. Please refer to the detailed documentation below for a deep dive into the system:
+
+* **[Model Specifications](./docs/MODEL.md)**: Details on CNN architecture (MobileNetV2), input dimensions, training datasets, and model versioning.
+* **[Diagnostic Pipeline](./docs/PIPELINE.md)**: Deep dive into the hybrid logic that combines Image Analysis with the Contextual Q&A State Machine.
+
+---
+
 ## ⚡ Installation & Setup
 
 1. Clone the repository:
