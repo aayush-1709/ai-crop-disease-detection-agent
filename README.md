@@ -67,38 +67,37 @@ graph TD
 ## 🗂 Project Structure
 
 ```text
-ai-crop-disease-detection-agent
+ai-crop-disease-detection-agent/
 │
-├── docs/                      # New: Technical Documentation
-│   ├── MODEL.md               # Model architecture details
-│   └── PIPELINE.md            # Q&A Logic flow
+├── 📂 docs/                        # 💡 Technical Documentation
+│   ├── MODEL.md                    # ML Model architecture & specs
+│   └── PIPELINE.md                 # Diagnostic logic & Q&A flow
 │
-│ app.py
-│ class_indices.json
-│ crop_diagnosis_best_model.tflite
-│ README.md
-│ requirements.txt
-│ .gitattributes
-│ .gitignore
+├── 📂 static/                      # 🎨 Frontend Static Assets
+│   ├── 📂 css/                     # Custom Stylesheets (style.css)
+│   ├── 📂 images/                  # Sample test images for users
+│   └── 📂 js/                      # Interactive logic
+│       ├── main.js                 # Image upload & API handling
+│       ├── history.js              # Diagnosis history management
+│       └── user_guide.js           # Interactive guide scripts
 │
-├───static
-│ ├───css
-│ │ style.css
-│ ├───images
-│ │ apple_black-rot.JPG
-│ │ apple_cedar_rust.JPG
-│ │ apple_healthy.JPG
-│ │ ... (other sample images)
-│ └───js
-│ history.js
-│ main.js
-│ user_guide.js
+├── 📂 templates/                   # 📝 HTML UI Components (Jinja2)
+│   ├── index.html                  # Main Dashboard / Diagnosis Page
+│   ├── history.html                # Past diagnosis records
+│   ├── tools.html                  # Agricultural tool recommendations
+│   └── user_guide.html             # Documentation for end-users
 │
-└───templates
-history.html
-index.html
-tools.html
-user_guide.html
+├── ⚙️ Core Backend & ML
+│   ├── app.py                      # Flask Application Entry Point
+│   ├── class_indices.json          # Mapping of model output to disease names
+│   └── crop_diagnosis_best_model.tflite # Optimized AI Engine
+│
+├── 📜 Project Meta
+│   ├── .gitattributes              # Git LFS/Attribute settings
+│   ├── .gitignore                  # Files to ignore (e.g., __pycache__)
+│   ├── README.md                   # Project Roadmap & Overview
+│   ├── requirements.txt            # Python Dependencies
+│   └── LICENSE                     # MIT License
 ```
 
 ---
