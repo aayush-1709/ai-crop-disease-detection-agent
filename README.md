@@ -39,10 +39,40 @@ Follow these simple steps to use AI Crop Doctor effectively:
 7. View the detected disease along with confidence score and treatment recommendations.
 
 ---
+## System Architecture
+
+```mermaid
+graph TD
+    A[User Image Upload] --> B{OOD Detection Layer}
+    B -- Invalid/Non-Leaf --> C[Error: Out of Distribution]
+    B -- Valid Leaf --> D[CNN Engine: MobileNetV2]
+    D --> E[Feature Extraction]
+    E --> F[Initial Probability Score]
+    
+    F --> G{Confidence Threshold}
+    G -- Confidence < 0.8 --> H[Interactive Q&A Module]
+    G -- Confidence >= 0.8 --> I[Direct Diagnosis]
+    
+    H --> J[Weighted Bayesian Update]
+    J --> K[Final Diagnosis & Treatment Plan]
+    I --> K
+    
+    style B fill:#f96,stroke:#333
+    style D fill:#bbf,stroke:#333
+    style H fill:#d4f,stroke:#333
+```
+
+---
 
 ## 🗂 Project Structure
 
+```text
 ai-crop-disease-detection-agent
+│
+├── docs/                      # New: Technical Documentation
+│   ├── MODEL.md               # Model architecture details
+│   └── PIPELINE.md            # Q&A Logic flow
+│
 │ app.py
 │ class_indices.json
 │ crop_diagnosis_best_model.tflite
@@ -69,39 +99,45 @@ history.html
 index.html
 tools.html
 user_guide.html
-
+```
 
 ---
 
 ## ⚡ Installation & Setup
 
 1. Clone the repository:
-
+```
 git clone https://github.com/your-username/ai-crop-disease-detection-agent.git
 cd ai-crop-disease-detection-agent
-
+```
 2. Install dependencies:
+```
 pip install -r requirements.txt
+```
 
 3. Run the app:
+```
 python app.py
+```
 
-4. Open your browser and go to:
-http://127.0.0.1:5000
+4. Open your browser and go to: `http://127.0.0.1:5000`
 
+---
 
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome!
-Fork the repository
-Create a new branch (git checkout -b feature-name)
-Make your changes
-Push to your branch (git push origin feature-name)
-Open a Pull Request
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-name`)
+3. Make your changes
+4. Push to your branch (`git push origin feature-name`)
+5. Open a Pull Request
 
-📄 License
+---
 
-This project is MIT licensed.
+## 📄 License
+
+This project is [MIT licensed](LICENSE).
 
 <p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> ```
 
