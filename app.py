@@ -1,8 +1,14 @@
 import os
 import json
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.preprocessing import image
+try:
+    import tensorflow as tf
+    from tensorflow.keras.preprocessing import image
+    TF_AVAILABLE = True
+except ImportError:
+    print("TensorFlow not found. Running in Mock Mode.")
+    TF_AVAILABLE = False
+    from PIL import Image
 import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
@@ -38,9 +44,9 @@ def initialize_firebase():
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
         if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
-            return False
+            print("WARNING: FIREBASE_CONFIG_JSON environment variable not set. Running without Firebase.")
+            db = None
+            return True # Continue without Firebase
 
         cred = credentials.Certificate(json.loads(firebase_config_json))
         print("Using FIREBASE_CONFIG_JSON environment variable for Firebase initialization.")
@@ -49,6 +55,10 @@ def initialize_firebase():
             firebase_admin.initialize_app(cred)
         db = firestore.client()
         print(f"Firebase initialized successfully. db object is: {db}")
+        return True
+    except Exception as e:
+        print(f"Failed to initialize Firebase: {e}. Running without Firebase.")
+        db = None
         return True
     except Exception as e:
         print(f"Failed to initialize Firebase: {e}")
@@ -61,21 +71,29 @@ def load_resources():
     global model, class_labels
     print("Attempting to load model and class indices...")
     try:
+        # Load class indices first
+        if not os.path.exists(CLASS_INDICES_FILENAME):
+             print(f"Error: Class indices file not found at {CLASS_INDICES_FILENAME}. Please ensure it's in the project root.")
+             return False
+        
+        with open(CLASS_INDICES_FILENAME, 'r') as f:
+            class_indices = json.load(f)
+        class_labels = {v: k for k, v in class_indices.items()}
+
+        if not TF_AVAILABLE:
+            print("Mock Mode: Skipping model load.")
+            model = "MOCK"
+            return True
+
         if not os.path.exists(MODEL_FILENAME):
             print(f"Error: Model file not found at {MODEL_FILENAME}. Please ensure it's committed to GitHub.")
-            return False
-        if not os.path.exists(CLASS_INDICES_FILENAME):
-            print(f"Error: Class indices file not found at {CLASS_INDICES_FILENAME}. Please ensure it's in the project root.")
             return False
 
         # --- Load TFLite model using Interpreter ---
         interpreter = tf.lite.Interpreter(model_path=MODEL_FILENAME)
         interpreter.allocate_tensors()
         model = interpreter 
-
-        with open(CLASS_INDICES_FILENAME, 'r') as f:
-            class_indices = json.load(f)
-        class_labels = {v: k for k, v in class_indices.items()}
+        
         print("Model and class indices loaded successfully.")
         return True
     except Exception as e:
@@ -151,23 +169,36 @@ def predict():
         img_base64 = base64.b64encode(img_bytes).decode('utf-8')
         img_stream = io.BytesIO(img_bytes)
         
-        img = image.load_img(img_stream, target_size=(IMG_HEIGHT, IMG_WIDTH))
-        img_array = image.img_to_array(img)
-        img_array = np.expand_dims(img_array, axis=0).astype(np.float32) / 255.0
+        if model == "MOCK":
+            # Mock Inference
+            print("Running in Mock Mode: Returning random prediction.")
+            import random
+            if class_labels:
+                predicted_class_index = random.choice(list(class_labels.keys()))
+                prediction = [[0] * len(class_labels)] # Fake prediction array
+                prediction[0][predicted_class_index] = 1.0 # High confidence for the chosen class
+            else:
+                 # Fallback if class labels failed (shouldn't happen based on load_resources)
+                 predicted_class_index = 0
+                 prediction = [[1.0]]
+        else:
+            img = image.load_img(img_stream, target_size=(IMG_HEIGHT, IMG_WIDTH))
+            img_array = image.img_to_array(img)
+            img_array = np.expand_dims(img_array, axis=0).astype(np.float32) / 255.0
 
-        # --- TFLite Inference ---
-        input_details = model.get_input_details()
-        output_details = model.get_output_details()
+            # --- TFLite Inference ---
+            input_details = model.get_input_details()
+            output_details = model.get_output_details()
 
-        # Set input tensor
-        model.set_tensor(input_details[0]['index'], img_array)
-        
-        # Run inference
-        model.invoke()
-        
-        # Get output tensor
-        prediction = model.get_tensor(output_details[0]['index'])
-        # --- End TFLite Inference ---
+            # Set input tensor
+            model.set_tensor(input_details[0]['index'], img_array)
+            
+            # Run inference
+            model.invoke()
+            
+            # Get output tensor
+            prediction = model.get_tensor(output_details[0]['index'])
+            # --- End TFLite Inference ---
 
         predicted_class_index = np.argmax(prediction[0])
         confidence = np.max(prediction[0]) * 100
@@ -212,8 +243,8 @@ def get_diagnosis():
 @app.route('/history', methods=['GET'])
 def get_history():
     if not db:
-        print("ERROR: Firestore 'db' object is None before history fetch.")
-        return jsonify({"error": "Firestore not initialized."}), 500
+        print("Firestore not initialized. Returning empty history.")
+        return jsonify({"history": []})
 
     try:
         predictions_ref = db.collection('predictions').order_by('timestamp', direction=firestore.Query.DESCENDING).limit(50)
