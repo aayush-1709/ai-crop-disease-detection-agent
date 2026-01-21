@@ -124,17 +124,19 @@
     alt="AI Crop Doctor Logo"
     class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
   />
-  <span class="tracking-wide hover:tracking-widest transition-all duration-300" data-i18n="ai_crop_doctor">AI Crop Doctor</span>
+  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
 </a>
 
 
       <!-- 📂 Navigation Links -->
-      <div class="space-x-4 hidden md:flex items-center">
-        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200" data-i18n="home">Home</a>
-        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200" data-i18n="history">History</a>
-        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200" data-i18n="user_guide">User Guide</a>
-        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200" data-i18n="tools">Tools</a>
-        <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md" data-i18n="emergency">
+      <div class="space-x-4 hidden md:flex">
+        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
+        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
+        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
+        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
+        <a href="#" 
+        id="emergencyBtn"
+         class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
           <i class="fas fa-phone-alt mr-1"></i> Emergency
         </a>
 
@@ -201,11 +203,12 @@
     </script>
     <!-- 📱 Mobile Dropdown -->
     <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
-      <a href="/" class="block text-white font-medium hover:text-green-200" data-i18n="home">Home</a>
-      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200" data-i18n="history">History</a>
-      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200" data-i18n="user_guide">User Guide</a>
-      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200" data-i18n="tools">Tools</a>
-      <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center" data-i18n="emergency">
+      <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
+      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
+      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
+      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
+      <a href="#" id="emergencyBtnMobile"
+       class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
         <i class="fas fa-phone-alt mr-1"></i> Emergency
       </a>
     </div>
