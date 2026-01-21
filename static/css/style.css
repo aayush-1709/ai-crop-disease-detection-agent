@@ -2,39 +2,49 @@
    PREMIUM UI UPGRADE — DELIGHT & DEPTH
 ===================================================== */
 
-/* ---------- ROOT ENHANCEMENTS ---------- */
-
+/* -----------------------------------------------------
+   ROOT VARIABLES
+----------------------------------------------------- */
 :root {
   --accent: #22c55e;
+  --accent-2: #4ade80;
   --accent-dark: #16a34a;
+
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(255, 255, 255, 0.45);
+
   --soft-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   --hard-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+
+  --glow: rgba(34, 197, 94, 0.45);
 }
 
-/* ---------- GLOBAL EXPERIENCE ---------- */
-
+/* -----------------------------------------------------
+   GLOBAL EXPERIENCE
+----------------------------------------------------- */
 body {
   font-family: 'Inter', sans-serif;
+  color: #0f172a;
   background:
     radial-gradient(circle at top, #f0fdf4, transparent 55%),
     linear-gradient(180deg, #f8fafc, #ffffff);
-  color: #0f172a;
 }
 
-/* Calm but responsive motion */
-* {
+button,
+a,
+.card,
+.guide-card,
+.flip-card,
+.prevention-item {
   transition:
+    transform 0.35s cubic-bezier(.22,1,.36,1),
+    box-shadow 0.35s ease,
     background-color 0.25s ease,
     color 0.25s ease,
-    box-shadow 0.35s ease,
-    transform 0.35s cubic-bezier(.22,1,.36,1),
-    border-color 0.25s ease,
     opacity 0.25s ease;
 }
 
-/* Accessibility: respect reduced motion */
+/* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -42,8 +52,9 @@ body {
   }
 }
 
-/* ---------- SCROLL REVEAL (POLISHED) ---------- */
-
+/* -----------------------------------------------------
+   SCROLL REVEAL
+----------------------------------------------------- */
 [data-animate] {
   opacity: 0;
   transform: translateY(18px) scale(0.98);
@@ -57,20 +68,20 @@ body {
   }
 }
 
-/* =====================================================
-   CARD SYSTEM — LUXURY FEEL
-===================================================== */
-
+/* -----------------------------------------------------
+   CARD SYSTEM
+----------------------------------------------------- */
 .card {
+  position: relative;
+  isolation: isolate;
   border-radius: 1.5rem;
   overflow: hidden;
   background: linear-gradient(180deg, #ffffff, #f9fafb);
   box-shadow: var(--soft-shadow);
-  position: relative;
-  isolation: isolate;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
-/* Soft light bloom */
 .card::before {
   content: "";
   position: absolute;
@@ -81,27 +92,45 @@ body {
     transparent 60%
   );
   opacity: 0;
-  z-index: -1;
   transition: opacity 0.5s ease;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35),
+    transparent 70%
+  );
+  opacity: 0;
+  transform: translateX(-120%);
+}
+
+.card:hover {
+  transform: translateY(-10px) rotateX(4deg) rotateY(-4deg) scale(1.03);
+  box-shadow: var(--hard-shadow);
 }
 
 .card:hover::before {
   opacity: 1;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.015);
-  box-shadow: var(--hard-shadow);
+.card:hover::after {
+  opacity: 1;
+  transform: translateX(120%);
+  transition: transform 1s ease;
 }
 
-/* =====================================================
-   CARD HEADER — PREMIUM SHIMMER
-===================================================== */
-
+/* -----------------------------------------------------
+   CARD HEADER
+----------------------------------------------------- */
 .card-header {
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
 }
 
 .card-header::after {
@@ -111,7 +140,7 @@ body {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(255, 255, 255, 0.35),
+    rgba(255,255,255,0.35),
     transparent
   );
   transform: translateX(-120%);
@@ -122,23 +151,22 @@ body {
   transition: transform 0.9s ease;
 }
 
-/* =====================================================
-   GUIDE CARDS — CONFIDENT MOTION
-===================================================== */
-
+/* -----------------------------------------------------
+   GUIDE CARDS
+----------------------------------------------------- */
 .guide-card {
   position: relative;
   border-left: 4px solid var(--accent);
   background: linear-gradient(180deg, #ffffff, #f8fafc);
+  animation: floatIdle 6s ease-in-out infinite;
 }
 
 .guide-card::after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0 0 0 0;
   width: 4px;
-  height: 0%;
+  height: 0;
   background: linear-gradient(var(--accent), var(--accent-dark));
   transition: height 0.45s ease;
 }
@@ -149,28 +177,29 @@ body {
 
 .guide-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.12);
+  animation-play-state: paused;
 }
 
-/* Floating icons feel alive */
 .guide-card i {
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.25));
+  animation: iconBreathe 3s infinite ease-in-out;
 }
 
 .guide-card:hover i {
-  transform: translateY(-6px) scale(1.15) rotate(-4deg);
+  animation: iconPop 0.5s ease forwards;
 }
 
-/* =====================================================
-   NAVIGATION TABS — APP-LIKE
-===================================================== */
-
+/* -----------------------------------------------------
+   NAVIGATION TABS
+----------------------------------------------------- */
 .guide-navigation-tabs button {
+  cursor: pointer;
+  border-radius: 999px;
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   position: relative;
   overflow: hidden;
 }
@@ -182,27 +211,34 @@ body {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(34, 197, 94, 0.3),
+    rgba(34,197,94,0.3),
     transparent
   );
   opacity: 0;
+}
+
+.guide-navigation-tabs button:hover {
+  transform: translateY(-4px) scale(1.08);
 }
 
 .guide-navigation-tabs button:hover::before {
   opacity: 1;
 }
 
+.guide-navigation-tabs button:active {
+  transform: scale(0.96);
+}
+
 .guide-navigation-tabs button.active {
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #ffffff;
-  box-shadow: 0 14px 36px rgba(34, 197, 94, 0.45);
-  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 14px 36px rgba(34,197,94,0.45);
+  animation: activePulse 1.8s infinite ease-in-out;
 }
 
-/* =====================================================
-   SECTION HEADINGS — CONFIDENCE LINE
-===================================================== */
-
+/* -----------------------------------------------------
+   SECTION HEADINGS
+----------------------------------------------------- */
 .guide-section h4 {
   position: relative;
   padding-bottom: 0.6rem;
@@ -220,15 +256,32 @@ body {
   transition: width 0.4s ease;
 }
 
+.guide-section h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+}
+
 .guide-section:hover h4::after {
   width: 96px;
 }
 
-/* =====================================================
-   STEP / UPLOAD BOX — INTERACTIVE
-===================================================== */
+.guide-section:hover h4::before {
+  opacity: 1;
+  animation: scanLine 1s ease;
+}
 
+/* -----------------------------------------------------
+   STEP / UPLOAD BOX
+----------------------------------------------------- */
 .step-visual {
+  position: relative;
+  border: 2px dashed #bbf7d0;
   background:
     repeating-linear-gradient(
       45deg,
@@ -237,8 +290,7 @@ body {
       #ecfdf5 12px,
       #ecfdf5 24px
     );
-  position: relative;
-  border: 2px dashed #bbf7d0;
+  animation: subtlePulse 4s infinite ease-in-out;
 }
 
 .step-visual::after {
@@ -247,29 +299,30 @@ body {
   inset: 0;
   background: radial-gradient(
     circle at center,
-    rgba(34, 197, 94, 0.35),
+    rgba(34,197,94,0.35),
     transparent 65%
   );
   opacity: 0;
+}
+
+.step-visual:hover {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  animation: none;
 }
 
 .step-visual:hover::after {
   opacity: 1;
 }
 
-.step-visual:hover {
-  border-color: var(--accent);
-  transform: scale(1.05);
-}
-
-/* =====================================================
-   PREVENTION GRID — CONFIDENT HOVER
-===================================================== */
-
+/* -----------------------------------------------------
+   PREVENTION ITEMS
+----------------------------------------------------- */
 .prevention-item {
+  position: relative;
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  position: relative;
+  animation: riseIn 0.8s ease both;
 }
 
 .prevention-item::before {
@@ -278,31 +331,30 @@ body {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(34, 197, 94, 0.18),
+    rgba(34,197,94,0.18),
     transparent
   );
   opacity: 0;
+}
+
+.prevention-item:hover {
+  transform: translateY(-10px) scale(1.06);
+  border-color: var(--accent);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.18);
 }
 
 .prevention-item:hover::before {
   opacity: 1;
 }
 
-.prevention-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-10px) scale(1.06);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.18);
-}
-
-/* =====================================================
-   FAQ / TROUBLESHOOT — SUBTLE CONFIDENCE
-===================================================== */
-
+/* -----------------------------------------------------
+   FAQ / TROUBLESHOOT
+----------------------------------------------------- */
 .faq-item,
 .troubleshoot-item {
+  position: relative;
   padding: 0.8rem;
   border-radius: 0.9rem;
-  position: relative;
 }
 
 .faq-item::before,
@@ -312,10 +364,17 @@ body {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(34, 197, 94, 0.18),
+    rgba(34,197,94,0.18),
     transparent
   );
   opacity: 0;
+}
+
+.faq-item:hover,
+.troubleshoot-item:hover {
+  transform: translateX(8px);
+  background-color: #f0fdf4;
+  animation: faqNudge 0.4s ease forwards;
 }
 
 .faq-item:hover::before,
@@ -323,57 +382,107 @@ body {
   opacity: 1;
 }
 
-.faq-item:hover,
-.troubleshoot-item:hover {
-  transform: translateX(8px);
-  background-color: #f0fdf4;
-}
-
-/* =====================================================
-   MOBILE — SAFE & CLEAN
-===================================================== */
-
-@media (max-width: 768px) {
-  .guide-navigation-tabs {
-    gap: 0.5rem;
-  }
-
-  .guide-navigation-tabs button {
-    padding: 0.55rem 1.1rem;
-    font-size: 0.85rem;
-  }
-
-  .card:hover,
-  .guide-card:hover,
-  .prevention-item:hover {
-    transform: none;
-  }
-}
-/* =====================================================
-   ✨ CINEMATIC MOTION ENGINE
-===================================================== */
-
-:root {
-  --accent: #22c55e;
-  --accent-2: #4ade80;
-  --accent-dark: #16a34a;
-  --glow: rgba(34, 197, 94, 0.45);
-}
-
 /* -----------------------------------------------------
-   BACKGROUND: Living Gradient (Subtle Motion)
+   BACKGROUND FLOAT
 ----------------------------------------------------- */
-
 body::before {
   content: "";
   position: fixed;
   inset: -20%;
+  z-index: -1;
   background:
     radial-gradient(circle at 20% 20%, rgba(34,197,94,0.12), transparent 40%),
     radial-gradient(circle at 80% 30%, rgba(74,222,128,0.12), transparent 45%),
     radial-gradient(circle at 50% 80%, rgba(22,163,74,0.12), transparent 50%);
-  z-index: -1;
   animation: bgFloat 18s ease-in-out infinite alternate;
+}
+
+/* -----------------------------------------------------
+   FLIP CARDS
+----------------------------------------------------- */
+.sample-image-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+}
+
+.flip-card-container {
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+@media (hover: hover) {
+  .flip-card-container:hover .flip-card {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (hover: none) {
+  .flip-card-container:active .flip-card,
+  .flip-card-container:focus-within .flip-card {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 85%;
+  object-fit: cover;
+}
+
+.card-title {
+  height: 15%;
+  background: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: #ecfdf5;
+  padding: 0.6rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.back-title {
+  color: #065f46;
+}
+
+/* -----------------------------------------------------
+   LOADERS & KEYFRAMES
+----------------------------------------------------- */
+.loader-ring {
+  border-top-color: var(--accent) !important;
+  border-left-color: var(--accent) !important;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes bgFloat {
@@ -381,73 +490,14 @@ body::before {
   to { transform: translateY(-60px) scale(1.04); }
 }
 
-/* =====================================================
-   🪄 CARDS — 3D DEPTH & LIGHT FOLLOW
-===================================================== */
-
-.card {
-  perspective: 1200px;
-  transform-style: preserve-3d;
-}
-
-.card:hover {
-  transform:
-    translateY(-10px)
-    rotateX(4deg)
-    rotateY(-4deg)
-    scale(1.03);
-}
-
-/* Light sweep */
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,0.35),
-    transparent 70%
-  );
-  opacity: 0;
-  transform: translateX(-120%);
-}
-
-.card:hover::after {
-  opacity: 1;
-  transform: translateX(120%);
-  transition: transform 1s ease;
-}
-
-/* =====================================================
-   🌟 GUIDE CARDS — FLOATING PRESENCE
-===================================================== */
-
-.guide-card {
-  animation: floatIdle 6s ease-in-out infinite;
-}
-
-.guide-card:hover {
-  animation-play-state: paused;
-}
-
 @keyframes floatIdle {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-/* Icon pulse on hover */
-.guide-card i {
-  animation: iconBreathe 3s infinite ease-in-out;
-}
-
 @keyframes iconBreathe {
   0%,100% { transform: scale(1); }
   50% { transform: scale(1.08); }
-}
-
-.guide-card:hover i {
-  animation: iconPop 0.5s ease forwards;
 }
 
 @keyframes iconPop {
@@ -456,59 +506,9 @@ body::before {
   100% { transform: scale(1.15) rotate(-3deg); }
 }
 
-/* =====================================================
-   🚀 NAV TABS — MAGNETIC INTERACTION
-===================================================== */
-
-.guide-navigation-tabs button {
-  cursor: pointer;
-}
-
-.guide-navigation-tabs button:hover {
-  transform: translateY(-4px) scale(1.08);
-}
-
-.guide-navigation-tabs button:active {
-  transform: scale(0.96);
-}
-
-/* Active pulse */
-.guide-navigation-tabs button.active {
-  animation: activePulse 1.8s infinite ease-in-out;
-}
-
 @keyframes activePulse {
-  0%,100% {
-    box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 14px rgba(34,197,94,0);
-  }
-}
-
-/* =====================================================
-   ✨ HEADINGS — SCAN LINE EFFECT
-===================================================== */
-
-.guide-section h4::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--accent),
-    transparent
-  );
-  opacity: 0;
-}
-
-.guide-section:hover h4::before {
-  opacity: 1;
-  animation: scanLine 1s ease;
+  0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  50% { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
 }
 
 @keyframes scanLine {
@@ -516,49 +516,14 @@ body::before {
   to { transform: translateX(40%); }
 }
 
-/* =====================================================
-   📦 STEP / UPLOAD — CALL TO ACTION ENERGY
-===================================================== */
-
-.step-visual {
-  animation: subtlePulse 4s infinite ease-in-out;
-}
-
 @keyframes subtlePulse {
   0%,100% { box-shadow: 0 0 0 rgba(34,197,94,0); }
   50% { box-shadow: 0 0 40px rgba(34,197,94,0.35); }
 }
 
-.step-visual:hover {
-  animation: none;
-}
-
-/* =====================================================
-   🛡️ PREVENTION CARDS — CONFIDENCE LIFT
-===================================================== */
-
-.prevention-item {
-  animation: riseIn 0.8s ease both;
-}
-
 @keyframes riseIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* =====================================================
-   ❓ FAQ — INTENTIONAL MOTION
-===================================================== */
-
-.faq-item:hover,
-.troubleshoot-item:hover {
-  animation: faqNudge 0.4s ease forwards;
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes faqNudge {
@@ -567,59 +532,31 @@ body::before {
   100% { transform: translateX(8px); }
 }
 
-/* =====================================================
-   💫 MICRO INTERACTIONS
-===================================================== */
-
-button,
-a {
-  position: relative;
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-button::after,
-a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 0 0 var(--glow);
-  opacity: 0;
-}
-
-button:hover::after,
-a:hover::after {
-  opacity: 1;
-  animation: clickGlow 0.6s ease;
-}
-
-@keyframes clickGlow {
-  from { box-shadow: 0 0 0 0 var(--glow); }
-  to { box-shadow: 0 0 20px 12px rgba(34,197,94,0); }
-}
-
-/* =====================================================
-   📱 MOBILE — PERFORMANCE SAFE
-===================================================== */
-
+/* -----------------------------------------------------
+   MOBILE SAFETY
+----------------------------------------------------- */
 @media (max-width: 768px) {
   body::before {
     animation: none;
   }
 
   .card:hover,
-  .guide-card:hover {
+  .guide-card:hover,
+  .prevention-item:hover {
     transform: none;
   }
-}
 
-/* Animation for the new loader-ring class */
-.loader-ring {
-  border-top-color: var(--accent) !important;
-  border-left-color: var(--accent) !important;
-  animation: spin 1s linear infinite;
-}
+  .guide-navigation-tabs {
+    gap: 0.5rem;
+  }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  .guide-navigation-tabs button {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+  }
 }

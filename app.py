@@ -38,9 +38,8 @@ def initialize_firebase():
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
         if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
-            return False
+            print("Firebase not configured. Running WITHOUT Firebase (local mode).")
+            return True
 
         cred = credentials.Certificate(json.loads(firebase_config_json))
         print("Using FIREBASE_CONFIG_JSON environment variable for Firebase initialization.")
@@ -236,7 +235,31 @@ def get_history():
 # --- Frontend Routes ---
 @app.route('/')
 def home():
-    return render_template('index.html')
+    images_dir = os.path.join(app.static_folder, 'images')
+
+    sample_images = []
+
+    for filename in sorted(os.listdir(images_dir)):
+        if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
+            name = filename \
+                .replace('_', ' ') \
+                .replace('(', '') \
+                .replace(')', '') \
+                .replace('.jpg', '') \
+                .replace('.jpeg', '') \
+                .replace('.png', '') \
+                .title()
+
+            sample_images.append({
+                "file": filename,
+                "name": name,
+                "description": "Click to analyze this sample image.",
+                "tip": "This is a sample image from the dataset."
+            })
+
+    return render_template("index.html", sample_images=sample_images)
+
+
 
 @app.route('/history_page')
 def history_page():
@@ -251,19 +274,16 @@ def tools_page():
     return render_template('tools.html')
 
 if __name__ == '__main__':
-    # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")
 
-    # Initialize Firebase and load resources
-    if not initialize_firebase():
-        print("CRITICAL ERROR: Firebase initialization failed during app startup.")
-        exit(1)
+    initialize_firebase()  # Firebase optional locally
 
     if not load_resources():
         print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
         exit(1)
-        
+
     app.run(debug=True, port=5000)
+
 
 # --- Initialization for Render deployment (Gunicorn) ---
 # This block will run when Gunicorn imports app.py as a module on Render.
@@ -277,4 +297,3 @@ if os.getenv("RENDER"): # Check if running on Render
         print("CRITICAL ERROR: Model and class indices loading failed for Render deployment.")
 else:
     print("Not running on Render. Local initialization handled by __main__ block.")
-
