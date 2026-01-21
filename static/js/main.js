@@ -156,9 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
         handleFile(file);
     });
 
+    // --- Lightbox Logic Removed ---
+
+    // Bind events to sample cards
     // Handle sample image click
     sampleImageCards.forEach(card => {
-        card.addEventListener('click', async () => {
+        card.addEventListener('click', async (e) => {
+            e.preventDefault(); // Prevent default
             hideError();
             const imagePath = card.dataset.imagePath;
             const imageNameText = card.dataset.imageName;
@@ -168,12 +172,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const blob = await response.blob();
                 const file = new File([blob], imageNameText, { type: blob.type });
                 handleFile(file);
+
+                // Scroll to top or upload section to show user the file is ready
+                uploadSection.scrollIntoView({ behavior: 'smooth' });
+
+                // Auto-trigger analysis
+                // We don't need to wait for reader.onload because analyzeImage uses currentImageFile
+                // which is set synchronously in handleFile (or we can just skip handleFile's async reader for logic)
+                // BUT handleFile sets currentImageFile synchronously.
+
+                // Directly call analyzeImage. 
+                // Note: file reading for preview in user interface might still be happening, 
+                // but formData uses the file object directly, which is ready.
+
+                analyzeImage();
+
             } catch (error) {
                 showError("Failed to load sample image. Please try again.");
                 console.error("Error loading sample image:", error);
             }
         });
     });
+
+    // Bind Lightbox Control Events
+    // --- Lightbox Listeners Removed ---
 
     // Handle click on drop area to trigger file input
     dropArea.addEventListener('click', () => {
@@ -212,8 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Handle Predict button click (Initial Analysis)
-    predictButton.addEventListener('click', async () => {
+    // Function to perform analysis (Predict)
+    async function analyzeImage() {
         hideError();
         if (!currentImageFile) {
             showError("Please select or drop an image first.");
@@ -252,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingSpinnerInitial.classList.add('hidden');
             diseaseDetectionSection.classList.remove('hidden'); // Show disease detection section
             additionalInfoSection.classList.remove('hidden'); // Show additional info section
-            
+
             // Ensure the summary image and name are visible in the disease detection section
             imagePreviewSummary.src = imagePreviewInitial.src;
             imageNameSummary.textContent = imageNameInitial.textContent;
@@ -265,7 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset layout if prediction fails
             introSampleSection.classList.remove('hidden');
         }
-    });
+    }
+
+    // Handle Predict button click (Initial Analysis)
+    predictButton.addEventListener('click', analyzeImage);
 
     // Handle Get Report button click (Detailed Report Generation)
     getReportButton.addEventListener('click', async () => {

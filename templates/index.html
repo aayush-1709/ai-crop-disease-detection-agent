@@ -104,55 +104,34 @@
 
 
     <!-- 🌱 Navigation Bar -->
-    <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
+    <nav class="navbar-glass fixed top-0 left-0 right-0 p-4 z-50 animate-slide-down">
       <div class="container mx-auto flex justify-between items-center">
 
         <!-- 🌿 Logo & Brand -->
-        <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-          <img
-            src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-            alt="AI Crop Doctor Logo"
-            class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300" />
-          <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-    <div class="container mx-auto flex justify-between items-center">
-      
-      <!-- 🌿 Logo & Brand -->
-      <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-  <img
-    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-    alt="AI Crop Doctor Logo"
-    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
-  />
-  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-</a>
-
-
-      <!-- 📂 Navigation Links -->
-      <div class="space-x-4 hidden md:flex">
-        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
-        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
-        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
-        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-        <a href="#" 
-        id="emergencyBtn"
-         class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
-          <i class="fas fa-phone-alt mr-1"></i> Emergency
+        <a href="/" class="text-white text-xl font-bold flex items-center space-x-3 group">
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-green-400 blur-lg opacity-50 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+            </div>
+            <img
+              src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
+              alt="AI Crop Doctor Logo"
+              class="relative w-10 h-10 rounded-full shadow-lg border-2 border-white group-hover:rotate-12 transition-transform duration-300" />
+          </div>
+          <span class="tracking-wide group-hover:text-green-100 transition-colors duration-300 shadow-sm">AI Crop
+            Doctor</span>
         </a>
 
 
         <!-- 📂 Navigation Links -->
-        <div class="space-x-4 hidden md:flex items-center">
-          <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
-          <a href="/history_page" target="_blank"
-            class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
-          <a href="/user_guide" target="_blank"
-            class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
-          <a href="/tools" target="_blank"
-            class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
+        <div class="space-x-1 hidden md:flex items-center">
+          <a href="/" class="text-white nav-item-pill font-medium">Home</a>
+          <a href="/history_page" target="_blank" class="text-white nav-item-pill font-medium">History</a>
+          <a href="/user_guide" target="_blank" class="text-white nav-item-pill font-medium">User Guide</a>
+          <a href="/tools" target="_blank" class="text-white nav-item-pill font-medium">Tools</a>
           <a href="#"
-            class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
-            <i class="fas fa-phone-alt mr-1"></i> Emergency
+            class="ml-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-5 py-2 rounded-full hover:from-red-600 hover:to-red-700 transition-all duration-300 font-semibold shadow-md hover:shadow-red-500/50 transform hover:-translate-y-0.5">
+            <i class="fas fa-phone-alt mr-2 animate-pulse"></i> Emergency
           </a>
 
           <!-- User Profile Section -->
@@ -208,138 +187,145 @@
       <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
       <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
       <a href="#" id="emergencyBtnMobile"
-       class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
+        class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
         <i class="fas fa-phone-alt mr-1"></i> Emergency
       </a>
     </div>
-  </nav>
+    </nav>
 
-  <!-- Emergency Support Modal -->
-<div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50">
-  <div class="bg-white rounded-lg p-6 w-96 mx-auto mt-24 shadow-lg">
-    <h2 class="text-xl font-bold text-red-600 mb-4">🚨 Emergency Support</h2>
+    <!-- Emergency Support Modal -->
+    <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50">
+      <div class="bg-white rounded-lg p-6 w-96 mx-auto mt-24 shadow-lg">
+        <h2 class="text-xl font-bold text-red-600 mb-4">🚨 Emergency Support</h2>
 
-    <form id="emergencyForm">
-      <label class="block mb-2 font-medium">Name *</label>
-      <input type="text" required class="w-full border px-3 py-2 rounded mb-3">
+        <form id="emergencyForm">
+          <label class="block mb-2 font-medium">Name *</label>
+          <input type="text" required class="w-full border px-3 py-2 rounded mb-3">
 
-      <label class="block mb-2 font-medium">Describe your issue *</label>
-      <textarea required class="w-full border px-3 py-2 rounded mb-3"></textarea>
+          <label class="block mb-2 font-medium">Describe your issue *</label>
+          <textarea required class="w-full border px-3 py-2 rounded mb-3"></textarea>
 
-      <label class="block mb-2 font-medium">
-        Upload image (optional, max 2 MB)
-      </label>
-      <input type="file" id="userImage" accept="image/*" class="w-full mb-3">
+          <label class="block mb-2 font-medium">
+            Upload image (optional, max 2 MB)
+          </label>
+          <input type="file" id="userImage" accept="image/*" class="w-full mb-3">
 
-      <div class="flex justify-end gap-2">
-        <button type="button" id="closeEmergency"
-          class="px-4 py-2 bg-gray-400 text-white rounded">
-          Cancel
-        </button>
-        <button type="submit"
-          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-          Submit
-        </button>
+          <div class="flex justify-end gap-2">
+            <button type="button" id="closeEmergency" class="px-4 py-2 bg-gray-400 text-white rounded">
+              Cancel
+            </button>
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+              Submit
+            </button>
+          </div>
+        </form>
+
+        <p id="emergencySuccess" class="hidden text-green-600 font-medium mt-4">
+          ✅ Thanks for submitting your issue.
+          Our team will approach you within 24–48 hours.
+        </p>
       </div>
-    </form>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
 
-    <p id="emergencySuccess" class="hidden text-green-600 font-medium mt-4">
-      ✅ Thanks for submitting your issue.  
-      Our team will approach you within 24–48 hours.
-    </p>
-  </div>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
+        const emergencyBtn = document.getElementById('emergencyBtn');
+        const emergencyBtnMobile = document.getElementById('emergencyBtnMobile');
+        const emergencyModal = document.getElementById('emergencyModal');
+        const closeEmergency = document.getElementById('closeEmergency');
+        const emergencyForm = document.getElementById('emergencyForm');
+        const emergencySuccess = document.getElementById('emergencySuccess');
+        const userImage = document.getElementById('userImage');
 
-    const emergencyBtn = document.getElementById('emergencyBtn');
-    const emergencyBtnMobile = document.getElementById('emergencyBtnMobile');
-    const emergencyModal = document.getElementById('emergencyModal');
-    const closeEmergency = document.getElementById('closeEmergency');
-    const emergencyForm = document.getElementById('emergencyForm');
-    const emergencySuccess = document.getElementById('emergencySuccess');
-    const userImage = document.getElementById('userImage');
-
-    function openEmergencyModal(e) {
-      e.preventDefault();
-      emergencyModal.classList.remove('hidden');
-    }
-
-    emergencyBtn?.addEventListener('click', openEmergencyModal);
-    emergencyBtnMobile?.addEventListener('click', openEmergencyModal);
-
-    closeEmergency.addEventListener('click', () => {
-      emergencyModal.classList.add('hidden');
-      emergencyForm.reset();
-      emergencySuccess.classList.add('hidden');
-    });
-
-    emergencyForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (userImage.files.length > 0) {
-        const fileSizeMB = userImage.files[0].size / 1024 / 1024;
-        if (fileSizeMB > 2) {
-          alert('Image size must be less than 2 MB');
-          return;
+        function openEmergencyModal(e) {
+          e.preventDefault();
+          emergencyModal.classList.remove('hidden');
         }
-      }
 
-      emergencySuccess.classList.remove('hidden');
-      emergencyForm.reset();
+        emergencyBtn?.addEventListener('click', openEmergencyModal);
+        emergencyBtnMobile?.addEventListener('click', openEmergencyModal);
 
-      console.log('Emergency form submitted (frontend only)');
-    });
+        closeEmergency.addEventListener('click', () => {
+          emergencyModal.classList.add('hidden');
+          emergencyForm.reset();
+          emergencySuccess.classList.add('hidden');
+        });
 
-  });
-</script>
+        emergencyForm.addEventListener('submit', (e) => {
+          e.preventDefault();
 
-  
+          if (userImage.files.length > 0) {
+            const fileSizeMB = userImage.files[0].size / 1024 / 1024;
+            if (fileSizeMB > 2) {
+              alert('Image size must be less than 2 MB');
+              return;
+            }
+          }
+
+          emergencySuccess.classList.remove('hidden');
+          emergencyForm.reset();
+
+          console.log('Emergency form submitted (frontend only)');
+        });
+
+      });
+    </script>
+
+
 
     <!-- frame chnages -->
 
 
     <!-- hero section -->
 
-    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
+    <main
+      class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen relative pt-24"
       style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
+
+      <!-- Overlay for better text contrast -->
+      <div class="absolute inset-0 bg-black/10"></div>
 
       <!-- Main content container -->
       <div
-        class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+        class="hero-glass-card p-8 rounded-3xl shadow-2xl max-w-6xl w-full text-center border-t-0 flex flex-col gap-8 relative z-10 animate-fade-in-up">
 
         <!-- Left Section: Introduction & Sample Images -->
         <div id="intro-sample-section" class="w-full text-left">
           <!-- Image with smooth hover animation -->
 
-          <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
+          <div class="text-center max-w-4xl mx-auto px-4 mt-6 space-y-6">
 
-            <div
-              class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-              <div class="overflow-hidden whitespace-nowrap">
-                <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
-                  Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
-                </h2>
-              </div>
-
+            <div class="max-w-3xl mx-auto mt-4 p-2 animate-fade-in-up delay-100">
+              <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-2">
+                <span class="text-gray-800">Welcome to</span>
+                <br>
+                <span class="hero-title-gradient">AI Crop Doctor</span>
+              </h2>
+              <div class="h-1 w-32 bg-green-500 mx-auto rounded-full my-4"></div>
             </div>
 
-
-            <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-              <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
-                Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with smart <span
-                  class="font-semibold text-gray-900">AI</span> — just upload a photo and let technology assist your
-                next step.
+            <div class="max-w-2xl mx-auto p-4 animate-fade-in-up delay-200">
+              <p class="text-gray-800 text-xl leading-relaxed font-light">
+                Diagnose <span class="font-bold text-green-700">plant diseases</span> instantly with
+                <span class="font-bold text-green-700">Smart AI</span>.
+                <br>Protect your harvest with precision.
               </p>
             </div>
 
-
-            <p class="text-gray-900 text-base italic leading-relaxed">
-              Powered by <span class="font-bold text-gray-900">Machine learning</span> and
-              <span class="font-bold text-gray-900">Generative AI</span>
-            </p>
-
-
+            <div class="flex justify-center flex-wrap gap-3 animate-fade-in-up delay-300">
+              <span
+                class="px-4 py-1.5 bg-green-100/80 text-green-800 rounded-full text-sm font-semibold border border-green-200 shadow-sm backdrop-blur-sm">
+                <i class="fas fa-brain mr-2"></i>Machine Learning
+              </span>
+              <span
+                class="px-4 py-1.5 bg-blue-100/80 text-blue-800 rounded-full text-sm font-semibold border border-blue-200 shadow-sm backdrop-blur-sm">
+                <i class="fas fa-magic mr-2"></i>Generative AI
+              </span>
+              <span
+                class="px-4 py-1.5 bg-purple-100/80 text-purple-800 rounded-full text-sm font-semibold border border-purple-200 shadow-sm backdrop-blur-sm">
+                <i class="fas fa-bolt mr-2"></i>Instant Results
+              </span>
+            </div>
           </div>
           <div id="upload-section"
             class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
@@ -374,19 +360,21 @@
               </button>
             </div>
           </div>
-                <!-- Loading Indicator for detailed report generation -->
-                <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
-    <div class="relative w-24 h-24 mb-6">
-        <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
-        <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full"></div>
-    </div>
+          <!-- Loading Indicator for detailed report generation -->
+          <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
+            <div class="relative w-24 h-24 mb-6">
+              <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
+              <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full">
+              </div>
+            </div>
 
-    <p class="text-gray-700 text-lg font-medium text-center">
-        <span id="loading-text-report">Generating your personalized report...</span>
-        <br>
-        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
-    </p>
-</div>
+            <p class="text-gray-700 text-lg font-medium text-center">
+              <span id="loading-text-report">Generating your personalized report...</span>
+              <br>
+              <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice
+                for you.</span>
+            </p>
+          </div>
 
 
 
@@ -1011,6 +999,8 @@
     <script>
       window.FIREBASE_CONFIG = {{ firebase_context | tojson | safe }};
     </script>
+    <!-- Lightbox Modal Removed -->
+
     <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
 
