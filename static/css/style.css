@@ -353,33 +353,7 @@ body {
    ✨ CINEMATIC MOTION ENGINE
 ===================================================== */
 
-:root {
-  --accent: #22c55e;
-  --accent-2: #4ade80;
-  --accent-dark: #16a34a;
-  --glow: rgba(34, 197, 94, 0.45);
-}
 
-/* -----------------------------------------------------
-   BACKGROUND: Living Gradient (Subtle Motion)
------------------------------------------------------ */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(34,197,94,0.12), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(74,222,128,0.12), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(22,163,74,0.12), transparent 50%);
-  z-index: -1;
-  animation: bgFloat 18s ease-in-out infinite alternate;
-}
-
-@keyframes bgFloat {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-60px) scale(1.04); }
-}
 
 /* =====================================================
    🪄 CARDS — 3D DEPTH & LIGHT FOLLOW
