@@ -8,6 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crop Doctor - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
   <!-- ===================================================
        STYLES & LIBRARIES
@@ -295,7 +296,10 @@
                     src="{{ url_for('static', filename='images/' + item.file) }}"
                     alt="{{ item.name }}"
                   />
-                  <div class="card-title">{{ item.name }}</div>
+
+                  <div class="card-title-wrapper">
+                    <div class="card-title">{{ item.name }}</div>
+                  </div>
                 </div>
 
                 <!-- BACK -->
