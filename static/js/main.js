@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({
                     disease_name: predictedDiseaseName,
                     user_context: userContext,
+                    language: i18n.getCurrentLanguage(),
                 }),
             });
 

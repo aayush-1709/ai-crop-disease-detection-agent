@@ -8,3 +8,5 @@ firebase-admin
 google-cloud-storage
 gunicorn
 python-dotenv
+geoip2==4.7.0
+requests==2.31.0

@@ -340,16 +340,6 @@ body {
    ✨ CINEMATIC MOTION ENGINE
 ===================================================== */
 
-:root {
-  --accent: #22c55e;
-  --accent-2: #4ade80;
-  --accent-dark: #16a34a;
-  --glow: rgba(34, 197, 94, 0.45);
-}
-
-/* -----------------------------------------------------
-   BACKGROUND: Living Gradient (Subtle Motion)
------------------------------------------------------ */
 
 body::before {
   content: "";
