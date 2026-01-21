@@ -33,7 +33,8 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # --- Global variables ---
 model = None
 class_labels = None
-# db = None  # Firebase DB is commented out for contribution without credentials
+# db = None  # Firebase intentionally disabled (no credentials required)
+
 
 # --- Load Model and Class Indices ---
 def load_resources():
@@ -163,6 +164,29 @@ def get_diagnosis():
 # --- Frontend Routes ---
 @app.route('/')
 def home():
+    images_dir = os.path.join(app.static_folder, 'images')
+    sample_images = []
+
+    for filename in sorted(os.listdir(images_dir)):
+        if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
+            name = (
+                filename
+                .replace('_', ' ')
+                .replace('(', '')
+                .replace(')', '')
+                .replace('.jpg', '')
+                .replace('.jpeg', '')
+                .replace('.png', '')
+                .title()
+            )
+
+            sample_images.append({
+                "file": filename,
+                "name": name,
+                "description": "Click to analyze this sample image.",
+                "tip": "This is a sample image from the dataset."
+            })
+
     firebase_context = {
         "apiKey": os.getenv("FIREBASE_API_KEY"),
         "authDomain": os.getenv("FIREBASE_AUTH_DOMAIN"),
@@ -172,7 +196,13 @@ def home():
         "appId": os.getenv("FIREBASE_APP_ID"),
         "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID")
     }
-    return render_template('index.html', firebase_context=firebase_context)
+
+    return render_template(
+        "index.html",
+        sample_images=sample_images,
+        firebase_context=firebase_context
+    )
+
 
 @app.route('/history_page')
 def history_page():
@@ -198,7 +228,7 @@ def language_management():
     if request.method == 'POST':
         data = request.get_json()
         language_code = data.get('language', 'en')
-        
+
         if set_user_language(language_code):
             return jsonify({
                 "success": True,
@@ -210,11 +240,10 @@ def language_management():
                 "success": False,
                 "message": "Invalid language code"
             }), 400
-    
-    else:  # GET request
+    else:
         current_language = TranslationManager.get_user_language()
         supported_languages = TranslationManager.SUPPORTED_LANGUAGES
-        
+
         return jsonify({
             "current_language": current_language,
             "supported_languages": supported_languages,
@@ -224,14 +253,14 @@ def language_management():
 @app.route('/api/detect-language')
 def detect_language():
     detected_language = TranslationManager.get_user_language()
-    
     return jsonify({
         "detected_language": detected_language,
         "language_name": TranslationManager.SUPPORTED_LANGUAGES.get(detected_language, "English")
     })
 
-# --- Run App ---
+
 if __name__ == '__main__':
     print("Starting Flask server...")
     load_resources()
     app.run(debug=True, port=5000)
+
