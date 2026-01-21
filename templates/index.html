@@ -2,43 +2,31 @@
 <html lang="en">
 
 <head>
-  <!-- ===================================================
-       META & TITLE
-  ==================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crop Doctor - Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
-  <!-- ===================================================
-       STYLES & LIBRARIES
-  ==================================================== -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/style.css') }}"
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+  <!-- Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- ===================================================
-       INLINE ANIMATIONS (INTENTIONAL)
-  ==================================================== -->
+  <!-- Animations -->
   <style>
     @keyframes pulse-glow {
-      0%   { box-shadow: 0 0 0px #4ade80; }
-      50%  { box-shadow: 0 0 15px #4ade80; }
+      0% { box-shadow: 0 0 0px #4ade80; }
+      50% { box-shadow: 0 0 15px #4ade80; }
       100% { box-shadow: 0 0 0px #4ade80; }
     }
 
@@ -53,7 +41,7 @@
 
     @keyframes marquee-right {
       from { transform: translateX(-100%); }
-      to   { transform: translateX(100%); }
+      to { transform: translateX(100%); }
     }
 
     .animate-marquee-right {
@@ -61,7 +49,6 @@
     }
   </style>
 </head>
-
 <body
   class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter"
 >
@@ -78,7 +65,6 @@
       "A healthy crop is a healthy future."
     </p>
   </div>
-
   <div
     id="frame2"
     class="fixed inset-0 hidden flex flex-col items-center justify-center bg-green-100 text-center text-3xl font-bold z-40"
@@ -92,64 +78,8 @@
   <!-- ===================================================
        MAIN CONTENT WRAPPER
   ==================================================== -->
-  <div id="mainContent" class="hidden">
+  <div id="mainContent">
 
-    <!-- ===================================================
-         NAVBAR
-    ==================================================== -->
-    <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-      <div class="container mx-auto flex justify-between items-center">
-
-        <!-- Logo -->
-        <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-          <img
-            src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-            alt="AI Crop Doctor Logo"
-            class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
-          />
-          <span class="tracking-wide hover:tracking-widest transition-all duration-300">
-            AI Crop Doctor
-          </span>
-        </a>
-
-        <!-- Desktop Links -->
-        <div class="space-x-4 hidden md:flex">
-          <a href="/" class="text-white nav-link font-medium hover:text-green-200">Home</a>
-          <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200">History</a>
-          <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200">User Guide</a>
-          <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200">Tools</a>
-          <a
-            href="#"
-            id="emergencyBtn"
-            class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold shadow-md"
-          >
-            <i class="fas fa-phone-alt mr-1"></i> Emergency
-          </a>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden">
-          <button id="menuToggle" class="text-white text-2xl">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
-        <a href="/" class="block text-white hover:text-green-200">Home</a>
-        <a href="/history_page" target="_blank" class="block text-white hover:text-green-200">History</a>
-        <a href="/user_guide" target="_blank" class="block text-white hover:text-green-200">User Guide</a>
-        <a href="/tools" target="_blank" class="block text-white hover:text-green-200">Tools</a>
-        <a
-          href="#"
-          id="emergencyBtnMobile"
-          class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center"
-        >
-          <i class="fas fa-phone-alt mr-1"></i> Emergency
-        </a>
-      </div>
-    </nav>
 
     <!-- ===================================================
          HERO + APP CONTENT
@@ -279,91 +209,62 @@
             Try with Sample Images:
           </h3>
 
-          <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
-          >
-            {% for item in sample_images %}
-            <div
-              class="sample-image-card flip-card-container"
-              data-image-path="{{ url_for('static', filename='images/' + item.file) }}"
-              data-image-name="{{ item.file }}"
-            >
-              <div class="flip-card">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+  {% for item in sample_images %}
+  <div class="sample-image-card flip-card-container"
+       data-image-path="{{ url_for('static', filename='images/' + item.file) }}"
+       data-image-name="{{ item.file }}">
 
-                <!-- FRONT -->
-                <div class="flip-card-front">
-                  <img
-                    src="{{ url_for('static', filename='images/' + item.file) }}"
-                    alt="{{ item.name }}"
-                  />
+    <div class="flip-card">
 
-                  <div class="card-title-wrapper">
-                    <div class="card-title">{{ item.name }}</div>
-                  </div>
-                </div>
-
-                <!-- BACK -->
-                <div class="flip-card-back">
-                  <h4 class="back-title">{{ item.name }}</h4>
-                  <p class="back-desc">{{ item.description }}</p>
-                  <p class="back-tip">
-                    <strong>Cure:</strong> {{ item.tip }}
-                  </p>
-                </div>
-
-              </div>
-            </div>
-            {% endfor %}
+      <!-- FRONT -->
+      <div class="flip-card-front">
+        <img
+          src="{{ url_for('static', filename='images/' + item.file) }}"
+          alt="{{ item.name }}"
+        />
+        <div class="card-title-wrapper">
+          <div class="card-title disease-name">
+            {{ item.name }}
           </div>
         </div>
       </div>
-    </main>
 
-    <!-- ===============================
-         FOOTER
-    ================================ -->
-    <footer class="bg-green-700 text-white text-sm py-4">
-      <div
-        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2"
-      >
-        <div class="italic text-green-100">
-          Empowering farmers with AI 🌿
-        </div>
+      <!-- BACK -->
+      <div class="flip-card-back">
+        <h4 class="back-title">{{ item.name }}</h4>
+        <p class="back-desc">{{ item.description }}</p>
+        <p class="back-tip">
+          <strong>Cure:</strong> {{ item.tip }}
+        </p>
       </div>
 
-      <div class="text-center text-green-100 text-xs mt-2">
-        © 2026 AI Crop Doctor. All rights reserved.
-      </div>
-    </footer>
-
+    </div>
   </div>
+  {% endfor %}
+</div>
+ 
 
-  <!-- ===============================
-       SCRIPTS
-  ================================ -->
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- Auth JS -->
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
+    <!-- Auth JS moved to bottom to safe load config -->
 
-    menuToggle?.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
+    <script>
+  window.onload = function () {
+    setTimeout(() => {
+      document.getElementById("frame1").classList.add("hidden");
+      document.getElementById("frame2").classList.remove("hidden");
 
-    window.onload = function () {
       setTimeout(() => {
-        document.getElementById("frame1").classList.add("hidden");
-        document.getElementById("frame2").classList.remove("hidden");
-
-        setTimeout(() => {
-          document.getElementById("frame2").classList.add("hidden");
-          document.getElementById("mainContent").classList.remove("hidden");
-        }, 2000);
+        document.getElementById("frame2").classList.add("hidden");
       }, 2000);
-    };
-  </script>
+    }, 2000);
+  };
+</script>
 
+    </main>
+        </div>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html>
 
+</html>
