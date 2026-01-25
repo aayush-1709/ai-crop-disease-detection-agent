@@ -23,6 +23,7 @@
 - 📊 **Confidence Scores** for transparency
 - 📱 **Fully Responsive** and mobile-friendly design
 - 🎯 **Actionable Recommendations** to help protect crops
+- 🤖 **AI Chat Assistant** (Crop Advisor)
 
 ---
 
