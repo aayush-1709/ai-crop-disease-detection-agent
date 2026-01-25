@@ -123,3 +123,57 @@ if (auth) {
         }
     });
 }
+
+// ------------------------------------------------------------------
+// Auth Page Form Switching Functions
+// ------------------------------------------------------------------
+
+function showLogin() {
+    document.getElementById('loginForm').classList.add('active');
+    document.getElementById('registerForm').classList.remove('active');
+    document.getElementById('resetForm').classList.remove('active');
+}
+
+function showRegister() {
+    document.getElementById('registerForm').classList.add('active');
+    document.getElementById('loginForm').classList.remove('active');
+    document.getElementById('resetForm').classList.remove('active');
+}
+
+function showReset() {
+    document.getElementById('resetForm').classList.add('active');
+    document.getElementById('loginForm').classList.remove('active');
+    document.getElementById('registerForm').classList.remove('active');
+}
+
+// Form submission handlers
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('.auth-form form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your authentication logic here
+            alert('Authentication functionality to be implemented');
+        });
+    });
+});
+// Password toggle functionality
+function togglePassword(element) {
+    const input = element.parentElement.querySelector('input');
+    const icon = element.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+// Google login placeholder
+function googleLogin() {
+    alert('Google login integration to be implemented');
+}

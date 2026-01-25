@@ -1,9 +1,9 @@
 import os
 import json
-import numpy as np
-import tensorflow as tf
-from tensorflow.keras.preprocessing import image
-import google.generativeai as genai
+# import numpy as np
+# import tensorflow as tf
+# from tensorflow.keras.preprocessing import image
+# import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import firebase_admin
@@ -113,30 +113,8 @@ def ensure_firebase_initialized():
 # --- Load Model and Class Indices on startup ---
 def load_resources():
     global model, class_labels
-    print("Attempting to load model and class indices...")
-    try:
-        if not os.path.exists(MODEL_FILENAME):
-            print(f"Error: Model file not found at {MODEL_FILENAME}. Please ensure it's committed to GitHub.")
-            return False
-        if not os.path.exists(CLASS_INDICES_FILENAME):
-            print(f"Error: Class indices file not found at {CLASS_INDICES_FILENAME}. Please ensure it's in the project root.")
-            return False
-
-        # --- Load TFLite model using Interpreter ---
-        interpreter = tf.lite.Interpreter(model_path=MODEL_FILENAME)
-        interpreter.allocate_tensors()
-        model = interpreter 
-
-        with open(CLASS_INDICES_FILENAME, 'r') as f:
-            class_indices = json.load(f)
-        class_labels = {v: k for k, v in class_indices.items()}
-        print("Model and class indices loaded successfully.")
-        return True
-    except Exception as e:
-        print(f"Failed to load model or class indices: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
+    print("Model loading temporarily disabled for auth page testing...")
+    return True  # Skip model loading for now
 
 
 # --- Gemini Integration ---
@@ -445,6 +423,10 @@ def user_guide():
 def tools_page():
     return render_template('tools.html')
 
+@app.route('/auth')
+def auth():
+    return render_template('auth.html')
+
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")
@@ -468,7 +450,7 @@ if __name__ == '__main__':
         print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
         exit(1)
         
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)
 
 # --- Initialization for Render deployment (Gunicorn) ---
 # This block will run when Gunicorn imports app.py as a module on Render.

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Crop Doctor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f766e 0%, #065f46 50%, #064e3b 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            font-size: 4rem;
+            animation-delay: 4s;
+        }
+        
+        .shape:nth-child(4) {
+            bottom: 15%;
+            right: 10%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+        
+        .shape:nth-child(5) {
+            top: 50%;
+            left: 5%;
+            font-size: 2rem;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        .auth-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group input {
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-google {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-google:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-switch {
+            animation: fadeSlide 0.5s ease;
+        }
+        
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .password-toggle {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: #10b981;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape">🌱</div>
+        <div class="shape">🌿</div>
+        <div class="shape">🍃</div>
+        <div class="shape">🌾</div>
+        <div class="shape">🌳</div>
+    </div>
+    
+    <div class="min-h-screen flex items-center justify-center p-4 relative z-10">
+        <div class="auth-card w-full max-w-md rounded-3xl p-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mb-4 shadow-lg">
+                    <i class="fas fa-seedling text-white text-2xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+                    AI Crop Doctor
+                </h1>
+                <p class="text-gray-600 mt-2">Your Digital Plant Health Assistant</p>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="form-switch">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-sign-in-alt text-green-600 mr-2"></i>
+                    Welcome Back
+                </h2>
+                
+                <form class="space-y-4">
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="email" required 
+                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" required 
+                                   class="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your password">
+                            <span class="password-toggle absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" onclick="togglePassword(this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full py-3 text-white font-semibold rounded-xl">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Sign In
+                    </button>
+                </form>
+                
+                <div class="divider relative text-center my-6">
+                    <span class="bg-white px-4 text-gray-500 text-sm">or continue with</span>
+                </div>
+                
+                <button class="btn-google w-full py-3 bg-white border-2 border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50">
+                    <i class="fab fa-google text-red-500 mr-2"></i>
+                    Google
+                </button>
+                
+                <div class="text-center mt-6 space-y-2">
+                    <p class="text-gray-600">
+                        Don't have an account? 
+                        <a href="#" onclick="showRegister()" class="text-green-600 font-semibold hover:text-green-700">Create Account</a>
+                    </p>
+                    <p>
+                        <a href="#" onclick="showReset()" class="text-green-600 hover:text-green-700">Forgot Password?</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="registerForm" class="form-switch hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-user-plus text-green-600 mr-2"></i>
+                    Create Account
+                </h2>
+                
+                <form class="space-y-4">
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" required 
+                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your full name">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="email" required 
+                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                        <div class="relative">
+                            <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="tel" required 
+                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" required 
+                                   class="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Create password">
+                            <span class="password-toggle absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" onclick="togglePassword(this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" required 
+                                   class="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Confirm password">
+                            <span class="password-toggle absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" onclick="togglePassword(this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" required class="mr-3 w-4 h-4 text-green-600">
+                        <label for="terms" class="text-sm text-gray-600">
+                            I agree to the <a href="#" class="text-green-600 hover:text-green-700">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full py-3 text-white font-semibold rounded-xl">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Create Account
+                    </button>
+                </form>
+                
+                <div class="divider relative text-center my-6">
+                    <span class="bg-white px-4 text-gray-500 text-sm">or continue with</span>
+                </div>
+                
+                <button class="btn-google w-full py-3 bg-white border-2 border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50">
+                    <i class="fab fa-google text-red-500 mr-2"></i>
+                    Google
+                </button>
+                
+                <div class="text-center mt-6">
+                    <p class="text-gray-600">
+                        Already have an account? 
+                        <a href="#" onclick="showLogin()" class="text-green-600 font-semibold hover:text-green-700">Sign In</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Reset Password Form -->
+            <div id="resetForm" class="form-switch hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-key text-green-600 mr-2"></i>
+                    Reset Password
+                </h2>
+                
+                <p class="text-gray-600 text-center mb-6">
+                    Enter your email address and we'll send you a link to reset your password.
+                </p>
+                
+                <form class="space-y-4">
+                    <div class="input-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="email" required 
+                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-all"
+                                   placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full py-3 text-white font-semibold rounded-xl">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Send Reset Link
+                    </button>
+                </form>
+                
+                <div class="text-center mt-6">
+                    <a href="#" onclick="showLogin()" class="text-green-600 hover:text-green-700 inline-flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('resetForm').classList.add('hidden');
+        }
+        
+        function showRegister() {
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('resetForm').classList.add('hidden');
+        }
+        
+        function showReset() {
+            document.getElementById('resetForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+        
+        function togglePassword(element) {
+            const input = element.parentElement.querySelector('input');
+            const icon = element.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        // Form submission handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Authentication functionality to be implemented');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
