@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Settings - AI Crop Doctor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f766e 0%, #065f46 50%, #064e3b 100%);
+            min-height: 100vh;
+        }
+        
+        .language-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .lang-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .lang-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+        }
+        
+        .lang-option.selected {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            transform: scale(1.02);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) { top: 10%; left: 10%; font-size: 3rem; animation-delay: 0s; }
+        .shape:nth-child(2) { top: 20%; right: 15%; font-size: 2.5rem; animation-delay: 2s; }
+        .shape:nth-child(3) { bottom: 30%; left: 20%; font-size: 4rem; animation-delay: 4s; }
+        .shape:nth-child(4) { bottom: 15%; right: 10%; font-size: 3.5rem; animation-delay: 1s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape">🌍</div>
+        <div class="shape">🗣️</div>
+        <div class="shape">🌐</div>
+        <div class="shape">📱</div>
+    </div>
+    
+    <div class="min-h-screen flex items-center justify-center p-4 relative z-10">
+        <div class="language-card w-full max-w-2xl rounded-3xl p-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mb-4 shadow-lg">
+                    <i class="fas fa-globe text-white text-2xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+                    Language Settings
+                </h1>
+                <p class="text-gray-600 mt-2">Choose your preferred language and region</p>
+            </div>
+            
+            <!-- Language Selection -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-language text-green-600 mr-2"></i>
+                    Select Language
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl selected" data-lang="en">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇺🇸</span>
+                            <div>
+                                <h3 class="font-semibold">English</h3>
+                                <p class="text-sm text-gray-600">Default language</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="hi">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">हिंदी</h3>
+                                <p class="text-sm text-gray-600">Hindi</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="te">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">తెలుగు</h3>
+                                <p class="text-sm text-gray-600">Telugu</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="ta">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">தமிழ்</h3>
+                                <p class="text-sm text-gray-600">Tamil</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="kn">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">ಕನ್ನಡ</h3>
+                                <p class="text-sm text-gray-600">Kannada</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="ml">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">മലയാളം</h3>
+                                <p class="text-sm text-gray-600">Malayalam</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="pa">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">ਪੰਜਾਬੀ</h3>
+                                <p class="text-sm text-gray-600">Punjabi</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lang-option p-4 border-2 border-gray-200 rounded-xl" data-lang="bho">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🇮🇳</span>
+                            <div>
+                                <h3 class="font-semibold">भोजपुरी</h3>
+                                <p class="text-sm text-gray-600">Bhojpuri</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regional Settings -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-map-marker-alt text-green-600 mr-2"></i>
+                    Regional Settings
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                        <select class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none">
+                            <option value="Asia/Kolkata">India Standard Time (IST)</option>
+                            <option value="UTC">UTC</option>
+                            <option value="America/New_York">Eastern Time</option>
+                            <option value="Europe/London">Greenwich Mean Time</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
+                        <select class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none">
+                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Localization Options -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-cog text-green-600 mr-2"></i>
+                    Localization Options
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Auto-translate content</h3>
+                            <p class="text-sm text-gray-600">Automatically translate disease reports</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Local plant names</h3>
+                            <p class="text-sm text-gray-600">Show plant names in local language</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Regional farming tips</h3>
+                            <p class="text-sm text-gray-600">Get location-specific advice</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all transform hover:-translate-y-1">
+                    <i class="fas fa-save mr-2"></i>
+                    Save Settings
+                </button>
+                <button class="flex-1 bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-semibold hover:bg-gray-300 transition-all" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to App
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Language selection functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const langOptions = document.querySelectorAll('.lang-option');
+            
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    langOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    const selectedLang = this.dataset.lang;
+                    console.log('Selected language:', selectedLang);
+                    
+                    // Store in localStorage
+                    localStorage.setItem('selectedLanguage', selectedLang);
+                });
+            });
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('selectedLanguage');
+            if (savedLang) {
+                langOptions.forEach(opt => opt.classList.remove('selected'));
+                const savedOption = document.querySelector(`[data-lang="${savedLang}"]`);
+                if (savedOption) {
+                    savedOption.classList.add('selected');
+                }
+            }
+            
+            // Save settings button
+            document.querySelector('button').addEventListener('click', function() {
+                const selectedLang = document.querySelector('.lang-option.selected')?.dataset.lang || 'en';
+                
+                // Save all settings
+                const settings = {
+                    language: selectedLang,
+                    timezone: document.querySelector('select').value,
+                    dateFormat: document.querySelectorAll('select')[1].value,
+                    autoTranslate: document.querySelectorAll('input[type="checkbox"]')[0].checked,
+                    localPlantNames: document.querySelectorAll('input[type="checkbox"]')[1].checked,
+                    regionalTips: document.querySelectorAll('input[type="checkbox"]')[2].checked
+                };
+                
+                localStorage.setItem('languageSettings', JSON.stringify(settings));
+                
+                alert('Settings saved successfully! 🌱');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -427,6 +427,10 @@ def tools_page():
 def auth():
     return render_template('auth.html')
 
+@app.route('/language')
+def language():
+    return render_template('language.html')
+
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")
