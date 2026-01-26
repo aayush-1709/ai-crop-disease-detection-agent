@@ -7,10 +7,34 @@ import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, storage
 from datetime import datetime
 import base64
 import io
+import uuid
+from werkzeug.utils import secure_filename
+
+# Load .env automatically for local development (so `flask run` also works).
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
+SUPPORTED_LANGS = {
+    "en": "English",
+    "hi": "Hindi",
+    "te": "Telugu",
+    "ta": "Tamil",
+    "kn": "Kannada",
+    "ml": "Malayalam",
+    "pa": "Punjabi",
+    "bho": "Bhojpuri",
+}
+
+def normalize_lang(lang: str) -> str:
+    lang = (lang or "en").strip().lower()
+    return lang if lang in SUPPORTED_LANGS else "en"
 
 # --- Flask App Setup ---
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -41,11 +65,17 @@ def initialize_firebase():
             print("Firebase config not found. Running without Firebase (local mode).")
             return False
 
-        cred = credentials.Certificate(json.loads(firebase_config_json))
-        print("Using FIREBASE_CONFIG_JSON environment variable for Firebase initialization.")
+        cred = credentials.Certificate(firebase_config_obj)
 
         if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred)
+            storage_bucket = os.getenv("FIREBASE_STORAGE_BUCKET")
+            if not storage_bucket:
+                project_id = firebase_config_obj.get("project_id")
+                if project_id:
+                    storage_bucket = f"{project_id}.appspot.com"
+
+            options = {"storageBucket": storage_bucket} if storage_bucket else None
+            firebase_admin.initialize_app(cred, options=options or {})
         db = firestore.client()
         print(f"Firebase initialized successfully. db object is: {db}")
         return True
@@ -54,6 +84,16 @@ def initialize_firebase():
         import traceback
         traceback.print_exc()
         return False
+
+
+def ensure_firebase_initialized():
+    """
+    Make Firebase init resilient in local dev and when app.py is imported (e.g. gunicorn/flask run).
+    """
+    global db
+    if db is not None:
+        return True
+    return initialize_firebase()
 
 # --- Load Model and Class Indices on startup ---
 def load_resources():
@@ -93,8 +133,13 @@ def get_gemini_diagnosis(disease_name, user_context):
         genai.configure(api_key=GEMINI_API_KEY)
         gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 
+        lang = normalize_lang(user_context.get("lang"))
+        lang_name = SUPPORTED_LANGS[lang]
+
         prompt = f"""
         Act as an expert agronomist and plant pathologist for a user in India.
+        IMPORTANT: Write the entire response in {lang_name}.
+        Use clear markdown headings and bullet points. Bold key actions and key warnings.
 
         *Primary Diagnosis from Image Analysis:*
         The image analysis model has identified the plant disease as: "{disease_name.replace('_', ' ')}".
@@ -199,7 +244,8 @@ def get_diagnosis():
         return jsonify({"error": "Invalid request data"}), 400
 
     disease_name = data.get('disease_name')
-    user_context = data.get('user_context', {})
+    user_context = data.get('user_context', {}) or {}
+    user_context["lang"] = normalize_lang(data.get("lang") or user_context.get("lang"))
 
     if not disease_name:
         return jsonify({"error": "Disease name is required for diagnosis"}), 400
@@ -208,10 +254,82 @@ def get_diagnosis():
     return jsonify({"report": final_report})
 
 
+# --- Emergency Support Endpoint ---
+@app.route('/emergency', methods=['POST'])
+def emergency_support():
+    """
+    Stores emergency support requests in Firestore (same Firebase project) and optionally uploads an image
+    to Firebase Storage (same project/bucket).
+    """
+    if not ensure_firebase_initialized():
+        return jsonify({"error": "Firestore not initialized."}), 500
+
+    name = (request.form.get('name') or '').strip()
+    phone = (request.form.get('phone') or '').strip()
+    issue = (request.form.get('issue') or '').strip()
+
+    if not name or not phone or not issue:
+        return jsonify({"error": "Name, phone, and issue are required."}), 400
+
+    image_file = request.files.get('image')
+    image_info = None
+
+    # Optional image upload to Firebase Storage
+    if image_file and image_file.filename:
+        try:
+            bucket = storage.bucket()
+            if not bucket or not bucket.name:
+                return jsonify({"error": "Firebase Storage bucket not configured. Set FIREBASE_STORAGE_BUCKET."}), 500
+
+            safe_name = secure_filename(image_file.filename)
+            blob_path = f"emergency_issues/{uuid.uuid4().hex}_{safe_name}"
+            blob = bucket.blob(blob_path)
+            blob.upload_from_file(image_file.stream, content_type=image_file.mimetype)
+
+            image_info = {
+                "bucket": bucket.name,
+                "path": blob_path,
+                "content_type": image_file.mimetype,
+                "gs_uri": f"gs://{bucket.name}/{blob_path}",
+            }
+        except Exception as e:
+            print(f"ERROR uploading emergency image: {e}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({"error": f"Failed to upload image: {e}"}), 500
+
+    try:
+        doc_ref = db.collection('emergency_issues').document()
+        doc_ref.set({
+            "created_at": firestore.SERVER_TIMESTAMP,
+            "status": "new",
+            "name": name,
+            "phone": phone,
+            "issue": issue,
+            "image": image_info,
+            "user_agent": request.headers.get("User-Agent"),
+            "ip": request.headers.get("X-Forwarded-For", request.remote_addr),
+        })
+        return jsonify({"ok": True, "id": doc_ref.id})
+    except Exception as e:
+        print(f"ERROR saving emergency issue: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to save request: {e}"}), 500
+
 # --- Frontend Routes ---
 @app.route('/')
 def home():
-    return render_template('index.html')
+    firebase_context = {
+        "apiKey": os.getenv("FIREBASE_API_KEY"),
+        "authDomain": os.getenv("FIREBASE_AUTH_DOMAIN"),
+        "projectId": os.getenv("FIREBASE_PROJECT_ID"),
+        "storageBucket": os.getenv("FIREBASE_STORAGE_BUCKET"),
+        "messagingSenderId": os.getenv("FIREBASE_MESSAGING_SENDER_ID"),
+        "appId": os.getenv("FIREBASE_APP_ID"),
+        "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID")
+    }
+    return render_template('index.html', firebase_context=firebase_context)
 
 @app.route('/history_page')
 def history_page():
@@ -228,6 +346,14 @@ def tools_page():
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")
+    
+    # Load environment variables from .env file
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        print("Loaded environment variables from .env")
+    except ImportError:
+        print("python-dotenv not found, skipping .env load")
 
     # Initialize Firebase and load resources
     firebase_ok = initialize_firebase()
@@ -252,4 +378,3 @@ if os.getenv("RENDER"): # Check if running on Render
         print("CRITICAL ERROR: Model and class indices loading failed for Render deployment.")
 else:
     print("Not running on Render. Local initialization handled by __main__ block.")
-

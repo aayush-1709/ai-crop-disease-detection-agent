@@ -41,35 +41,38 @@ Follow these simple steps to use AI Crop Doctor effectively:
 ---
 
 ## 🗂 Project Structure
-
+```bash
 ai-crop-disease-detection-agent
-│ app.py
-│ class_indices.json
-│ crop_diagnosis_best_model.tflite
-│ README.md
-│ requirements.txt
-│ .gitattributes
-│ .gitignore
+│__app.py
+│__class_indices.json
+│__crop_diagnosis_best_model.tflite
+│__README.md
+│__requirements.txt
+│__.gitattributes
+│__.gitignore
 │
 ├───static
 │ ├───css
-│ │ style.css
+│ │   |___style.css
 │ ├───images
-│ │ apple_black-rot.JPG
-│ │ apple_cedar_rust.JPG
-│ │ apple_healthy.JPG
-│ │ ... (other sample images)
+│ │   |___apple_black-rot.JPG
+│ │   |___apple_cedar_rust.JPG
+│ │   |___apple_healthy.JPG
+│ │   |___... (35 more sample images)
 │ └───js
-│ history.js
-│ main.js
-│ user_guide.js
+│ |   |___history.js
+│ |   |___main.js
+│ |   |___user_guide.js
+| |   |___auth.js
+| |   |___user_guide.js
+| |   |___emergency.js
 │
 └───templates
-history.html
-index.html
-tools.html
-user_guide.html
-
+| |___history.html
+| |___index.html
+| |___tools.html
+| |___user_guide.html
+```
 
 ---
 
@@ -104,4 +107,3 @@ Open a Pull Request
 This project is MIT licensed.
 
 <p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> ```
-
