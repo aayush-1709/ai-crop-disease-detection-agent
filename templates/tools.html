@@ -54,7 +54,8 @@
                 <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
                 <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
                 <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-                <a href="#" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
+                <select class="languageSelect bg-green-800/40 text-white text-sm px-3 py-2 rounded-full border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300"></select>
+                <a href="#" id="emergencyBtn" class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
                     <i class="fas fa-phone-alt mr-1"></i> Emergency
                 </a>
             </div>
@@ -73,7 +74,8 @@
             <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
             <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
             <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-            <a href="#" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
+            <select class="languageSelect w-full bg-green-800/40 text-white text-sm px-3 py-2 rounded-xl border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300"></select>
+            <a href="#" id="emergencyBtnMobile" class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
                 <i class="fas fa-phone-alt mr-1"></i> Emergency
             </a>
         </div>
@@ -83,10 +85,48 @@
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
+
+    <!-- Emergency Support Modal -->
+    <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50">
+        <div class="bg-white rounded-lg p-6 w-96 mx-auto mt-24 shadow-lg">
+            <h2 class="text-xl font-bold text-red-600 mb-4">🚨 Emergency Support</h2>
+
+            <form id="emergencyForm">
+                <label class="block mb-2 font-medium">Name *</label>
+                <input id="emergencyName" name="name" type="text" required class="w-full border px-3 py-2 rounded mb-3" placeholder="Your name">
+
+                <label class="block mb-2 font-medium">Phone Number *</label>
+                <input id="emergencyPhone" name="phone" type="tel" inputmode="tel" required class="w-full border px-3 py-2 rounded mb-3"
+                    placeholder="e.g., +91 98765 43210">
+
+                <label class="block mb-2 font-medium">Describe your issue *</label>
+                <textarea id="emergencyIssue" name="issue" required class="w-full border px-3 py-2 rounded mb-3"
+                    placeholder="Describe the crop/plant issue, symptoms, and location..."></textarea>
+
+                <label class="block mb-2 font-medium">Upload image (optional, max 2 MB)</label>
+                <input type="file" id="userImage" name="image" accept="image/*" class="w-full mb-3">
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="closeEmergency" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
+                    <button id="emergencySubmitBtn" type="submit"
+                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed">
+                        Submit
+                    </button>
+                </div>
+            </form>
+
+            <p id="emergencySuccess" class="hidden text-green-600 font-medium mt-4">
+                ✅ Thanks for submitting your issue.
+                Our team will approach you within 24–48 hours.
+            </p>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="flex-grow">
@@ -337,6 +377,8 @@
 </footer>
 
     <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
 </body>
 </html>
