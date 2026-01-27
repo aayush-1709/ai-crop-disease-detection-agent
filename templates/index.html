@@ -43,7 +43,7 @@
 </style>
 
 </head>
-<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
+<body class="min-h-screen flex flex-col font-inter" data-theme="light">
 <!-- Frame 1 -->
 <div id="frame1" class="fixed inset-0 flex flex-col items-center justify-center bg-green-200 text-center text-3xl font-bold z-50">
   <h1>🌿 Welcome to Crop Cure!</h1>
@@ -62,7 +62,7 @@
 
     
     <!-- 🌱 Navigation Bar -->
-  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
+  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 py-4 px-6 shadow-lg z-50">
     <div class="container mx-auto flex justify-between items-center">
       
       <!-- 🌿 Logo & Brand -->
@@ -87,6 +87,16 @@
          class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
           <i class="fas fa-phone-alt mr-1"></i> Emergency
         </a>
+        <button
+  id="themeToggleMobile"
+  type="button"
+  class="ml-3 w-10 h-10 flex items-center justify-center rounded-full bg-green-900 text-white hover:bg-green-700 transition duration-200 cursor-pointer"
+  title="Toggle Dark / Light Mode"
+>
+  <i class="fas fa-moon"></i>
+</button>
+
+
       </div>
       
       <!-- 📱 Mobile Menu Button -->
@@ -107,6 +117,15 @@
        class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
         <i class="fas fa-phone-alt mr-1"></i> Emergency
       </a>
+      <button
+  id="themeToggle"
+  type="button"
+  class="ml-3 w-10 h-10 flex items-center justify-center rounded-full bg-green-900 text-white hover:bg-green-700 transition duration-200 cursor-pointer"
+  title="Toggle Dark / Light Mode"
+>
+  🌙
+</button>
+
     </div>
   </nav>
 
@@ -671,6 +690,7 @@
   </div>
 </footer>
  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 <script>
   window.onload = function () {
     setTimeout(() => {

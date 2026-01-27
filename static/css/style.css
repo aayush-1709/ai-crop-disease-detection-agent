@@ -1,37 +1,108 @@
 /* =====================================================
-   PREMIUM UI UPGRADE — DELIGHT & DEPTH
+   THEME SYSTEM (Light / Dark)
 ===================================================== */
 
-/* ---------- ROOT ENHANCEMENTS ---------- */
-
 :root {
+  --bg-main: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-soft: #e5e7eb;
+
+  /* Accent & Motion */
   --accent: #22c55e;
+  --accent-2: #4ade80;
   --accent-dark: #16a34a;
+  --glow: rgba(34, 197, 94, 0.45);
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(255, 255, 255, 0.45);
   --soft-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   --hard-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
 }
 
-/* ---------- GLOBAL EXPERIENCE ---------- */
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-main: #0f172a;        /* dark slate blue */
+  --bg-secondary: #020617;  /* card background */
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-soft: #1f2937;
+}
 
+
+/* Dark mode hardcoded color fixes */
+[data-theme="dark"] .card,
+[data-theme="dark"] .guide-card,
+[data-theme="dark"] .prevention-item,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .troubleshoot-item {
+  background: linear-gradient(
+    180deg,
+    var(--bg-secondary),
+    var(--bg-main)
+  ) !important;
+  border-color: var(--border-soft) !important;
+}
+
+[data-theme="dark"] .faq-item:hover,
+[data-theme="dark"] .troubleshoot-item:hover {
+  background-color: var(--bg-main) !important;
+}
+
+/* Tailwind background overrides for dark mode */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .bg-green-100 {
+  background-color: var(--bg-secondary) !important;
+}
+
+/* Dark mode card polish */
+[data-theme="dark"] .bg-white {
+  background-color: #020617 !important;
+}
+
+[data-theme="dark"] .border-gray-200 {
+  border-color: #1f2937 !important;
+}
+
+[data-theme="dark"] .text-gray-800,
+[data-theme="dark"] .text-gray-900 {
+  color: #e5e7eb !important;
+}
+
+
+/* ---------- GLOBAL EXPERIENCE ---------- */
 body {
   font-family: 'Inter', sans-serif;
   background:
-    radial-gradient(circle at top, #f0fdf4, transparent 55%),
-    linear-gradient(180deg, #f8fafc, #ffffff);
-  color: #0f172a;
+    radial-gradient(circle at top, rgba(34,197,94,0.12), transparent 55%),
+    linear-gradient(180deg, var(--bg-main), var(--bg-secondary));
+  color: var(--text-main);
+  perspective: 1200px;
 }
+
+
 
 /* Calm but responsive motion */
 * {
   transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
+    background-color 0.35s ease,
+    color 0.35s ease,
     box-shadow 0.35s ease,
     transform 0.35s cubic-bezier(.22,1,.36,1),
-    border-color 0.25s ease,
-    opacity 0.25s ease;
+    border-color 0.35s ease,
+    opacity 0.35s ease;
+}
+
+body,
+main {
+  transition: background-image 0.6s ease;
+}
+
+
+@keyframes slowDrift {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-30px) scale(1.02); }
 }
 
 /* Accessibility: respect reduced motion */
@@ -64,7 +135,6 @@ body {
 .card {
   border-radius: 1.5rem;
   overflow: hidden;
-  background: linear-gradient(180deg, #ffffff, #f9fafb);
   box-shadow: var(--soft-shadow);
   position: relative;
   isolation: isolate;
@@ -90,9 +160,14 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-8px) scale(1.015);
   box-shadow: var(--hard-shadow);
+  transform:
+    translateY(-8px)
+    rotateX(3deg)
+    rotateY(-3deg)
+    scale(1.025);
 }
+
 
 /* =====================================================
    CARD HEADER — PREMIUM SHIMMER
@@ -129,7 +204,11 @@ body {
 .guide-card {
   position: relative;
   border-left: 4px solid var(--accent);
-  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  background: linear-gradient(
+  180deg,
+  var(--bg-secondary),
+  var(--bg-main)
+);
 }
 
 .guide-card::after {
@@ -164,6 +243,38 @@ body {
 /* =====================================================
    NAVIGATION TABS — APP-LIKE
 ===================================================== */
+/* =====================================================
+   THEME-AWARE SURFACES
+===================================================== */
+
+.card,
+.guide-card,
+.prevention-item,
+.faq-item,
+.troubleshoot-item,
+.step-visual {
+  background: linear-gradient(
+    180deg,
+    var(--bg-secondary),
+    var(--bg-main)
+  );
+  border-color: var(--border-soft);
+  color: var(--text-main);
+}
+
+p,
+span,
+label,
+select,
+option {
+  color: var(--text-main);
+}
+
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+  color: var(--text-main) !important;
+}
 
 .guide-navigation-tabs button {
   background: var(--glass-bg);
@@ -239,6 +350,7 @@ body {
     );
   position: relative;
   border: 2px dashed #bbf7d0;
+    color: var(--text-main);
 }
 
 .step-visual::after {
@@ -267,8 +379,12 @@ body {
 ===================================================== */
 
 .prevention-item {
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(
+    180deg,
+    var(--bg-secondary),
+    var(--bg-main)
+  );
   position: relative;
 }
 
@@ -326,7 +442,7 @@ body {
 .faq-item:hover,
 .troubleshoot-item:hover {
   transform: translateX(8px);
-  background-color: #f0fdf4;
+  background-color: var(--bg-main);
 }
 
 /* =====================================================
@@ -349,16 +465,6 @@ body {
     transform: none;
   }
 }
-/* =====================================================
-   ✨ CINEMATIC MOTION ENGINE
-===================================================== */
-
-:root {
-  --accent: #22c55e;
-  --accent-2: #4ade80;
-  --accent-dark: #16a34a;
-  --glow: rgba(34, 197, 94, 0.45);
-}
 
 /* -----------------------------------------------------
    BACKGROUND: Living Gradient (Subtle Motion)
@@ -379,23 +485,6 @@ body::before {
 @keyframes bgFloat {
   from { transform: translateY(0) scale(1); }
   to { transform: translateY(-60px) scale(1.04); }
-}
-
-/* =====================================================
-   🪄 CARDS — 3D DEPTH & LIGHT FOLLOW
-===================================================== */
-
-.card {
-  perspective: 1200px;
-  transform-style: preserve-3d;
-}
-
-.card:hover {
-  transform:
-    translateY(-10px)
-    rotateX(4deg)
-    rotateY(-4deg)
-    scale(1.03);
 }
 
 /* Light sweep */
@@ -622,4 +711,69 @@ a:hover::after {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+[data-theme="dark"] #emergencyModal > div {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+/* 🌙 Better dark hero background */
+[data-theme="dark"] main {
+  position: relative;
+  background-image:
+    linear-gradient(
+      rgba(3, 20, 10, 0.75),
+      rgba(3, 20, 10, 0.85)
+    ),
+    url("https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[data-theme="dark"] main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(34,197,94,0.15), transparent 45%),
+    radial-gradient(circle at 70% 70%, rgba(74,222,128,0.10), transparent 50%);
+}
+[data-theme="dark"] main * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] .backdrop-blur-md {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.85),
+    rgba(2, 6, 23, 0.85)
+  ) !important;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.12);
+}
+
+[data-theme="dark"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: -2;
+}
+
+[data-theme="dark"] .shadow-xl,
+[data-theme="dark"] .shadow-lg,
+[data-theme="dark"] .shadow-md {
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(34, 197, 94, 0.12) !important;
+}
+
+[data-theme="dark"] body::before {
+  animation: slowDrift 22s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.55);
 }
