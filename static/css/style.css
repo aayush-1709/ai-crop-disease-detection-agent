@@ -349,6 +349,7 @@ body {
     transform: none;
   }
 }
+
 /* =====================================================
    ✨ CINEMATIC MOTION ENGINE
 ===================================================== */
@@ -612,11 +613,33 @@ a:hover::after {
   }
 }
 
-/* Animation for the new loader-ring class */
+/* =====================================================
+   ✅ LOADER FIX (Issue #57)
+   - Added missing .loader style
+   - Improved loader-ring visibility
+===================================================== */
+
+/* Default spinner used in loading-spinner-initial */
+.loader {
+  border: 8px solid rgba(148, 163, 184, 0.35);
+  border-top: 8px solid var(--accent);
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Ring spinner used in loading-spinner-report */
 .loader-ring {
+  border: 4px solid rgba(148, 163, 184, 0.25);
   border-top-color: var(--accent) !important;
   border-left-color: var(--accent) !important;
-  animation: spin 1s linear infinite;
+  border-right-color: rgba(34, 197, 94, 0.15);
+  border-bottom-color: rgba(34, 197, 94, 0.15);
+  border-radius: 999px;
+  animation: spin 0.9s linear infinite;
+  box-shadow: 0 10px 22px rgba(34, 197, 94, 0.18);
 }
 
 @keyframes spin {
@@ -750,10 +773,15 @@ a:hover::after {
   .result-card {
     padding: 15px;
   }
+
   .disease-name {
     font-size: 20px;
+  }
+}
+
 /* ================================
    Footer Styles (Issue #86)
+================================ */
 
 .custom-footer {
   background-color: #166534; /* green-700 */
