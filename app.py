@@ -7,10 +7,34 @@ import google.generativeai as genai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, storage
 from datetime import datetime
 import base64
 import io
+import uuid
+from werkzeug.utils import secure_filename
+
+# Load .env automatically for local development (so `flask run` also works).
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
+SUPPORTED_LANGS = {
+    "en": "English",
+    "hi": "Hindi",
+    "te": "Telugu",
+    "ta": "Tamil",
+    "kn": "Kannada",
+    "ml": "Malayalam",
+    "pa": "Punjabi",
+    "bho": "Bhojpuri",
+}
+
+def normalize_lang(lang: str) -> str:
+    lang = (lang or "en").strip().lower()
+    return lang if lang in SUPPORTED_LANGS else "en"
 
 # --- Flask App Setup ---
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -37,16 +61,36 @@ def initialize_firebase():
     print("Attempting to initialize Firebase...")
     try:
         firebase_config_json = os.getenv("FIREBASE_CONFIG_JSON")
-        if not firebase_config_json:
-            print("CRITICAL ERROR: FIREBASE_CONFIG_JSON environment variable not set.")
-            print("Please ensure your Firebase service account key JSON is set as an environment variable on Render.")
+        firebase_config_obj = None
+
+        if firebase_config_json:
+            firebase_config_obj = json.loads(firebase_config_json)
+            print("Using FIREBASE_CONFIG_JSON environment variable for Firebase initialization.")
+        else:
+            # Local fallback: try service account JSON file (DO NOT use this on production).
+            for candidate in ("serviceAccountKey.json", "plant-disease-detection-467016-55dc39c76029.json"):
+                if os.path.exists(candidate):
+                    with open(candidate, "r", encoding="utf-8") as f:
+                        firebase_config_obj = json.load(f)
+                    print(f"Using local Firebase service account file for initialization: {candidate}")
+                    break
+
+        if not firebase_config_obj:
+            print("CRITICAL ERROR: Firebase service account not configured.")
+            print("Set FIREBASE_CONFIG_JSON env var (recommended), or provide serviceAccountKey.json for local dev.")
             return False
 
-        cred = credentials.Certificate(json.loads(firebase_config_json))
-        print("Using FIREBASE_CONFIG_JSON environment variable for Firebase initialization.")
+        cred = credentials.Certificate(firebase_config_obj)
 
         if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred)
+            storage_bucket = os.getenv("FIREBASE_STORAGE_BUCKET")
+            if not storage_bucket:
+                project_id = firebase_config_obj.get("project_id")
+                if project_id:
+                    storage_bucket = f"{project_id}.appspot.com"
+
+            options = {"storageBucket": storage_bucket} if storage_bucket else None
+            firebase_admin.initialize_app(cred, options=options or {})
         db = firestore.client()
         print(f"Firebase initialized successfully. db object is: {db}")
         return True
@@ -55,6 +99,16 @@ def initialize_firebase():
         import traceback
         traceback.print_exc()
         return False
+
+
+def ensure_firebase_initialized():
+    """
+    Make Firebase init resilient in local dev and when app.py is imported (e.g. gunicorn/flask run).
+    """
+    global db
+    if db is not None:
+        return True
+    return initialize_firebase()
 
 # --- Load Model and Class Indices on startup ---
 def load_resources():
@@ -94,8 +148,13 @@ def get_gemini_diagnosis(disease_name, user_context):
         genai.configure(api_key=GEMINI_API_KEY)
         gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 
+        lang = normalize_lang(user_context.get("lang"))
+        lang_name = SUPPORTED_LANGS[lang]
+
         prompt = f"""
         Act as an expert agronomist and plant pathologist for a user in India.
+        IMPORTANT: Write the entire response in {lang_name}.
+        Use clear markdown headings and bullet points. Bold key actions and key warnings.
 
         *Primary Diagnosis from Image Analysis:*
         The image analysis model has identified the plant disease as: "{disease_name.replace('_', ' ')}".
@@ -200,7 +259,8 @@ def get_diagnosis():
         return jsonify({"error": "Invalid request data"}), 400
 
     disease_name = data.get('disease_name')
-    user_context = data.get('user_context', {})
+    user_context = data.get('user_context', {}) or {}
+    user_context["lang"] = normalize_lang(data.get("lang") or user_context.get("lang"))
 
     if not disease_name:
         return jsonify({"error": "Disease name is required for diagnosis"}), 400
@@ -208,10 +268,73 @@ def get_diagnosis():
     final_report = get_gemini_diagnosis(disease_name, user_context)
     return jsonify({"report": final_report})
 
+# --- Translation endpoint (UI multi-language support) ---
+@app.route('/translate', methods=['POST'])
+def translate():
+    if not GEMINI_API_KEY:
+        return jsonify({"error": "Gemini API key not configured on the backend (GEMINI_API_KEY)."}), 500
+
+    data = request.get_json() or {}
+    lang = normalize_lang(data.get("lang"))
+    texts = data.get("texts") or []
+
+    if not isinstance(texts, list) or not all(isinstance(t, str) for t in texts):
+        return jsonify({"error": "texts must be a list of strings"}), 400
+
+    # Basic safety limits
+    if len(texts) > 200:
+        return jsonify({"error": "Too many strings to translate in one request"}), 400
+
+    # Short-circuit English
+    if lang == "en":
+        return jsonify({"translations": texts})
+
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel('gemini-2.5-flash')
+        lang_name = SUPPORTED_LANGS[lang]
+
+        # Ask for strict JSON array output to keep ordering.
+        prompt = f"""
+Translate the following UI strings into {lang_name}.
+Rules:
+- Return ONLY a valid JSON array of strings (no markdown, no explanation).
+- Keep ordering exactly the same.
+- Keep numbers, URLs, and units unchanged.
+- Keep product/app name "AI Crop Doctor" as-is.
+
+Strings to translate (JSON array):
+{json.dumps(texts, ensure_ascii=False)}
+"""
+
+        response = gemini_model.generate_content(prompt)
+        raw = (response.text or "").strip()
+
+        # Try to parse JSON array; if model wrapped in code fences, strip them.
+        if raw.startswith("```"):
+            raw = raw.strip("`")
+            raw = raw.replace("json", "", 1).strip()
+
+        translated = json.loads(raw)
+        if not isinstance(translated, list):
+            raise ValueError("Translation response is not a JSON array")
+
+        # Ensure length match
+        if len(translated) != len(texts):
+            # Fallback: pad/trim to match
+            translated = (translated + texts)[: len(texts)]
+
+        return jsonify({"translations": translated})
+    except Exception as e:
+        print(f"ERROR during translation: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Translation error: {e}"}), 500
+
 # --- History Endpoint ---
 @app.route('/history', methods=['GET'])
 def get_history():
-    if not db:
+    if not ensure_firebase_initialized():
         print("ERROR: Firestore 'db' object is None before history fetch.")
         return jsonify({"error": "Firestore not initialized."}), 500
 
@@ -232,6 +355,69 @@ def get_history():
         import traceback
         traceback.print_exc()
         return jsonify({"error": f"Error fetching history: {e}"}), 500
+
+# --- Emergency Support Endpoint ---
+@app.route('/emergency', methods=['POST'])
+def emergency_support():
+    """
+    Stores emergency support requests in Firestore (same Firebase project) and optionally uploads an image
+    to Firebase Storage (same project/bucket).
+    """
+    if not ensure_firebase_initialized():
+        return jsonify({"error": "Firestore not initialized."}), 500
+
+    name = (request.form.get('name') or '').strip()
+    phone = (request.form.get('phone') or '').strip()
+    issue = (request.form.get('issue') or '').strip()
+
+    if not name or not phone or not issue:
+        return jsonify({"error": "Name, phone, and issue are required."}), 400
+
+    image_file = request.files.get('image')
+    image_info = None
+
+    # Optional image upload to Firebase Storage
+    if image_file and image_file.filename:
+        try:
+            bucket = storage.bucket()
+            if not bucket or not bucket.name:
+                return jsonify({"error": "Firebase Storage bucket not configured. Set FIREBASE_STORAGE_BUCKET."}), 500
+
+            safe_name = secure_filename(image_file.filename)
+            blob_path = f"emergency_issues/{uuid.uuid4().hex}_{safe_name}"
+            blob = bucket.blob(blob_path)
+            blob.upload_from_file(image_file.stream, content_type=image_file.mimetype)
+
+            image_info = {
+                "bucket": bucket.name,
+                "path": blob_path,
+                "content_type": image_file.mimetype,
+                "gs_uri": f"gs://{bucket.name}/{blob_path}",
+            }
+        except Exception as e:
+            print(f"ERROR uploading emergency image: {e}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({"error": f"Failed to upload image: {e}"}), 500
+
+    try:
+        doc_ref = db.collection('emergency_issues').document()
+        doc_ref.set({
+            "created_at": firestore.SERVER_TIMESTAMP,
+            "status": "new",
+            "name": name,
+            "phone": phone,
+            "issue": issue,
+            "image": image_info,
+            "user_agent": request.headers.get("User-Agent"),
+            "ip": request.headers.get("X-Forwarded-For", request.remote_addr),
+        })
+        return jsonify({"ok": True, "id": doc_ref.id})
+    except Exception as e:
+        print(f"ERROR saving emergency issue: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to save request: {e}"}), 500
 
 # --- Frontend Routes ---
 @app.route('/')
@@ -258,6 +444,25 @@ def user_guide():
 @app.route('/tools')
 def tools_page():
     return render_template('tools.html')
+
+# -------------------------------
+# Legal / Informational Pages
+# -------------------------------
+
+@app.route("/privacy")
+def privacy_policy():
+    return render_template("privacy.html")
+
+
+@app.route("/terms")
+def terms_of_use():
+    return render_template("terms.html")
+
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
 
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.

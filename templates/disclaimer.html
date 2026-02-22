@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Disclaimer | AI Crop Doctor</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col">
+
+<!-- ✅ SAME HEADER AS USER GUIDE -->
+{% include "navbar.html" %}
+
+<!-- 🌾 Background + Center Layout -->
+<main
+  class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
+  style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
+
+  <!-- 🔹 OUTER GLASS CARD (SAME AS USER GUIDE) -->
+  <div
+    class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-4xl w-full border-t-4 border-green-500 flex flex-col gap-6">
+
+    <!-- 🔹 INNER HOVER CARD -->
+    <div
+      class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+
+      <!-- GREEN CARD HEADER (USER GUIDE STYLE) -->
+      <div class="bg-green-600 text-white px-6 py-4 rounded-lg mb-6">
+        <h1 class="text-2xl font-bold">Disclaimer</h1>
+        <p class="text-green-100 text-sm">
+          Important limitations regarding AI-based predictions
+        </p>
+      </div>
+
+      <!-- CONTENT SECTIONS -->
+      <div class="space-y-5">
+
+        <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-green-500">
+          <h3 class="text-lg font-semibold mb-2">Accuracy of Predictions</h3>
+          <p class="text-gray-700">
+            AI Crop Doctor uses machine learning models to analyze plant images.
+            While best efforts are made, predictions may not always be accurate.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-green-500">
+          <h3 class="text-lg font-semibold mb-2">No Professional Advice</h3>
+          <p class="text-gray-700">
+            This application does not replace professional agricultural consultation.
+            Always consult experts before taking major farming decisions.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-green-500">
+          <h3 class="text-lg font-semibold mb-2">User Responsibility</h3>
+          <p class="text-gray-700">
+            By using AI Crop Doctor, users acknowledge that all actions taken based on
+            AI-generated results are at their own risk.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ✅ SAME FOOTER AS OTHER PAGES -->
+{% include "footer.html" %}
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+</body>
+</html>

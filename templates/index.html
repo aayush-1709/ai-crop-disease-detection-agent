@@ -13,10 +13,6 @@
   <!-- Marked.js for Markdown rendering -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- Firebase SDK (Version 8 Compat for simplicity with existing auth.js) -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
   <style>
     @keyframes pulse-glow {
       0% {
@@ -60,53 +56,14 @@
 </head>
 
 <body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
-  <!-- Frame 1 -->
-  <div id="frame1"
-    class="fixed inset-0 flex flex-col items-center justify-center bg-green-200 text-center text-3xl font-bold z-50">
-    <h1>🌿 Welcome to Crop Cure!</h1>
-    <p class="text-xl mt-2 italic text-green-800">"A healthy crop is a healthy future."</p>
-  </div>
-
-  <!-- Frame 2 -->
-  <div id="frame2"
-    class="fixed inset-0 hidden flex flex-col items-center justify-center bg-green-100 text-center text-3xl font-bold z-40">
-    <h1>🌱 AI Crop Doctor</h1>
-    <p class="text-xl mt-2 italic text-green-700">"Detect early, protect fully."</p>
-  </div>
-
-  <!-- Login Frame -->
-  <div id="loginFrame" class="fixed inset-0 hidden flex flex-col items-center justify-center bg-white z-30">
-    <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center border-t-4 border-green-500">
-      <div class="mb-6">
-        <img
-          src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-          alt="AI Crop Doctor Logo" class="w-24 h-24 rounded-full mx-auto shadow-lg border-4 border-green-100">
-      </div>
-      <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back!</h2>
-      <p class="text-gray-600 mb-8">Sign in to access your crop health history.</p>
-
-      <button id="google-login-btn"
-        class="w-full flex items-center justify-center bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 rounded-xl transition duration-300 shadow-sm hover:shadow-md">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-6 h-6 mr-3"
-          alt="Google Logo">
-        Sign in with Google
-      </button>
-
-      <p class="mt-6 text-xs text-gray-400">
-        By continuing, you agree to our Terms of Service and Privacy Policy.
-      </p>
-    </div>
-  </div>
-
   <!-- Main Content Wrapper -->
-  <div id="mainContent" class="hidden">
+  <div id="mainContent">
     <!-- 🟩 Everything else like navbar, hero section, footer goes inside here -->
 
 
     <!-- 🌱 Navigation Bar -->
     <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-      <div class="container mx-auto flex justify-between items-center">
-
+      <div class="container mx-auto flex items-center justify-between">
         <!-- 🌿 Logo & Brand -->
         <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
           <img
@@ -114,35 +71,10 @@
             alt="AI Crop Doctor Logo"
             class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300" />
           <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-  <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
-    <div class="container mx-auto flex justify-between items-center">
-      
-      <!-- 🌿 Logo & Brand -->
-      <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
-  <img
-    src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
-    alt="AI Crop Doctor Logo"
-    class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300"
-  />
-  <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
-</a>
-
-
-      <!-- 📂 Navigation Links -->
-      <div class="space-x-4 hidden md:flex">
-        <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
-        <a href="/history_page" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
-        <a href="/user_guide" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
-        <a href="/tools" target="_blank" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-        <a href="#" 
-        id="emergencyBtn"
-         class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
-          <i class="fas fa-phone-alt mr-1"></i> Emergency
         </a>
 
-
-        <!-- 📂 Navigation Links -->
-        <div class="space-x-4 hidden md:flex items-center">
+        <!-- 📂 Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-4">
           <a href="/" class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Home</a>
           <a href="/history_page" target="_blank"
             class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">History</a>
@@ -150,69 +82,47 @@
             class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
           <a href="/tools" target="_blank"
             class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-          <a href="#"
+          <select class="languageSelect"
+            class="bg-green-800/40 text-white text-sm px-3 py-2 rounded-full border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
+          </select>
+          <a href="#" id="emergencyBtn"
             class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
             <i class="fas fa-phone-alt mr-1"></i> Emergency
           </a>
-
-          <!-- User Profile Section -->
-          <div
-            class="flex items-center space-x-3 bg-green-800 bg-opacity-30 rounded-full px-3 py-1 ml-4 border border-green-500/30">
-            <span id="user-name-display" class="text-green-100 font-medium text-sm hidden">User</span>
-            <img id="user-avatar" src="" alt="User" class="w-8 h-8 rounded-full border-2 border-white hidden">
-            <button onclick="signOut()" class="text-green-200 hover:text-white text-xs ml-2">
-              <i class="fas fa-sign-out-alt"></i>
-            </button>
-          </div>
         </div>
 
         <!-- 📱 Mobile Menu Button -->
-        <div class="md:hidden">
-          <button id="menuToggle" class="text-white text-2xl focus:outline-none">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
+        <button id="menuToggle" class="md:hidden text-white text-2xl focus:outline-none" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
 
       <!-- 📱 Mobile Dropdown -->
-      <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
+      <div id="mobileMenu" class="md:hidden hidden mt-3 space-y-2 px-2">
         <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
         <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
         <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
         <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-        <a href="#"
+        <select class="languageSelect"
+          class="w-full bg-green-800/40 text-white text-sm px-3 py-2 rounded-xl border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
+        </select>
+        <a href="#" id="emergencyBtnMobile"
           class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
           <i class="fas fa-phone-alt mr-1"></i> Emergency
         </a>
-        <button onclick="signOut()" class="block w-full text-left text-green-200 hover:text-white font-medium py-2">
-          Sign Out
-        </button>
       </div>
     </nav>
-
-
-
 
     <!-- JS: Toggle mobile menu -->
     <script>
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
     </script>
-    <!-- 📱 Mobile Dropdown -->
-    <div id="mobileMenu" class="md:hidden mt-2 space-y-2 px-4 hidden">
-      <a href="/" class="block text-white font-medium hover:text-green-200">Home</a>
-      <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
-      <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
-      <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-      <a href="#" id="emergencyBtnMobile"
-       class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
-        <i class="fas fa-phone-alt mr-1"></i> Emergency
-      </a>
-    </div>
-  </nav>
 
   <!-- Emergency Support Modal -->
 <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50">
@@ -221,23 +131,29 @@
 
     <form id="emergencyForm">
       <label class="block mb-2 font-medium">Name *</label>
-      <input type="text" required class="w-full border px-3 py-2 rounded mb-3">
+      <input id="emergencyName" name="name" type="text" required
+        class="w-full border px-3 py-2 rounded mb-3" placeholder="Your name">
+
+      <label class="block mb-2 font-medium">Phone Number *</label>
+      <input id="emergencyPhone" name="phone" type="tel" inputmode="tel" required
+        class="w-full border px-3 py-2 rounded mb-3" placeholder="e.g., +91 98765 43210">
 
       <label class="block mb-2 font-medium">Describe your issue *</label>
-      <textarea required class="w-full border px-3 py-2 rounded mb-3"></textarea>
+      <textarea id="emergencyIssue" name="issue" required class="w-full border px-3 py-2 rounded mb-3"
+        placeholder="Describe the crop/plant issue, symptoms, and location..."></textarea>
 
       <label class="block mb-2 font-medium">
         Upload image (optional, max 2 MB)
       </label>
-      <input type="file" id="userImage" accept="image/*" class="w-full mb-3">
+      <input type="file" id="userImage" name="image" accept="image/*" class="w-full mb-3">
 
       <div class="flex justify-end gap-2">
         <button type="button" id="closeEmergency"
           class="px-4 py-2 bg-gray-400 text-white rounded">
           Cancel
         </button>
-        <button type="submit"
-          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+        <button id="emergencySubmitBtn" type="submit"
+          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed">
           Submit
         </button>
       </div>
@@ -249,50 +165,7 @@
     </p>
   </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-
-    const emergencyBtn = document.getElementById('emergencyBtn');
-    const emergencyBtnMobile = document.getElementById('emergencyBtnMobile');
-    const emergencyModal = document.getElementById('emergencyModal');
-    const closeEmergency = document.getElementById('closeEmergency');
-    const emergencyForm = document.getElementById('emergencyForm');
-    const emergencySuccess = document.getElementById('emergencySuccess');
-    const userImage = document.getElementById('userImage');
-
-    function openEmergencyModal(e) {
-      e.preventDefault();
-      emergencyModal.classList.remove('hidden');
-    }
-
-    emergencyBtn?.addEventListener('click', openEmergencyModal);
-    emergencyBtnMobile?.addEventListener('click', openEmergencyModal);
-
-    closeEmergency.addEventListener('click', () => {
-      emergencyModal.classList.add('hidden');
-      emergencyForm.reset();
-      emergencySuccess.classList.add('hidden');
-    });
-
-    emergencyForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (userImage.files.length > 0) {
-        const fileSizeMB = userImage.files[0].size / 1024 / 1024;
-        if (fileSizeMB > 2) {
-          alert('Image size must be less than 2 MB');
-          return;
-        }
-      }
-
-      emergencySuccess.classList.remove('hidden');
-      emergencyForm.reset();
-
-      console.log('Emergency form submitted (frontend only)');
-    });
-
-  });
-</script>
+<script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
 
   
 
@@ -314,13 +187,12 @@
 
           <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
 
-            <div
-              class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-              <div class="overflow-hidden whitespace-nowrap">
-                <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
-                  Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
-                </h2>
-              </div>
+            <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto mt-6 sm:mt-8 md:mt-10 px-4 sm:px-6 py-4 sm:py-6 bg-green-100 border-2 sm:border-4 border-green-800 rounded-lg sm:rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+                <div class="overflow-hidden">
+                  <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-green-800 text-center leading-tight">
+                        Welcome to <span class="text-green-900 underline block sm:inline">AI Crop Doctor</span>
+                  </h2>
+                </div>
 
             </div>
 
@@ -374,27 +246,14 @@
               </button>
             </div>
           </div>
-                <!-- Loading Indicator for detailed report generation -->
-                <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
-    <div class="relative w-24 h-24 mb-6">
-        <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
-        <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full"></div>
-    </div>
-
-    <p class="text-gray-700 text-lg font-medium text-center">
-        <span id="loading-text-report">Generating your personalized report...</span>
-        <br>
-        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
-    </p>
-</div>
-
-
-
           <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
           <!--  grid for rows with 5 images each -->
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_black-rot.JPG') }}"
               data-image-name="0001.JPG">
               <img src="{{ url_for('static', filename='images/apple_black-rot.JPG') }}" alt="Apple Black Rot"
@@ -402,7 +261,10 @@
               <p class="text-xs font-medium text-gray-700">Apple Black Rot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}"
               data-image-name="0002.JPG">
               <img src="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}" alt="Apple Cedar Rust"
@@ -410,21 +272,30 @@
               <p class="text-xs font-medium text-gray-700">Apple Cedar Rust</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_healthy.JPG') }}" data-image-name="0003.JPG">
               <img src="{{ url_for('static', filename='images/apple_healthy.JPG') }}" alt="Apple Healthy"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Apple Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_scab.JPG') }}" data-image-name="0004.JPG">
               <img src="{{ url_for('static', filename='images/apple_scab.JPG') }}" alt="Apple Scab"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Apple Scab</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}"
               data-image-name="0005.JPG">
               <img src="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}" alt="Healthy Blueberry"
@@ -432,7 +303,10 @@
               <p class="text-xs font-medium text-gray-700">Healthy Blueberry</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
               data-image-name="0006.JPG">
               <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
@@ -440,7 +314,10 @@
               <p class="text-xs font-medium text-gray-700">Cherry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
               data-image-name="0007.JPG">
               <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
@@ -448,7 +325,10 @@
               <p class="text-xs font-medium text-gray-700">Cherry Powdery Milkdew</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}"
               data-image-name="0008.JPG">
               <img
@@ -458,7 +338,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Cercospora Leaf Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
               data-image-name="0009.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
@@ -466,7 +349,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Common Rust</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}"
               data-image-name="0010.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}" alt="Corn Healthy"
@@ -474,7 +360,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
               data-image-name="0011.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
@@ -483,7 +372,9 @@
               <p class="text-xs font-medium text-gray-700">Corn Northern leaf Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}"
               data-image-name="0012.JPG">
               <img src="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}" alt="Grape Black Rot"
@@ -491,7 +382,9 @@
               <p class="text-xs font-medium text-gray-700">Grape Black Rot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
               data-image-name="0013.JPG">
               <img src="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
@@ -499,21 +392,27 @@
               <p class="text-xs font-medium text-gray-700">Grape Leaf Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/grape_esca.JPG') }}" data-image-name="0014.JPG">
               <img src="{{ url_for('static', filename='images/grape_esca.JPG') }}" alt="Grape Esca"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Grape Esca</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/grape_healthy.JPG') }}" data-image-name="0015.JPG">
               <img src="{{ url_for('static', filename='images/grape_healthy.JPG') }}" alt="Grape Healthy"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Grape Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
               data-image-name="0016.JPG">
               <img src="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
@@ -521,7 +420,9 @@
               <p class="text-xs font-medium text-gray-700">Orange Haunglongbing</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
               data-image-name="0017.JPG">
               <img src="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
@@ -529,7 +430,9 @@
               <p class="text-xs font-medium text-gray-700">Peach Bacterial Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Peach___healthy.JPG') }}"
               data-image-name="0018.JPG">
               <img src="{{ url_for('static', filename='images/Peach___healthy.JPG') }}" alt="Peach Healthy"
@@ -537,14 +440,18 @@
               <p class="text-xs font-medium text-gray-700">Peach Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/pepper_spot.JPG') }}" data-image-name="0019.JPG">
               <img src="{{ url_for('static', filename='images/pepper_spot.JPG') }}" alt="Pepper Spot"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Pepper Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}"
               data-image-name="0020.JPG">
               <img src="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}" alt="Pepper Bell Healthy"
@@ -552,7 +459,9 @@
               <p class="text-xs font-medium text-gray-700">Pepper Bell Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Potato___healthy.JPG') }}"
               data-image-name="0021.JPG">
               <img src="{{ url_for('static', filename='images/Potato___healthy.JPG') }}" alt="Potato Healthy"
@@ -560,7 +469,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/potato_early_blight.JPG') }}"
               data-image-name="0022.JPG">
               <img src="{{ url_for('static', filename='images/potato_early_blight.JPG') }}" alt="Potato Early Blight"
@@ -568,7 +479,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Early Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/potato_late_blight.JPG') }}"
               data-image-name="0023.JPG">
               <img src="{{ url_for('static', filename='images/potato_late_blight.JPG') }}" alt="Potato Late Blight"
@@ -576,7 +489,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Late Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}"
               data-image-name="0024.JPG">
               <img src="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}" alt="Raspberry Healthy"
@@ -584,7 +499,9 @@
               <p class="text-xs font-medium text-gray-700">Raspberry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}"
               data-image-name="0025.JPG">
               <img src="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}" alt="Soyabean Healthy"
@@ -592,7 +509,9 @@
               <p class="text-xs font-medium text-gray-700">Soyabean Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
               data-image-name="0026.JPG">
               <img src="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
@@ -600,7 +519,9 @@
               <p class="text-xs font-medium text-gray-700">Squash Powdery Mildew</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}"
               data-image-name="0027.JPG">
               <img src="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}" alt="Strawberry Healthy"
@@ -608,7 +529,9 @@
               <p class="text-xs font-medium text-gray-700">Strawberry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
               data-image-name="0028.JPG">
               <img src="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
@@ -616,7 +539,9 @@
               <p class="text-xs font-medium text-gray-700">Strawberry Leaf Scorch</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
               data-image-name="0029.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
@@ -624,7 +549,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Bacterial Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}"
               data-image-name="0030.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}" alt="Tomato Early Blight"
@@ -632,7 +559,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Early Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}"
               data-image-name="0031.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}" alt="Tomato healthy"
@@ -640,7 +569,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}"
               data-image-name="0032.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}" alt="Tomato Leaf Mold"
@@ -648,7 +579,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Leaf Mold</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
               data-image-name="0033.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
@@ -657,7 +590,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Septoria leaf Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
               data-image-name="0034.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
@@ -665,7 +600,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Spider Mites</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}"
               data-image-name="0035.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}" alt="Tomato Target Spot"
@@ -673,7 +610,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Target Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
               data-image-name="0036.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
@@ -681,7 +620,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Mosaic Virus</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
               data-image-name="0037.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
@@ -690,7 +631,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Yellow Leaf Curl Virus</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}"
               data-image-name="0038.JPG">
               <img src="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}" alt="Tomato Late Blight"
@@ -709,21 +652,36 @@
           </div>
 
           <!-- Disease Detection Section -->
-          <div id="disease-detection-section" class="hidden mb-8 text-left">
-            <div class="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
-              <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection</h2>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
-              <div class="flex items-center justify-between mb-2">
-                <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
-                <div class="flex items-center">
-                  <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
-                  <div class="w-32 bg-gray-200 rounded-full h-2.5">
-                    <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%;"></div>
-                  </div>
-                  <span id="confidence-score-text" class="ml-2 text-gray-700 font-semibold text-sm"></span>
-                </div>
-              </div>
+          <div id="disease-detection-section" class="hidden mb-8 flex justify-center">
+  <div class="result-card w-full max-w-xl">
+
+    <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
+      🌿 Disease Prediction Result
+    </h2>
+
+    <img id="image-preview-summary"
+      class="result-image mx-auto"
+      alt="Uploaded Image">
+
+    <p id="image-name-summary" class="text-gray-500 text-sm text-center mt-2"></p>
+
+    <p class="mt-4 text-gray-700 text-center">
+      <strong>Predicted Disease:</strong>
+    </p>
+
+    <p id="prediction-result" class="disease-name text-center"></p>
+
+    <div class="confidence-section">
+      <p class="text-gray-600 text-sm mb-1 text-center">Confidence Level</p>
+      <div class="progress-bar">
+        <div id="confidence-bar" class="progress" style="width: 0%"></div>
+      </div>
+      <p id="confidence-score-text" class="text-center text-sm text-gray-700 mt-1"></p>
+    </div>
+
+  </div>
+</div>
+
               <img id="image-preview-summary"
                 class="max-w-full h-48 object-contain mx-auto rounded-lg shadow-md border border-gray-200 mt-4"
                 alt="Uploaded Image">
@@ -919,7 +877,10 @@
 
           <!-- Loading Indicator for detailed report generation -->
           <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
-            <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
+            <div class="relative w-24 h-24 mb-6">
+              <div class="absolute inset-0 border-4 border-green-100 rounded-full"></div>
+              <div class="loader-ring absolute inset-0 border-4 border-t-green-500 border-l-green-500 rounded-full"></div>
+            </div>
             <p class="text-gray-700 text-lg font-medium text-center">
               <span id="loading-text-report">Generating your personalized report...</span>
               <br>
@@ -952,29 +913,8 @@
         </div>
       </div>
     </main>
-    <footer class="bg-green-700 text-white text-sm py-4">
-      <div
-        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-        <!-- Project Info -->
-        <!-- <div>
-      <span class="font-semibold">AI Crop Doctor</span> — Built by 
-      <span class="underline">Anshika Singh</span> & 
-      <span class="underline">Ayush Sinha</span>
-    </div> -->
-        <!-- Tagline -->
-        <div class="italic text-green-100">
-          Empowering farmers with AI 🌿
-        </div>
-      </div>
-      <!-- Footer Bottom -->
-      <div class="text-center text-green-100 text-xs mt-2">
-        © 2026 AI Crop Doctor. All rights reserved.
-      </div>
-    </footer>
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-    <!-- Auth JS -->
-
     <!-- Auth JS moved to bottom to safe load config -->
 
     <script>
@@ -1009,9 +949,16 @@
 
     <!-- Pass Firebase Config from Flask to JS -->
     <script>
-      window.FIREBASE_CONFIG = {{ firebase_context | tojson | safe }};
-    </script>
-    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-</body>
+      // Firebase auth is currently disabled in this project
+      // Keeping config empty to avoid template rendering errors
+      window.FIREBASE_CONFIG = {};
 
+      // Ensure main content is visible
+      window.addEventListener('DOMContentLoaded', () => {
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) mainContent.classList.remove('hidden');
+      });
+    </script>
+    {% include "footer.html" %}
+</body>
 </html>

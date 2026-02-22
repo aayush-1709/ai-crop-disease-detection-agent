@@ -15,18 +15,25 @@ const firebaseConfig = window.FIREBASE_CONFIG || {
 };
 
 // Initialize Firebase
-if (typeof firebase !== 'undefined') {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    console.error("Firebase SDK not loaded.");
+let auth = null;
+try {
+    if (typeof firebase === 'undefined') {
+        console.error("Firebase SDK not loaded. Falling back to showing main content without auth gating.");
+    } else {
+        firebase.initializeApp(firebaseConfig);
+        auth = firebase.auth();
+    }
+} catch (e) {
+    console.error("Firebase init failed. Falling back to showing main content without auth gating.", e);
 }
 
 // ------------------------------------------------------------------
 // Auth Logic
 // ------------------------------------------------------------------
 
-const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+const googleProvider = (typeof firebase !== 'undefined' && firebase.auth)
+    ? new firebase.auth.GoogleAuthProvider()
+    : null;
 
 // DOM Elements
 const loginFrame = document.getElementById('loginFrame');
@@ -38,6 +45,10 @@ const logoutBtn = document.getElementById('logout-btn');
 
 // Login Function
 function signInWithGoogle() {
+    if (!auth || !googleProvider) {
+        alert("Login is not available right now (Firebase not configured).");
+        return;
+    }
     auth.signInWithPopup(googleProvider)
         .then((result) => {
             // User signed in
@@ -54,6 +65,10 @@ function signInWithGoogle() {
 
 // Logout Function
 function signOut() {
+    if (!auth) {
+        window.location.reload();
+        return;
+    }
     auth.signOut().then(() => {
         console.log("User signed out");
         window.location.reload(); // Reload to show login screen again
@@ -81,23 +96,30 @@ function transitionToMainContent() {
     }
 }
 
+// If Firebase isn't available, don't block the app UI behind auth.
+if (!auth) {
+    transitionToMainContent();
+}
+
 // Event Listeners
 if (loginBtn) {
     loginBtn.addEventListener('click', signInWithGoogle);
 }
 
 // Check Auth State on Load
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        // User is already signed in
-        console.log("Auth state change: Signed in");
-        updateUIForSignedInUser(user);
-        // If the window is currently showing the login frame, move past it
-        // We check this to avoid conflicting with the initial animation sequence
-        if (!loginFrame.classList.contains('hidden') && mainContent.classList.contains('hidden')) {
-            transitionToMainContent();
+if (auth) {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // User is already signed in
+            console.log("Auth state change: Signed in");
+            updateUIForSignedInUser(user);
+            // If the window is currently showing the login frame, move past it
+            // We check this to avoid conflicting with the initial animation sequence
+            if (loginFrame && mainContent && !loginFrame.classList.contains('hidden') && mainContent.classList.contains('hidden')) {
+                transitionToMainContent();
+            }
+        } else {
+            console.log("Auth state change: Signed out");
         }
-    } else {
-        console.log("Auth state change: Signed out");
-    }
-});
+    });
+}
