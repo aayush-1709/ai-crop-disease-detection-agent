@@ -4,9 +4,15 @@
     <!-- Brand -->
     <div class="footer-section">
       <h3 class="footer-title">AI Crop Doctor</h3>
+
+      <p class="footer-tagline">
+        Empowering farmers with AI 🌾
+      </p>
+
       <p class="footer-text">
-        AI-powered crop disease detection platform helping farmers make
-        informed decisions for healthier crops.
+        AI-powered crop disease detection platform helping farmers identify
+        plant diseases early and make informed decisions for healthier crops
+        and sustainable agriculture.
       </p>
     </div>
 
@@ -34,22 +40,37 @@
     <!-- Support -->
     <div class="footer-section">
       <h4 class="footer-heading">Support</h4>
+
       <p class="footer-text">Need help?</p>
+
       <p class="footer-email">
-        📧 <a href="mailto:support@aicropdoctor.com">support@aicropdoctor.com</a>
+        📧 <a href="mailto:support@aicropdoctor.com">
+          support@aicropdoctor.com
+        </a>
       </p>
 
       <div class="footer-social">
-        <a href="https://github.com/aayush-1709" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/aayush-sinha/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/aayush-1709" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/aayush-sinha/" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
       </div>
     </div>
 
   </div>
 
+  <!-- Footer Bottom -->
   <div class="footer-bottom">
-    © 2026 AI Crop Doctor. All rights reserved.
+    <p>
+      Made with ❤️ for Farmers | © <span id="footer-year"></span> AI Crop Doctor. All rights reserved.
+    </p>
   </div>
 </footer>
 
@@ -57,3 +78,9 @@
 <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
   ↑
 </button>
+
+<script>
+  // Dynamic Year
+  document.getElementById("footer-year").textContent =
+    new Date().getFullYear();
+</script>
