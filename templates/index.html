@@ -59,13 +59,25 @@
 
     .sample-image-card img {
       width: 100%;
-      height: 6rem;
+      height: 7rem;
       object-fit: cover;
+      background-color: transparent;
+    }
+
+    .sample-image-card,
+    .sample-image-card:hover {
+      transform: none !important;
+    }
+
+    .sample-image-card-inner,
+    .sample-image-card:hover .sample-image-card-inner {
+      transform: none !important;
+      transition: none !important;
     }
 
     @media (max-width: 640px) {
       .sample-image-card img {
-        height: 5.25rem;
+        height: 6rem;
       }
     }
   </style>
@@ -280,7 +292,7 @@
           </div>
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
           <!--  grid for rows with 5 images each -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             <div
               class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
        transition-all duration-300 ease-out
@@ -942,48 +954,6 @@
     </main>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const cards = document.querySelectorAll(".sample-image-card");
-
-  cards.forEach(card => {
-
-    const img = card.querySelector("img");
-    const label = card.querySelector("p");
-
-    if (!img || !label) return;
-
-    const diseaseName = label.innerText;
-
-    card.innerHTML = `
-  <div class="sample-image-card-inner">
-
-    <div class="sample-image-card-front">
-      ${img.outerHTML}
-      ${label.outerHTML}
-    </div>
-
-    <div class="sample-image-card-back">
-      <h4>${diseaseName}</h4>
-      <p>Plant disease detected on this crop.</p>
-      <p>Hover to learn about symptoms & prevention.</p>
-    </div>
-
-  </div>
-`;
-
-card.addEventListener("click", () => {
-  const inner = card.querySelector(".sample-image-card-inner");
-  inner.style.transform =
-    inner.style.transform === "rotateY(180deg)"
-      ? "rotateY(0deg)"
-      : "rotateY(180deg)";
-});
-  });
-
-});
-</script>
     <!-- Auth JS moved to bottom to safe load config -->
 
     <script>

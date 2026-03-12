@@ -260,14 +260,22 @@ document.addEventListener("DOMContentLoaded", () => {
   sampleImageCards.forEach((card) => {
     card.addEventListener("click", async () => {
       hideError();
+      sampleImageCards.forEach((sampleCard) =>
+        sampleCard.classList.remove("ring-2", "ring-green-500"),
+      );
+      card.classList.add("ring-2", "ring-green-500");
       const imagePath = card.dataset.imagePath;
       const imageNameText = card.dataset.imageName;
 
       try {
         const response = await fetch(imagePath);
+        if (!response.ok) {
+          throw new Error("Sample image request failed");
+        }
         const blob = await response.blob();
         const file = new File([blob], imageNameText, { type: blob.type });
         handleFile(file);
+        uploadSection.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch (error) {
         showError("Failed to load sample image. Please try again.");
         console.error("Error loading sample image:", error);
@@ -337,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || 'Prediction failed.';
+                throw new Error(errorData.error || 'Prediction failed.');
             }
 
             const data = await response.json();
@@ -428,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || 'Diagnosis failed.';
+                throw new Error(errorData.error || 'Diagnosis failed.');
             }
 
             const data = await response.json();
