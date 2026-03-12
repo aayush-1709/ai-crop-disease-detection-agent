@@ -1,6 +1,6 @@
 Flask==3.0.3
 flask-cors==4.0.1
-tensorflow==2.16.1
+tensorflow-cpu==2.19.0
 numpy==1.26.4
 Pillow==10.4.0
 google-generativeai==0.8.5
