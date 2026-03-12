@@ -178,29 +178,10 @@
         });
     </script>
 
-    <!-- Footer -->
-    <footer class="bg-green-700 text-white text-sm py-4">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-            <!-- Project Info -->
-            <!-- <div>
-                <span class="font-semibold">AI Crop Doctor</span> — Built by 
-                <span class="underline">Anshika Singh</span> & 
-                <span class="underline">Ayush Sinha</span>
-            </div> -->
-            <!-- Tagline -->
-            <div class="italic text-green-100">
-                Empowering farmers with AI 🌿
-            </div>
-        </div>
-        <!-- Footer Bottom -->
-        <div class="text-center text-green-100 text-xs mt-2">
-            © 2026 AI Crop Doctor. All rights reserved.
-        </div>
-    </footer>
-
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/history.js') }}"></script>
     <script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
+{% include "footer.html" %}
 </body>
 </html>

@@ -56,6 +56,18 @@
     body {
       overflow-x: hidden;
     }
+
+    .sample-image-card img {
+      width: 100%;
+      height: 6rem;
+      object-fit: cover;
+    }
+
+    @media (max-width: 640px) {
+      .sample-image-card img {
+        height: 5.25rem;
+      }
+    }
   </style>
 
 </head>
@@ -90,6 +102,17 @@
           <select
             class="languageSelect bg-green-800/40 text-white text-sm px-3 py-2 rounded-full border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
           </select>
+          <!-- 🌙 Theme Toggle Button -->
+          <button
+            id="themeToggle"
+            class="relative w-11 h-11 flex items-center justify-center rounded-full
+                   bg-green-900/60 text-yellow-300
+                   hover:bg-green-900 hover:scale-110
+                   shadow-lg shadow-black/30
+                   transition-all duration-300"
+            title="Toggle Dark / Light Mode">
+            🌙
+          </button>
           <a href="#" id="emergencyBtn"
             class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
             <i class="fas fa-phone-alt mr-1"></i> Emergency
@@ -111,6 +134,10 @@
         <select
           class="languageSelect w-full bg-green-800/40 text-white text-sm px-3 py-2 rounded-xl border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
         </select>
+        <button id="themeToggleMobile"
+          class="block w-full text-xl bg-green-800/40 text-white px-3 py-2 rounded-xl">
+          🌙 Toggle Theme
+        </button>
         <a href="#" id="emergencyBtnMobile"
           class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
           <i class="fas fa-phone-alt mr-1"></i> Emergency
@@ -190,13 +217,12 @@
         <div id="intro-sample-section" class="w-full text-left">
           <!-- Image with smooth hover animation -->
 
-          <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
+          <div class="text-center max-w-3xl mx-auto px-4 mt-8 sm:mt-10 space-y-4">
 
-            <div
-              class="max-w-xl mx-auto mt-6 sm:mt-10 p-4 sm:p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-              <div class="overflow-hidden whitespace-normal">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-green-800 inline-block ">
-                  Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
+            <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto mt-6 sm:mt-8 md:mt-10 px-4 sm:px-6 py-4 sm:py-6 bg-green-100 border-2 sm:border-4 border-green-800 rounded-lg sm:rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+              <div class="overflow-hidden">
+                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-green-800 text-center leading-tight">
+                  Welcome to <span class="text-green-900 underline block sm:inline">AI Crop Doctor</span>
                 </h2>
               </div>
 
@@ -254,9 +280,12 @@
           </div>
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
           <!--  grid for rows with 5 images each -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_black-rot.JPG') }}"
               data-image-name="0001.JPG">
               <img src="{{ url_for('static', filename='images/apple_black-rot.JPG') }}" alt="Apple Black Rot"
@@ -264,7 +293,10 @@
               <p class="text-xs font-medium text-gray-700">Apple Black Rot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}"
               data-image-name="0002.JPG">
               <img src="{{ url_for('static', filename='images/apple_cedar_rust.JPG') }}" alt="Apple Cedar Rust"
@@ -272,21 +304,30 @@
               <p class="text-xs font-medium text-gray-700">Apple Cedar Rust</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_healthy.JPG') }}" data-image-name="0003.JPG">
               <img src="{{ url_for('static', filename='images/apple_healthy.JPG') }}" alt="Apple Healthy"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Apple Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/apple_scab.JPG') }}" data-image-name="0004.JPG">
               <img src="{{ url_for('static', filename='images/apple_scab.JPG') }}" alt="Apple Scab"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Apple Scab</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}"
               data-image-name="0005.JPG">
               <img src="{{ url_for('static', filename='images/blueberry_healthy.JPG') }}" alt="Healthy Blueberry"
@@ -294,7 +335,10 @@
               <p class="text-xs font-medium text-gray-700">Healthy Blueberry</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
               data-image-name="0006.JPG">
               <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___healthy.JPG') }}"
@@ -302,7 +346,10 @@
               <p class="text-xs font-medium text-gray-700">Cherry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
               data-image-name="0007.JPG">
               <img src="{{ url_for('static', filename='images/Cherry_(including_sour)___Powdery_mildew.JPG') }}"
@@ -310,7 +357,10 @@
               <p class="text-xs font-medium text-gray-700">Cherry Powdery Milkdew</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot.JPG') }}"
               data-image-name="0008.JPG">
               <img
@@ -320,7 +370,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Cercospora Leaf Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
               data-image-name="0009.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___Common_rust_.JPG') }}"
@@ -328,7 +381,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Common Rust</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}"
               data-image-name="0010.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___healthy.JPG') }}" alt="Corn Healthy"
@@ -336,7 +392,10 @@
               <p class="text-xs font-medium text-gray-700">Corn Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+             class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+
               data-image-path="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
               data-image-name="0011.JPG">
               <img src="{{ url_for('static', filename='images/Corn_(maize)___Northern_Leaf_Blight.JPG') }}"
@@ -345,7 +404,9 @@
               <p class="text-xs font-medium text-gray-700">Corn Northern leaf Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}"
               data-image-name="0012.JPG">
               <img src="{{ url_for('static', filename='images/Grape___Black_rot.JPG') }}" alt="Grape Black Rot"
@@ -353,7 +414,9 @@
               <p class="text-xs font-medium text-gray-700">Grape Black Rot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
               data-image-name="0013.JPG">
               <img src="{{ url_for('static', filename='images/Grape___Leaf_blight_(Isariopsis_Leaf_Spot).JPG') }}"
@@ -361,21 +424,27 @@
               <p class="text-xs font-medium text-gray-700">Grape Leaf Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/grape_esca.JPG') }}" data-image-name="0014.JPG">
               <img src="{{ url_for('static', filename='images/grape_esca.JPG') }}" alt="Grape Esca"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Grape Esca</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/grape_healthy.JPG') }}" data-image-name="0015.JPG">
               <img src="{{ url_for('static', filename='images/grape_healthy.JPG') }}" alt="Grape Healthy"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Grape Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
               data-image-name="0016.JPG">
               <img src="{{ url_for('static', filename='images/Orange___Haunglongbing_(Citrus_greening).JPG') }}"
@@ -383,7 +452,9 @@
               <p class="text-xs font-medium text-gray-700">Orange Haunglongbing</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
               data-image-name="0017.JPG">
               <img src="{{ url_for('static', filename='images/Peach___Bacterial_spot.JPG') }}"
@@ -391,7 +462,9 @@
               <p class="text-xs font-medium text-gray-700">Peach Bacterial Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Peach___healthy.JPG') }}"
               data-image-name="0018.JPG">
               <img src="{{ url_for('static', filename='images/Peach___healthy.JPG') }}" alt="Peach Healthy"
@@ -399,14 +472,18 @@
               <p class="text-xs font-medium text-gray-700">Peach Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/pepper_spot.JPG') }}" data-image-name="0019.JPG">
               <img src="{{ url_for('static', filename='images/pepper_spot.JPG') }}" alt="Pepper Spot"
                 class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
               <p class="text-xs font-medium text-gray-700">Pepper Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}"
               data-image-name="0020.JPG">
               <img src="{{ url_for('static', filename='images/Pepper,_bell___healthy.JPG') }}" alt="Pepper Bell Healthy"
@@ -414,7 +491,9 @@
               <p class="text-xs font-medium text-gray-700">Pepper Bell Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Potato___healthy.JPG') }}"
               data-image-name="0021.JPG">
               <img src="{{ url_for('static', filename='images/Potato___healthy.JPG') }}" alt="Potato Healthy"
@@ -422,7 +501,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/potato_early_blight.JPG') }}"
               data-image-name="0022.JPG">
               <img src="{{ url_for('static', filename='images/potato_early_blight.JPG') }}" alt="Potato Early Blight"
@@ -430,7 +511,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Early Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/potato_late_blight.JPG') }}"
               data-image-name="0023.JPG">
               <img src="{{ url_for('static', filename='images/potato_late_blight.JPG') }}" alt="Potato Late Blight"
@@ -438,7 +521,9 @@
               <p class="text-xs font-medium text-gray-700">Potato Late Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}"
               data-image-name="0024.JPG">
               <img src="{{ url_for('static', filename='images/Raspberry___healthy.JPG') }}" alt="Raspberry Healthy"
@@ -446,7 +531,9 @@
               <p class="text-xs font-medium text-gray-700">Raspberry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}"
               data-image-name="0025.JPG">
               <img src="{{ url_for('static', filename='images/Soybean___healthy.JPG') }}" alt="Soyabean Healthy"
@@ -454,7 +541,9 @@
               <p class="text-xs font-medium text-gray-700">Soyabean Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
               data-image-name="0026.JPG">
               <img src="{{ url_for('static', filename='images/Squash___Powdery_mildew.JPG') }}"
@@ -462,7 +551,9 @@
               <p class="text-xs font-medium text-gray-700">Squash Powdery Mildew</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}"
               data-image-name="0027.JPG">
               <img src="{{ url_for('static', filename='images/Strawberry___healthy.JPG') }}" alt="Strawberry Healthy"
@@ -470,7 +561,9 @@
               <p class="text-xs font-medium text-gray-700">Strawberry Healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
               data-image-name="0028.JPG">
               <img src="{{ url_for('static', filename='images/Strawberry___Leaf_scorch.JPG') }}"
@@ -478,7 +571,9 @@
               <p class="text-xs font-medium text-gray-700">Strawberry Leaf Scorch</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
               data-image-name="0029.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Bacterial_spot.JPG') }}"
@@ -486,7 +581,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Bacterial Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}"
               data-image-name="0030.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}" alt="Tomato Early Blight"
@@ -494,7 +591,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Early Blight</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}"
               data-image-name="0031.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___healthy.JPG') }}" alt="Tomato healthy"
@@ -502,7 +601,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato healthy</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}"
               data-image-name="0032.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Leaf_Mold.JPG') }}" alt="Tomato Leaf Mold"
@@ -510,7 +611,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Leaf Mold</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
               data-image-name="0033.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Septoria_leaf_spot.JPG') }}"
@@ -519,7 +622,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Septoria leaf Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
               data-image-name="0034.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Spider_mites Two-spotted_spider_mite.JPG') }}"
@@ -527,7 +632,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Spider Mites</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}"
               data-image-name="0035.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Target_Spot.JPG') }}" alt="Tomato Target Spot"
@@ -535,7 +642,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Target Spot</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
               data-image-name="0036.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Tomato_mosaic_virus.JPG') }}"
@@ -543,7 +652,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Mosaic Virus</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
               data-image-name="0037.JPG">
               <img src="{{ url_for('static', filename='images/Tomato___Tomato_Yellow_Leaf_Curl_Virus.JPG') }}"
@@ -552,7 +663,9 @@
               <p class="text-xs font-medium text-gray-700">Tomato Yellow Leaf Curl Virus</p>
             </div>
             <div
-              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors"
+              class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer 
+       transition-all duration-300 ease-out
+       hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
               data-image-path="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}"
               data-image-name="0038.JPG">
               <img src="{{ url_for('static', filename='images/tomato_late_blight.JPG') }}" alt="Tomato Late Blight"
@@ -571,25 +684,35 @@
           </div>
 
           <!-- Disease Detection Section -->
-          <div id="disease-detection-section" class="hidden mb-8 text-left">
-            <div class="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
-              <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection</h2>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
-                <div class="flex flex-wrap items-center gap-y-1">
-                  <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
-                  <div class="w-32 bg-gray-200 rounded-full h-2.5">
-                    <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%;"></div>
-                  </div>
-                  <span id="confidence-score-text" class="ml-2 text-gray-700 font-semibold text-sm"></span>
-                </div>
-              </div>
+          <div id="disease-detection-section" class="hidden mb-8 flex justify-center">
+            <div class="result-card w-full max-w-xl">
+
+              <h2 class="text-2xl font-bold text-green-800 mb-4 text-center">
+                🌿 Disease Prediction Result
+              </h2>
               <img id="image-preview-summary"
-                class="max-w-full h-48 object-contain mx-auto rounded-lg shadow-md border border-gray-200 mt-4"
+                class="result-image mx-auto"
                 alt="Uploaded Image">
-              <p id="image-name-summary" class="text-gray-600 mt-2 text-sm text-center"></p>
+
+              <p id="image-name-summary" class="text-gray-500 text-sm text-center mt-2"></p>
+
+              <div class="mt-5 text-center">
+                <p class="text-gray-700 text-sm uppercase tracking-wide">
+                  Predicted Disease
+                </p>
+                <p id="prediction-result" class="disease-name text-center"></p>
+              </div>
+
+              <div class="confidence-section mt-6">
+                <p class="text-gray-600 text-sm mb-2 text-center font-medium">
+                  Confidence Level
+                </p>
+                <div class="progress-bar">
+                  <div id="confidence-bar" class="progress" style="width: 0%"></div>
+                </div>
+                <p id="confidence-score-text" class="text-center text-sm text-gray-700 mt-2"></p>
+              </div>
+
             </div>
           </div>
 
@@ -817,39 +940,94 @@
         </div>
       </div>
     </main>
-    <footer class="bg-green-700 text-white text-sm py-4">
-      <div
-        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-2">
-        <!-- Project Info -->
-        <!-- <div>
-      <span class="font-semibold">AI Crop Doctor</span> — Built by 
-      <span class="underline">Anshika Singh</span> & 
-      <span class="underline">Ayush Sinha</span>
-    </div> -->
-        <!-- Tagline -->
-        <div class="italic text-green-100">
-          Empowering farmers with AI 🌿
-        </div>
-      </div>
-      <!-- Footer Bottom -->
-      <div class="text-center text-green-100 text-xs mt-2">
-        © 2026 AI Crop Doctor. All rights reserved.
-      </div>
-    </footer>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-    <!-- Auth JS -->
+  const cards = document.querySelectorAll(".sample-image-card");
 
+  cards.forEach(card => {
+
+    const img = card.querySelector("img");
+    const label = card.querySelector("p");
+
+    if (!img || !label) return;
+
+    const diseaseName = label.innerText;
+
+    card.innerHTML = `
+  <div class="sample-image-card-inner">
+
+    <div class="sample-image-card-front">
+      ${img.outerHTML}
+      ${label.outerHTML}
+    </div>
+
+    <div class="sample-image-card-back">
+      <h4>${diseaseName}</h4>
+      <p>Plant disease detected on this crop.</p>
+      <p>Hover to learn about symptoms & prevention.</p>
+    </div>
+
+  </div>
+`;
+
+card.addEventListener("click", () => {
+  const inner = card.querySelector(".sample-image-card-inner");
+  inner.style.transform =
+    inner.style.transform === "rotateY(180deg)"
+      ? "rotateY(0deg)"
+      : "rotateY(180deg)";
+});
+  });
+
+});
+</script>
     <!-- Auth JS moved to bottom to safe load config -->
 
     <script>
-      // Auth disabled: ensure main content is visible.
+      window.onload = function () {
+        // Show Frame 1 for 2s
+        setTimeout(() => {
+          document.getElementById("frame1").classList.add("hidden");
+          document.getElementById("frame2").classList.remove("hidden");
+
+          // Show Frame 2 for 2s, then Check Login
+          setTimeout(() => {
+            document.getElementById("frame2").classList.add("hidden");
+
+            // The auth.js script will automatically handle the transition to 'mainContent'
+            // if the user is already logged in. 
+            // If not, we show the login frame here.
+            if (typeof firebase !== 'undefined' && firebase.auth().currentUser) {
+              // User likely logged in (though might take a ms to sync), auth.js handles it.
+              // But to be safe if auth state isn't ready:
+              document.getElementById("mainContent").classList.remove("hidden");
+            } else {
+              // Show Login Frame by default, auth.js hides it if user is found.
+              // But we can check if 'mainContent' is already visible (handled by auth state listener)
+              if (document.getElementById("mainContent").classList.contains("hidden")) {
+                document.getElementById("loginFrame").classList.remove("hidden");
+              }
+            }
+          }, 2000); // Frame 2 duration
+        }, 2000); // Frame 1 duration
+      };
+    </script>
+
+    <!-- Pass Firebase Config from Flask to JS -->
+    <script>
+      // Firebase auth is currently disabled in this project
+      // Keeping config empty to avoid template rendering errors
+      window.FIREBASE_CONFIG = {};
+
+      // Ensure main content is visible
       window.addEventListener('DOMContentLoaded', () => {
         const mainContent = document.getElementById('mainContent');
         if (mainContent) mainContent.classList.remove('hidden');
       });
     </script>
+    {% include "footer.html" %}
 </body>
-
 </html>

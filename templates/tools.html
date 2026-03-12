@@ -333,52 +333,10 @@
             </div>
         </section>
     </main>
-
-    
-    <!-- Footer -->
-<footer class="bg-green-700 text-white text-sm py-6">
-  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-
-    <!-- Tagline -->
-    <div class="italic text-green-100">
-      Empowering farmers with AI 🌿
-    </div>
-
-    <!-- Social Media Icons -->
-    <div class="flex gap-5 text-xl">
-      <!-- GitHub -->
-      <a
-        href="https://github.com/aayush-1709/ai-crop-disease-detection-agent"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        class="hover:text-gray-300 transition-colors"
-      >
-        <i class="fab fa-github"></i>
-      </a>
-
-      <!-- LinkedIn -->
-      <a
-        href="https://www.linkedin.com/in/aayush-sinha-481345230/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        class="hover:text-blue-200 transition-colors"
-      >
-        <i class="fab fa-linkedin"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div class="text-center text-green-100 text-xs mt-4">
-    © 2026 AI Crop Doctor. All rights reserved.
-  </div>
-</footer>
-
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
+{% include "footer.html" %}
 </body>
 </html>

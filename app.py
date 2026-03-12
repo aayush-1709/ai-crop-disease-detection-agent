@@ -445,6 +445,25 @@ def user_guide():
 def tools_page():
     return render_template('tools.html')
 
+# -------------------------------
+# Legal / Informational Pages
+# -------------------------------
+
+@app.route("/privacy")
+def privacy_policy():
+    return render_template("privacy.html")
+
+
+@app.route("/terms")
+def terms_of_use():
+    return render_template("terms.html")
+
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
+
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")

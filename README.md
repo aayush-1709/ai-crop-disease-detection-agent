@@ -41,66 +41,74 @@ Follow these simple steps to use AI Crop Doctor effectively:
 ---
 
 ## 🗂 Project Structure
-
-ai-crop-disease-detection-agent
-│ app.py
-│ class_indices.json
-│ crop_diagnosis_best_model.tflite
-│ README.md
-│ requirements.txt
-│ .gitattributes
-│ .gitignore
+```bash
+📁 ai-crop-disease-detection-agent/
+│__📄 app.py
+│__📄 class_indices.json
+│__📄 crop_diagnosis_best_model.tflite
+│__📄 README.md
+│__📄 requirements.txt
+│__📄 .gitattributes
+│__📄 .gitignore
 │
-├───static
-│ ├───css
-│ │ style.css
-│ ├───images
-│ │ apple_black-rot.JPG
-│ │ apple_cedar_rust.JPG
-│ │ apple_healthy.JPG
-│ │ ... (other sample images)
-│ └───js
-│ history.js
-│ main.js
-│ user_guide.js
+├───📁 static/
+│ ├───📁 css/
+│ │   |___📄 style.css
+│ ├───📁 images/
+│ │   |___📄 apple_black-rot.JPG
+│ │   |___📄 apple_cedar_rust.JPG
+│ │   |___📄 apple_healthy.JPG
+│ │   |___... 📄 (35 more sample images)
+│ └───📁 js/
+│ |   |___📄 history.js
+│ |   |___📄 main.js
+│ |   |___📄 user_guide.js
+| |   |___📄 auth.js
+| |   |___📄 user_guide.js
+| |   |___📄 emergency.js
 │
-└───templates
-history.html
-index.html
-tools.html
-user_guide.html
-
+└───📁 templates/
+| |___📄 history.html
+| |___📄 index.html
+| |___📄 tools.html
+| |___📄 user_guide.html
+```
 
 ---
 
 ## ⚡ Installation & Setup
 
 1. Clone the repository:
-
+```bash
 git clone https://github.com/your-username/ai-crop-disease-detection-agent.git
+
 cd ai-crop-disease-detection-agent
-
+```
 2. Install dependencies:
+```bash
 pip install -r requirements.txt
-
-3. Run the app:
+```
+3. Run the application:
+```bash
 python app.py
-
+```
 4. Open your browser and go to:
+```bash
 http://127.0.0.1:5000
-
+```
 
 🤝 Contributing
 
 Contributions are welcome!
-Fork the repository
-Create a new branch (git checkout -b feature-name)
-Make your changes
-Push to your branch (git push origin feature-name)
-Open a Pull Request
+- Fork the repository
+- Create a new branch `git checkout -b feature-name`
+- Make your changes
+- Push to your branch `git push origin feature-name`
+- Open a Pull Request
+Read the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) and [Contribution](Contribution.md) for further details.
 
 📄 License
 
-This project is MIT licensed.
+This project is MIT licensed. View [LICENSE](LICENSE)
 
-<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> ```
+<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> 
