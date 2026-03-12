@@ -44,9 +44,11 @@ CORS(app)
 IMG_HEIGHT = 128
 IMG_WIDTH = 128
 
-# Model and class indices file paths
-MODEL_FILENAME = 'crop_diagnosis_best_model.tflite'
-CLASS_INDICES_FILENAME = os.path.join(os.getcwd(), 'class_indices.json')
+# Model and class indices file paths (use app directory, not process CWD)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_FILENAME = "crop_diagnosis_best_model.tflite"
+MODEL_PATH = os.path.join(BASE_DIR, MODEL_FILENAME)
+CLASS_INDICES_FILENAME = os.path.join(BASE_DIR, 'class_indices.json')
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -115,15 +117,16 @@ def load_resources():
     global model, class_labels
     print("Attempting to load model and class indices...")
     try:
-        if not os.path.exists(MODEL_FILENAME):
-            print(f"Error: Model file not found at {MODEL_FILENAME}. Please ensure it's committed to GitHub.")
+        if not os.path.exists(MODEL_PATH):
+            print(f"Error: Model file not found at {MODEL_PATH}.")
+            print("Please commit crop_diagnosis_best_model.tflite in the repository root.")
             return False
         if not os.path.exists(CLASS_INDICES_FILENAME):
             print(f"Error: Class indices file not found at {CLASS_INDICES_FILENAME}. Please ensure it's in the project root.")
             return False
 
         # --- Load TFLite model using Interpreter ---
-        interpreter = tf.lite.Interpreter(model_path=MODEL_FILENAME)
+        interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
         interpreter.allocate_tensors()
         model = interpreter 
 
@@ -196,7 +199,15 @@ def get_gemini_diagnosis(disease_name, user_context):
 @app.route('/predict', methods=['POST'])
 def predict():
     if not model or not class_labels:
-        return jsonify({"error": "Model not loaded. Please ensure model and class indices files exist."}), 500
+        # Lazy-load as a safety net in production workers.
+        if not load_resources():
+            missing = []
+            if not os.path.exists(MODEL_PATH):
+                missing.append(f"model: {MODEL_PATH}")
+            if not os.path.exists(CLASS_INDICES_FILENAME):
+                missing.append(f"class_indices: {CLASS_INDICES_FILENAME}")
+            detail = "; ".join(missing) if missing else "resource initialization failed"
+            return jsonify({"error": f"Model not loaded ({detail})."}), 500
 
     if 'image' not in request.files:
         return jsonify({"error": "No image file provided"}), 400
