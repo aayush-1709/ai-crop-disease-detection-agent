@@ -51,6 +51,11 @@
     .animate-marquee-right {
       animation: marquee-right 10s linear infinite;
     }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
   </style>
 
 </head>
@@ -65,12 +70,12 @@
     <nav class="bg-gradient-to-r from-green-700 via-green-600 to-green-800 p-4 shadow-lg z-50">
       <div class="container mx-auto flex items-center justify-between">
         <!-- 🌿 Logo & Brand -->
-        <a href="/" class="text-white text-base font-bold flex items-center space-x-3">
+        <a href="/" class="text-white text-sm sm:text-base font-bold flex items-center space-x-2 sm:space-x-3 min-w-0">
           <img
             src="https://media.istockphoto.com/id/1496224767/vector/vector-cute-farmer-robot-cartoon-illustration-isolated.jpg?s=1024x1024&w=is&k=20&c=Q96xOCkdNNc8-NwUVzO1Ka0CSxIfKxv7z5rKch2rAuo="
             alt="AI Crop Doctor Logo"
             class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300" />
-          <span class="tracking-wide hover:tracking-widest transition-all duration-300">AI Crop Doctor</span>
+          <span class="tracking-wide hover:tracking-widest transition-all duration-300 truncate">AI Crop Doctor</span>
         </a>
 
         <!-- 📂 Desktop Navigation -->
@@ -82,8 +87,8 @@
             class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">User Guide</a>
           <a href="/tools" target="_blank"
             class="text-white nav-link font-medium hover:text-green-200 transition-all duration-200">Tools</a>
-          <select class="languageSelect"
-            class="bg-green-800/40 text-white text-sm px-3 py-2 rounded-full border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
+          <select
+            class="languageSelect bg-green-800/40 text-white text-sm px-3 py-2 rounded-full border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
           </select>
           <a href="#" id="emergencyBtn"
             class="bg-red-500 nav-link text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold shadow-md">
@@ -103,8 +108,8 @@
         <a href="/history_page" target="_blank" class="block text-white font-medium hover:text-green-200">History</a>
         <a href="/user_guide" target="_blank" class="block text-white font-medium hover:text-green-200">User Guide</a>
         <a href="/tools" target="_blank" class="block text-white font-medium hover:text-green-200">Tools</a>
-        <select class="languageSelect"
-          class="w-full bg-green-800/40 text-white text-sm px-3 py-2 rounded-xl border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
+        <select
+          class="languageSelect w-full bg-green-800/40 text-white text-sm px-3 py-2 rounded-xl border border-green-500/30 focus:outline-none focus:ring-2 focus:ring-green-300">
         </select>
         <a href="#" id="emergencyBtnMobile"
           class="block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 font-semibold text-center">
@@ -126,7 +131,7 @@
 
   <!-- Emergency Support Modal -->
 <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50">
-  <div class="bg-white rounded-lg p-6 w-96 mx-auto mt-24 shadow-lg">
+  <div class="bg-white rounded-lg p-4 sm:p-6 w-[92%] max-w-md mx-auto mt-10 sm:mt-16 md:mt-24 shadow-lg max-h-[85vh] overflow-y-auto">
     <h2 class="text-xl font-bold text-red-600 mb-4">🚨 Emergency Support</h2>
 
     <form id="emergencyForm">
@@ -147,7 +152,7 @@
       </label>
       <input type="file" id="userImage" name="image" accept="image/*" class="w-full mb-3">
 
-      <div class="flex justify-end gap-2">
+      <div class="flex flex-col-reverse sm:flex-row justify-end gap-2">
         <button type="button" id="closeEmergency"
           class="px-4 py-2 bg-gray-400 text-white rounded">
           Cancel
@@ -174,12 +179,12 @@
 
     <!-- hero section -->
 
-    <main class="flex-grow flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat min-h-screen"
+    <main class="flex-grow flex items-center justify-center p-3 sm:p-4 bg-cover bg-center bg-no-repeat min-h-screen"
       style="background-image: url('https://cdn.pixabay.com/photo/2021/06/28/18/36/cereals-6372410_1280.jpg');">
 
       <!-- Main content container -->
       <div
-        class="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+        class="bg-white bg-opacity-10 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-6 sm:gap-8">
 
         <!-- Left Section: Introduction & Sample Images -->
         <div id="intro-sample-section" class="w-full text-left">
@@ -188,9 +193,9 @@
           <div class="text-center max-w-3xl mx-auto px-4 mt-10 space-y-4">
 
             <div
-              class="max-w-xl mx-auto mt-10 p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
-              <div class="overflow-hidden whitespace-nowrap">
-                <h2 class="text-4xl font-extrabold text-green-800 inline-block ">
+              class="max-w-xl mx-auto mt-6 sm:mt-10 p-4 sm:p-6 bg-green-100 border-4 border-green-800 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+              <div class="overflow-hidden whitespace-normal">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-green-800 inline-block ">
                   Welcome to <span class="text-green-900 underline">AI Crop Doctor</span>
                 </h2>
               </div>
@@ -199,7 +204,7 @@
 
 
             <div class="max-w-2xl mx-auto mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-              <p class="text-gray-800 text-lg leading-relaxed tracking-wide">
+              <p class="text-gray-800 text-base sm:text-lg leading-relaxed tracking-wide">
                 Diagnose <span class="font-semibold text-green-600">plant diseases</span> instantly with smart <span
                   class="font-semibold text-gray-900">AI</span> — just upload a photo and let technology assist your
                 next step.
@@ -215,18 +220,18 @@
 
           </div>
           <div id="upload-section"
-            class="max-w-xl mx-auto mb-10 p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+            class="max-w-xl mx-auto mb-8 sm:mb-10 p-4 sm:p-6 bg-white border border-gray-200 rounded-2xl shadow-md">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-5 sm:mb-6 text-center">
               Upload Plant Image
             </h2>
 
             <div id="drop-area"
-              class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
+              class="border-2 border-dashed border-gray-300 rounded-xl p-4 sm:p-6 mb-6 bg-gray-50 hover:border-green-400 hover:bg-green-50 transition-all duration-300 cursor-pointer flex flex-col items-center">
               <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
               </svg>
-              <p class="text-gray-600 text-center text-base">
+              <p class="text-gray-600 text-center text-sm sm:text-base">
                 Drag & Drop your image here, or
                 <span class="text-green-600 font-semibold underline">click to browse</span>
               </p>
@@ -247,7 +252,7 @@
               </button>
             </div>
           </div>
-          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
           <!--  grid for rows with 5 images each -->
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             <div
@@ -571,9 +576,9 @@
               <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection</h2>
             </div>
             <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
-              <div class="flex items-center justify-between mb-2">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
                 <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
-                <div class="flex items-center">
+                <div class="flex flex-wrap items-center gap-y-1">
                   <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
                   <div class="w-32 bg-gray-200 rounded-full h-2.5">
                     <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%;"></div>
@@ -769,7 +774,7 @@
             </div>
 
             <button id="get-report-button"
-              class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg text-lg font-semibold w-full">
+              class="bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg text-base sm:text-lg font-semibold w-full">
               <i class="fas fa-robot mr-2"></i> Get AI Diagnosis
             </button>
           </div>
@@ -793,11 +798,11 @@
             <div class="bg-green-600 text-white p-3 rounded-t-lg flex items-center">
               <h2 class="text-xl font-semibold"><i class="fas fa-robot mr-2"></i>AI Agronomist Report</h2>
             </div>
-            <div id="final-report-content" class="bg-gray-50 p-6 rounded-b-xl border border-gray-200 prose max-w-none">
+            <div id="final-report-content" class="bg-gray-50 p-4 sm:p-6 rounded-b-xl border border-gray-200 prose max-w-none">
               <!-- Report content will be injected here -->
             </div>
             <button id="start-over-button"
-              class="bg-gray-400 text-white px-8 py-3 rounded-xl hover:bg-gray-500 transition-colors duration-300 shadow-lg text-lg font-semibold mt-6">
+              class="bg-gray-400 text-white px-6 sm:px-8 py-3 rounded-xl hover:bg-gray-500 transition-colors duration-300 shadow-lg text-base sm:text-lg font-semibold mt-6 w-full sm:w-auto">
               Start Over
             </button>
           </div>
